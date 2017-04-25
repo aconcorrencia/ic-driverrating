@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="210dp"
+    android:background="@drawable/side_nav_bar"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <com.joooonho.SelectableRoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/img_car2"
+        app:sriv_border_color="#fff"
+        app:sriv_border_width="3dip"
+        app:sriv_left_bottom_corner_radius="48dip"
+        app:sriv_left_top_corner_radius="16dip"
+        app:sriv_oval="true"
+        app:sriv_right_bottom_corner_radius="16dip"
+        app:sriv_right_top_corner_radius="0dip"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtNomePerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="Perfil: Sem perfil"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_below="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/txtMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marca:"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/txtNomePerfil"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/txtModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="Modelo:"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/txtNomePerfil"
+        android:layout_toRightOf="@+id/txtMarca"
+        android:layout_toEndOf="@+id/txtMarca" />
+</RelativeLayout>

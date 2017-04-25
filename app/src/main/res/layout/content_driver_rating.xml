@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_driver_rating"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="android.usuario.driverrating.DriverRatingActivity"
+    tools:showIn="@layout/app_bar_driver_rating"
+    android:background="#D3D3D3">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:visibility="gone"
+    android:background="#000">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instruções de Uso"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/textView4d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:text="1 - Conectar o scanner OBD ao veículo;"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/textView4dfg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="2 - Criar um perfil do seu veículo através do menu ao lado e colocar como padrão;"
+        android:textColor="@color/white"
+        android:layout_below="@+id/textView4d"
+        android:layout_alignLeft="@+id/textView4d"
+        android:layout_alignStart="@+id/textView4d" />
+
+    <TextView
+        android:id="@+id/textView4ddf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="3 - Selecionar o dispositivo OBD através da configuração do Bluetooth no menu ao lado;"
+        android:textColor="@color/white"
+        android:layout_below="@+id/textView4dfg"
+        android:layout_alignLeft="@+id/textView4dfg"
+        android:layout_alignStart="@+id/textView4dfg" />
+
+    <TextView
+        android:id="@+id/textVidsew4ddf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="4 - Clicar no botão abaixo: 'Iniciar Classificação'"
+        android:textColor="@color/white"
+        android:layout_below="@+id/textView4ddf"
+        android:layout_alignLeft="@+id/textView4ddf"
+        android:layout_alignStart="@+id/textView4ddf" />
+
+</RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btnIniciarClassificacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:onClick="btnIniciarClassificacao"
+        android:text="Iniciar Classificação"
+        android:textColor="@color/white" />
+
+    <!--com.github.anastr.speedviewlib.PointerSpeedometer
+        android:id="@+id/speedView"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" /-->
+
+</RelativeLayout>

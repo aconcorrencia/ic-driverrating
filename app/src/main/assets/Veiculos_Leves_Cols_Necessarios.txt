@@ -1,0 +1,829 @@
+AUDI ;A1 Sportback ;1.8 -16V ;Ambition (192cv);DCT -7 ;0.014;114;0 ;0 ;11;13
+AUDI ;A1 Sportback ;1.4 -16V ;Attraction (125cv);DCT -7 ;0.02;97;0 ;0 ;13;15
+AUDI ;A3 Sportback ;1.4 -16V ;;DCT -7 ;0.045;105;0 ;0 ;12;14
+AUDI ;RS3 Sportback ;2.5 -20V ;(367cv) ;DCT -7 ;0.012;159;0 ;0 ;8;10
+AUDI ;S3 Sportback ;2.0 -16V ;(286cv) ;DCT -6 ;0.012;135;0 ;0 ;9;12
+AUDI ;A3 Sedan ;1.4 -16V ;Attraction (150cv);A -6 ;0.013;105;7.8;9.9;12;14
+AUDI ;A3 Sedan ;1.4 -16V ;Ambiente (150cv);A -6 ;0.013;105;7.8;9.9;12;14
+AUDI ;A3 Sedan ;2.0 -16V ;Ambition ;DCT -6 ;0.022;119;0 ;0 ;10;13
+AUDI ;S3 Sedan ;2.0 -16V ;(286cv) ;DCT -6 ;0.012;135;0 ;0 ;9;12
+AUDI ;A4 Sedan ;1.8 -16V ;Attraction (170cv) ;CVT ;0.032;140;0 ;0 ;9;11
+AUDI ;A4 Sedan ;1.8 -16V ;Ambiente (170cv) ;CVT ;0.032;140;0 ;0 ;9;11
+AUDI ;A4 Sedan ;2.0 -16V ;Attraction ;DCT -7 ;0.013;109;0 ;0 ;11;14
+AUDI ;A4 Sedan ;2.0 -16V ;Ambiente ;DCT -7 ;0.013;109;0 ;0 ;11;14
+AUDI ;A5 Cabriolet ;2.0 -16V ;Ambition (230cv);DCT -7 ;0.026;152;0 ;0 ;8;10
+AUDI ;A5 Coupe ;2.0 -16V ;Ambition (230cv);DCT -7 ;0.026;149;0 ;0 ;8;10
+AUDI ;A5 Sportback ;2.0 -16V ;Ambition (225cv) ;DCT -7 ;0.05;150;0 ;0 ;8;12
+AUDI ;A5 Sportback ;1.8 -16V ;Attraction (170cv) ;CVT ;0.032;140;0 ;0 ;9;11
+AUDI ;A5 Sportback ;1.8 -16V ;Ambiente (170cv) ;CVT ;0.032;140;0 ;0 ;9;11
+AUDI ;A5 Sportback ;2.0 -16V ;Attraction (230cv) ;DCT -7 ;0.035;150;0 ;0 ;8;10
+AUDI ;A5 Sportback ;2.0 -16V ;Ambiente (230cv) ;DCT -7 ;0.035;150;0 ;0 ;8;10
+AUDI ;A6 Sedan ;3.0 -24V ;Ambiente (333cv) ;DCT -7 ;0.033;159;0 ;0 ;8;11
+AUDI ;A6 Sedan ;2.0 -16V ;Attraction (252cv) ;DCT -7 ;0.016;154;0 ;0 ;8;10
+AUDI ;A7 Sportback ;2.0 -16V ;Attraction (252cv) ;DCT -7 ;0.016;154;0 ;0 ;8;10
+AUDI ;A8 ;4.0 -32V ;Sedan (435cv) ;A -8 ;0.013;170;0 ;0 ;7;10
+AUDI ;A8 L ;3.0 -24V ;Longo (310cv) ;A -8 ;0.04;156;0 ;0 ;8;11
+AUDI ;A8 L ;6.3 -48V ;Longo (500cv) ;A -8 ;0.033;225;0 ;0 ;6;7
+AUDI ;Q5 ;3.0 -24V ;Ambition (272cv) ;A -8 ;0.008;180;0 ;0 ;7;9
+AUDI ;S6 Sedan ;4.0 -32V ;(450cv) ;DCT -7 ;0.012;176;0 ;0 ;7;10
+AUDI ;S8 ;4.0 -32V ;Sedan (520cv) ;A -8 ;0.018;181;0 ;0 ;7;9
+AUDI ;SQ5 ;3.0 -24V ;(354cv) ;A -8 ;0.017;176;0 ;0 ;7;10
+AUDI ;R8 ;5.2 -40V ;Coupé (550cv) ;DCT -7 ;0.021;249;0 ;0 ;5;8
+AUDI ;S7 Sportback ;4.0 -32V ;(450cv) ;DCT -7 ;0.012;176;0 ;0 ;7;10
+AUDI ;TT ;2.0 -16V ;Coupé (230cv) ;DCT -6 ;0.022;123;0 ;0 ;10;13
+AUDI ;TT ;2.0 -16V ;Roadster (230cv);DCT -6 ;0.035;122;0 ;0 ;10;13
+AUDI ;TTS ;2.0 -16V ;Coupé (286cv) ;DCT -6 ;0.026;140;0 ;0 ;9;11
+AUDI ;TTS ;2.0 -16V ;Roadster (286cv);DCT -6 ;0.021;141;0 ;0 ;9;11
+BMW ;120i ;2.0 -16V ;Active Flex ;A -8 ;0.01;128;6.5;9.3;9;13
+BMW ;125i ;2.0 -16V ;Active Flex ;A -8 ;0.011;139;6;8.3;9;12
+BMW ;225i ;2.0 -16V ;CAT ;A -8 ;0.053;135;0 ;0 ;9;12
+BMW ;M135i ;3.0 -24V ;;A -8 ;0.011;144;0 ;0 ;8;11
+BMW ;320i ;2.0 -16V ;Active Flex ;A -8 ;0.008;125;6.5;9.3;9;13
+BMW ;328i ;2.0 -16V ;Active Flex ;A -8 ;0.011;127;6.4;9.1;9;13
+BMW ;428i ;2.0 -16V ;Grand Coupe ;A -8 ;0.01;140;0 ;0 ;9;12
+BMW ;X1 ;2.0 -16V ;sDrive20i ;A -8 ;0.022;117;0 ;0 ;10;13
+BMW ;X1 ;2.0 -16v ;sDrive20i Activeflex;A -8 ;0.03;118;7;9;10;13
+BMW ;X1 ;2.0 -16V ;xDrive25i ;A -8 ;0.027;125;0 ;0 ;9;13
+BMW ;X1 ;2.0 -16V ;xDrive25i Activeflex;A -8 ;0.03;133;6.6;8.1;9;12
+BMW ;528i ;2.0 -16V ;;A -8 ;0.012;158;0 ;0 ;7;11
+BMW ;535i ;3.0 -24V ;;A -8 ;0.008;162;0 ;0 ;7;10
+BMW ;M3 ;3.0 -24V ;Sedan ;DCT -7 ;0.012;160;0 ;0 ;8;10
+BMW ;M6;4.4 -32V ;Gran Coupe ;DCT -7 ;0.024;171;0 ;0 ;7;10
+BMW ;X3 ;2.0 -16V ;xDrive20i ;A -8 ;0.008;175;0 ;0 ;7;9
+BMW ;X3 ;3.0 -24V ;xDrive35i ;A -8 ;0.009;173;0 ;0 ;7;9
+BMW ;X4 ;2.0 -16V ;xDrive20i ;A -8 ;0.015;164;0 ;0 ;8;10
+BMW ;X4 ;2.0 -16V ;xDrive28i ;A -8 ;0.011;155;0 ;0 ;8;11
+BMW ;X4 ;3.0 -24V ;xDrive35i ;A -8 ;0.014;176;0 ;0 ;7;10
+BMW ;X5 ;3.0 -24V ;xDrive35i ;A -8 ;0.01;200;0 ;0 ;6;8
+BMW ;X5 ;3.0 -24V ;M50D ;A -8 ;0.309;192;0 ;0 ;10;11
+BMW ;X6 ;4.4 -32V ;M ;A -8 ;0.015;230;0 ;0 ;5;7
+BMW ;X6 ;3.0 -24V ;xDrive35i ;A -8 ;0.01;194;0 ;0 ;6;8
+BMW ;428i ;2.0 -16V ;Cabrio ;A -8 ;0.01;140;0 ;0 ;9;12
+BMW ;M235i ;3.0 -24V ;;A -8 ;0.012;153;0 ;0 ;8;11
+BMW ;M4 ;3.0 -24V ;Cabrio ;DCT -7 ;0.012;160;0 ;0 ;8;10
+BMW ;M4 ;3.0 -24V ;Coupe ;DCT -7 ;0.012;160;0 ;0 ;8;10
+BMW ;Z4 ;2.0 -16V ;sDrive20i ;A -8 ;0.012;152;0 ;0 ;8;11
+CHERY ;New QQ ;1.0 -12V ;QQ 1.0 ;M -5 ;0.017;103;0 ;0 ;12;14
+CHERY ;New QQ ;1.0 -12V ;QQ 1.0 ACT ;M -5 ;0.017;103;0 ;0 ;12;14
+CHERY ;Novo Celer ;1.5 -16V ;FFHB FL ;M -5 ;0.029;135;6.3;7.8;9;11
+CHERY ;Novo Celer ;1.5 -16V ;Flex FL ;M -5 ;0.029;135;6.3;7.8;9;11
+CHERY ;Novo Celer ;1.5 -16V ;HB FL ;M -5 ;0.029;135;6.3;7.8;9;11
+CHERY ;Novo Celer ;1.5 -16V ;HB ACT ;M -5 ;0.029;135;6.3;7.8;9;11
+CHERY ;Novo Celer ;1.5 -16V ;SD ACT ;M -5 ;0.029;135;6.3;7.8;9;11
+CHERY ;Novo Celer ;1.5 -16V ;SD FL ;M -5 ;0.029;135;6.3;7.8;9;11
+CHEVROLET ;Classic ;1.0 -8V ;LS ;M -5 ;0.014;117;7.3;8.6;11;13
+CHEVROLET ;Onix ;1.0 -8V ;LS ;M -5 ;0.011;109;7.8;9.2;12;14
+CHEVROLET ;Onix ;1.0 -8V ;LT ;M -5 ;0.011;109;7.8;9.2;12;14
+CHEVROLET ;Onix ;1.4 -8V ;LT ;A -6 ;0.006;125;6.9;8.5;10;12
+CHEVROLET ;Onix ;1.4 -8V ;LTZ ;A -6 ;0.006;125;6.9;8.5;10;12
+CHEVROLET ;Onix ;1.4 -8V ;LT ;M -5 ;0.015;108;7.9;9.6;12;14
+CHEVROLET ;Onix ;1.4 -8V ;LTZ ;M -5 ;0.015;108;7.9;9.6;12;14
+CHEVROLET ;Onix ;1.4 -8V ;EFF ;M -5 ;0.015;108;7.9;9.6;12;14
+CHEVROLET ;Prisma ;1.0 -8V ;LT ;M -5 ;0.011;109;7.8;9.2;12;14
+CHEVROLET ;Prisma ;1.4 -8V ;LT ;A -6 ;0.006;125;6.9;8.5;10;12
+CHEVROLET ;Prisma ;1.4 -8V ;LTZ ;A -6 ;0.006;125;6.9;8.5;10;12
+CHEVROLET ;Prisma ;1.4 -8V ;ADV ;A -6 ;0.006;125;6.9;8.5;10;12
+CHEVROLET ;Prisma ;1.4 -8V ;LT ;M -5 ;0.015;108;7.9;9.6;12;14
+CHEVROLET ;Prisma ;1.4 -8V ;LTZ ;M -5 ;0.015;108;7.9;9.6;12;14
+CHEVROLET ;Spin ;1.8 -8V ;Activ (5L) ;A -6 ;0.018;139;5.9;7.5;9;11
+CHEVROLET ;Spin ;1.8 -8V ;1.8L AT LT (5L);A -6 ;0.016;141;5.9;7.4;9;11
+CHEVROLET ;Spin ;1.8 -8V ;LT Advantage (5L) ;A -6 ;0.016;141;5.9;7.4;9;11
+CHEVROLET ;Spin ;1.8 -8V ;MT (5L) ;M -5 ;0.021;138;6.5;7.4;9;11
+CHEVROLET ;Spin ;1.8 -8V ;MT LT (5L) ;M -5 ;0.021;138;6.5;7.4;9;11
+CHEVROLET ;Spin ;1.8 -8V ;MT LT Advantage (5L) ;M -5 ;0.021;138;6.5;7.4;9;11
+CHEVROLET ;Cruze Sedan ;1.8 -16V ;LT NB ;A -6 ;0.016;138;6.1;7.3;9;11
+CHEVROLET ;Cruze Sedan ;1.8 -16V ;LTZ NB ;A -6 ;0.016;138;6.1;7.3;9;11
+CHEVROLET ;Cruze Sport 6 ;1.8 -16V ;LT HB ;A -6 ;0.016;138;6.1;7.3;9;11
+CHEVROLET ;Cruze Sport 6 ;1.8 -16V ;LTZ HB ;A -6 ;0.016;138;6.1;7.3;9;11
+CHEVROLET ;TRAILBLAZER (my 2017) ;3.6 -24V ;LTZ 4x4 ;A -6 ;0.01;188;0 ;0 ;7;9
+CHEVROLET ;TRAILBLAZER (my 2017) ;2.8 -16V ;LT 4x4 ;A -6 ;0.339;246;0 ;0 ;8;9
+CHEVROLET ;TRAILBLAZER (my 2017) ;2.8 -16V ;LTZ 4x4 ;A -6 ;0.339;246;0 ;0 ;8;9
+CHEVROLET ;Spin ;1.8 -8V ;1.8L AT LTZ (7L);A -6 ;0.016;141;5.9;7.4;9;11
+CHEVROLET ;Spin ;1.8 -8V ;1.8L MT LTZ (7L);M -5 ;0.021;138;6.5;7.4;9;11
+CHEVROLET ;Montana ;1.4 -8V ;LS ;M -5 ;0.014;121;7.1;8.3;10;12
+CHEVROLET ;Montana ;1.4 -8V ;Sport ;M -5 ;0.014;121;7.1;8.3;10;12
+CHEVROLET ;S10 ;2.5 -16V ;High Country Cabine Dupla 4x4;M -6 ;0.013;176;5.1;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;High Country Cabine Dupla 4x2;M -6 ;0.013;176;5.1;5.5;7;8
+CHEVROLET ;S10 ;2.4 -8V ;LS ;M -5 ;0.053;187;4.8;5.5;7;8
+CHEVROLET ;S10 ;2.4 -8V ;Advantage Cabine Dupla 4x2;M -5 ;0.053;187;4.8;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LS ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LT ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LTZ ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;L Free Ride Advantage Cabine Dupla 4x2;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LS ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LT ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;LTZ ;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.5 -16V ;Free Ride Advantage Cabine Dupla 4x4;M -6 ;0.016;178;4.9;5.5;7;8
+CHEVROLET ;S10 ;2.4 -8V ;LS Cabine Simples 4x2;M -5 ;0.053;187;4.8;5.5;7;8
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LS Cabine Dupla 4x2;M -6 ;0.047;153;5.6;6.4;8;10
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LT Cabine Dupla 4x2;M -6 ;0.047;153;5.6;6.4;8;10
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LTZ Cabine Dupla 4x2;M -6 ;0.047;153;5.6;6.4;8;10
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LT Cabine Dupla 4x4;M -6 ;0.061;160;5.3;6.1;8;9
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LTZ Cabine Dupla 4x4;M -6 ;0.061;160;5.3;6.1;8;9
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;LS Cabine Simples 4x2;M -6 ;0.04;161;5.6;6;8;9
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;High Country Cabine Dupla 4x2;M -6 ;0.051;154;5.5;6.4;8;10
+CHEVROLET ;S10 (modelo 2017) ;2.5 -16V ;High Country Cabine Dupla 4x4;M -6 ;0.053;162;5.3;6.1;8;9
+CHEVROLET ;S10 (modelo 2017) Diesel ;2.8 -16V ;LS Cabine Simples 4x4;M -6 ;0.289;211;0 ;0 ;9;10
+CHEVROLET ;S10 (modelo 2017) Diesel ;2.8 -16V ;LS Cabine Chassis 4x4;M -6 ;0.289;211;0 ;0 ;9;10
+CHEVROLET ;S10 (modelo 2017) Diesel ;2.8 -16V ;LS Cabine Dupla 4x4;M -6 ;0.316;223;0 ;0 ;8;10
+CHEVROLET ;S10 (modelo 2017) Diesel ;2.8 -16V ;LT Cabine Dupla 4x4;M -6 ;0.316;223;0 ;0 ;8;10
+CHEVROLET ;Camaro Conversével ;6.2 -16V ;2SS Conversivel;A -6 ;0.006;215;0 ;0 ;6;8
+CHEVROLET ;Camaro Cupé ;6.2 -16V ;2SS ;A -6 ;0.006;215;0 ;0 ;6;8
+CHRYSLER ;300C ;3.6 -24V ;300C ;A -8 ;0.009;168;0 ;0 ;7;10
+CHRYSLER ;Town & Country ;3.6 -24V ;Touring ;A -6 ;0.033;196;0 ;0 ;6;9
+CHRYSLER ;Town & Country ;3.6 -24V ;Limited ;A -6 ;0.033;196;0 ;0 ;6;9
+CITROEN ;C3 ;1.5 -8V ;Origine ;M -5 ;0.009;103;8;10;12;15
+CITROEN ;C3 ;1.5 -8V ;Attraction ;M -5 ;0.009;103;8;10;12;15
+CITROEN ;C3 ;1.5 -8V ;Tendance ;M -5 ;0.009;103;8;10;12;15
+CITROEN ;C3 ;1.6 -16V ;A Exclusive ;A -4 ;0.043;115;7.9;8.8;11;13
+CITROEN ;C3 ;1.6 -16V ;A Tendance ;A -4 ;0.043;115;7.9;8.8;11;13
+CITROEN ;DS3 ;1.6 -16V ;Sport Chic ;M -6 ;0.033;107;0 ;0 ;11;14
+CITROEN ;C4 Lounge ;1.6 -16V ;THP A Origine ;A -6 ;0.02;115;7.1;9;11;13
+CITROEN ;C4 Lounge ;1.6 -16V ;THP A Tendance;A -6 ;0.02;115;7.1;9;11;13
+CITROEN ;C4 Lounge ;1.6 -16V ;THP A Exclusive ;A -6 ;0.02;115;7.1;9;11;13
+CITROEN ;DS5 ;1.6 -16V ;Be Chic ;A -6 ;0.026;138;0 ;0 ;9;12
+CITROEN ;DS5 ;1.6 -16V ;So Chic ;A -6 ;0.026;138;0 ;0 ;9;12
+CITROEN ;Aircross ;1.6 -16V ;A Shine ;A -4 ;0.027;124;7.2;8.2;10;12
+CITROEN ;Aircross ;1.6 -16V ;A Feel ;A -4 ;0.027;124;7.2;8.2;10;12
+CITROEN ;Aircross ;1.6 -16V ;A Live ;A -4 ;0.027;124;7.2;8.2;10;12
+CITROEN ;Aircross ;1.6 -16V ;Feel ;M -5 ;0.032;123;7.3;8.2;10;12
+CITROEN ;Aircross ;1.5 -8V ;Start ;M -5 ;0.017;124;7.5;8.2;10;12
+CITROEN ;Aircross ;1.5 -8V ;Live ;M -5 ;0.017;124;7.5;8.2;10;12
+CITROEN ;Grand C4 Picasso ;1.6 -16V ;Seduction ;A -6 ;0.029;131;0 ;0 ;9;12
+CITROEN ;Grand C4 Picasso ;1.6 -16V ;Intensive ;A -6 ;0.029;131;0 ;0 ;9;12
+CITROEN ;Jumper ;2.3 -16V ;Minibus 2.3HDi 33M;M -5 ;0.289;236;0 ;0 ;8;10
+CITROEN ;Jumper ;2.3 -16V ;Furgéo 2.3HDi 35LH;M -5 ;0.289;236;0 ;0 ;8;10
+DODGE ;Durango ;3.6 -24V ;Limited ;A -8 ;0.013;190;0 ;0 ;7;9
+DODGE ;Journey ;3.6 -24V ;SXT ;A -6 ;0.014;185;0 ;0 ;7;9
+FERRARI ;458;4.5 -32V ;Speciale ;DCT -7 ;0.019;232;0 ;0 ;5;7
+FERRARI ;California T ;3.8 -32V ;;DCT -7 ;0.01;201;0 ;0 ;6;10
+FERRARI ;F12Berlinetta ;6.3 -48V ;;DCT -7 ;0.017;259;0 ;0 ;5;7
+FIAT ;500;1.4 -16V ;Abarth ;M -5 ;0.009;120;0 ;0 ;11;12
+FIAT ;500;1.4 -16V ;Cabrio Automético ;A  -6 ;0.027;124;6.9;8.2;10;12
+FIAT ;500;1.4 -8V ;Cult ;M -5 ;0.019;115;7.6;8.7;11;13
+FIAT ;500;1.4 -8V ;Cult Cabrio ;M -5 ;0.019;122;7.4;8.2;10;12
+FIAT ;500;1.4 -8V ;Cult Cabrio Dualogic;MTA -5 ;0.034;117;7.6;8.2;11;12
+FIAT ;500;1.4 -8V ;Cult Dualogic ;MTA -5 ;0.034;113;7.7;8.7;11;13
+FIAT ;MOBI ;1.0 -8V ;Way ;M -5 ;0.017;107;8.4;9.2;12;13
+FIAT ;MOBI ;1.0 -8V ;Way On ;M -5 ;0.017;107;8.4;9.2;12;13
+FIAT ;MOBI ;1.0 -8V ;EASY ;M -5 ;0.023;98;8.7;10.1;13;15
+FIAT ;MOBI ;1.0 -8V ;EASY ON ;M -5 ;0.017;107;8.4;9.2;12;13
+FIAT ;MOBI ;1.0 -8V ;LIKE ;M -5 ;0.017;107;8.4;9.2;12;13
+FIAT ;MOBI ;1.0 -8V ;LIKE ON ;M -5 ;0.017;107;8.4;9.2;12;13
+FIAT ;Novo Uno ;1.0 -8V ;Attractive ;M -5 ;0.008;108;8;9.4;12;13
+FIAT ;MICRO COMPACTO ;1.4 -8V ;Evolution ;M -5 ;0.009;98;8.8;10.1;13;15
+FIAT ;Novo Uno ;1.4 -8V ;Sporting ;M -5 ;0.034;114;7.8;8.8;11;13
+FIAT ;Novo Uno ;1.4 -8V ;Sporting Dualogic ;MTA -5 ;0.031;117;7.7;8.3;11;12
+FIAT ;Novo Uno ;1.0 -8V ;Way ;M -5 ;0.02;110;8;9.1;12;13
+FIAT ;Palio ;1.0 -8V ;Fire Evo ;M -5 ;0.019;99;8.7;10.4;12;15
+FIAT ;Palio ;1.0 -8V ;Fire Way ;M -5 ;0.019;103;8.3;9.8;12;14
+FIAT ;Uno ;1.0 -8V ;Vivace ;M -5 ;0.019;102;8.2;10.4;12;15
+FIAT ;Idea ;1.4 -8V ;Attractive ;M -5 ;0.016;130;6.7;7.3;10;11
+FIAT ;Idea ;1.6 -16V ;Essence Dualogic ;MTA -5 ;0.022;125;6.7;7.9;10;12
+FIAT ;Idea ;1.6 -16V ;Essence ;M -5 ;0.019;128;6.8;8;10;12
+FIAT ;Novo Palio ;1.4 -8V ;Attractive ;M -5 ;0.017;113;7.7;9;11;13
+FIAT ;Novo Palio ;1.6 -16V ;Essence ;M -5 ;0.01;124;6.9;8.2;10;12
+FIAT ;Novo Palio ;1.0 -8V ;Attractive ;M -5 ;0.008;118;7.2;8.7;10;13
+FIAT ;Punto ;1.4 -8V ;Attractive ;M -5 ;0.022;120;7.3;8.6;10;12
+FIAT ;Punto ;1.6 -16V ;Essence ;M -5 ;0.029;125;6.7;8.4;10;12
+FIAT ;Punto ;1.6 -16V ;Essence Dualogic ;MTA -5 ;0.021;125;6.9;8;10;12
+FIAT ;Punto ;1.8 -16V ;Sporting ;M -5 ;0.018;130;6.7;7.9;10;11
+FIAT ;Punto ;1.8 -16V ;Blackmotion ;M -5 ;0.018;130;6.7;7.9;10;11
+FIAT ;Punto ;1.4 -16V ;Tjet ;M -5 ;0.031;139;0 ;0 ;9;10
+FIAT ;Siena ;1.0 -8V ;EL ;M -5 ;0.032;106;8.1;9.8;12;14
+FIAT ;Siena ;1.4 -8V ;EL ;M -5 ;0.031;116;7.3;8.5;11;13
+FIAT ;Bravo ;1.8 -16V ;Essence ;M -5 ;0.015;139;6.4;7.5;9;11
+FIAT ;Bravo ;1.8 -16V ;Absolute ;M -5 ;0.015;139;6.4;7.5;9;11
+FIAT ;Bravo ;1.8 -16V ;Sporting ;M -5 ;0.015;139;6.4;7.5;9;11
+FIAT ;Bravo ;1.8 -16V ;Essence ;MTA -5 ;0.016;138;6.5;7.6;9;11
+FIAT ;Bravo ;1.8 -16V ;Absolute ;MTA -5 ;0.016;138;6.5;7.6;9;11
+FIAT ;Bravo ;1.8 -16V ;Sporting Dualogic;MTA -5 ;0.016;138;6.5;7.6;9;11
+FIAT ;Bravo ;1.4 -16V ;Tjet Gasolina ;M -6 ;0.025;141;0 ;0 ;9;10
+FIAT ;Grand Siena ;1.4 -8V ;Attractive ;M -5 ;0.017;111;7.7;9;11;13
+FIAT ;Grand Siena ;1.6 -16V ;Essence Dualogic ;MTA -5 ;0.026;122;7;8.3;10;12
+FIAT ;Grand Siena ;1.4 -8V ;Tetra Fuel ;M -5 ;0.035;126;6.8;8.1;10;12
+FIAT ;Grand Siena ;1.6 -16V ;Essence ;M -5 ;0.019;121;6.9;8.3;10;13
+FIAT ;Weekend ;1.4 -8V ;Attractive ;M -5 ;0.027;122;7.2;8;11;12
+FIAT ;Linea ;1.8 -16V ;Essence ;M -5 ;0.021;126;6.7;8;10;12
+FIAT ;Linea ;1.8 -16V ;Essence ;MTA -5 ;0.013;126;6.7;8.3;10;12
+FIAT ;Linea ;1.8 -16V ;Absolute Dualogic ;MTA -5 ;0.013;126;6.7;8.3;10;12
+FIAT ;Doblé ;1.8 -16V ;Adventure ;M -5 ;0.025;151;6.1;6.6;9;10
+FIAT ;Idea ;1.8 -16V ;Adventure ;M -5 ;0.021;145;6.3;7;9;10
+FIAT ;Idea ;1.8 -16V ;Adventure Dualogic ;MTA -5 ;0.019;147;6.3;6.9;9;10
+FIAT ;Novo Uno ;1.4 -8V ;Way ;M -5 ;0.034;114;7.8;8.8;11;13
+FIAT ;Novo Uno ;1.4 -8V ;Way Dualogic ;MTA -5 ;0.031;117;7.7;8.3;11;12
+FIAT ;Weekend ;1.8 -16V ;Adventure ;M -5 ;0.017;136;6.6;7.2;10;10
+FIAT ;Weekend ;1.8 -16V ;Adventure Dualogic ;MTA -5 ;0.016;137;6.5;7.2;10;10
+FIAT ;Weekend ;1.6 -16V ;Trekking ;M -5 ;0.021;131;6.9;7.8;10;11
+FIAT ;Doblé ;1.4 -8V ;Attractive ;M -5 ;0.031;145;6.4;6.4;9;9
+FIAT ;Doblé ;1.8 -16V ;Essence ;M -5 ;0.02;145;6.2;6.7;9;10
+FIAT ;Freemont ;2.4 -16V ;Emotion ;A -6 ;0.032;165;0 ;0 ;7;11
+FIAT ;Freemont ;2.4 -16V ;Precision ;A -6 ;0.032;165;0 ;0 ;7;11
+FIAT ;Doblé ;1.4 -8V ;Cargo ;M -5 ;0.033;134;6.8;7.1;10;10
+FIAT ;Doblé ;1.8 -16V ;Cargo ;M -5 ;0.02;136;6.4;7.1;10;10
+FIAT ;Fiorino ;1.4 -8V ;Furgéo ;M -5 ;0.03;119;7.5;8.3;11;12
+FIAT ;Novo Uno ;1.4 -8V ;Furgéo ;M -5 ;0.034;114;7.8;8.8;11;13
+FIAT ;Strada ;1.6 -16V ;Trekking CD ;M -5 ;0.029;126;7;7.7;10;11
+FIAT ;Strada ;1.4 -8V ;Working CC ;M -5 ;0.037;127;7;7.6;10;11
+FIAT ;Strada ;1.4 -8V ;CE ;M -5 ;0.037;127;7;7.6;10;11
+FIAT ;Toro ;1.8 -16V ;Freedon ;A -6 ;0.029;149;5.8;7.4;8;11
+FIAT ;Toro ;2.0 -16V ;Freedon 4X2 ;M -6 ;0.266;176;0 ;0 ;11;13
+FIAT ;Toro ;2.0 -16V ;Volcano 4X4 ;A -9 ;0.23;204;0 ;0 ;9;11
+FIAT ;Toro ;2.0 -16V ;Freedon 4X4 ;M -6 ;0.254;181;0 ;0 ;10;12
+FORD ;KA (5 Portas) ;1.5 -16V ;SE ;M -5 ;0.018;108;7.9;9.5;12;14
+FORD ;KA (5 Portas) ;1.5 -16V ;SEL ;M -5 ;0.018;108;7.9;9.5;12;14
+FORD ;KA (5 Portas) ;1.0 -12V ;SE ;M -5 ;0.023;95;8.9;10.4;13;15
+FORD ;KA (5 Portas) ;1.0 -12V ;SEL ;M -5 ;0.023;95;8.9;10.4;13;15
+FORD ;New Fiesta Hatch ;1.5 -16V ;S ;M -5 ;0.02;114;7.6;9.4;11;13
+FORD ;New Fiesta Hatch ;1.5 -16V ;SE ;M -5 ;0.02;114;7.6;9.4;11;13
+FORD ;New Fiesta Hatch ;1.6 -16V ;SE ;DCT -6 ;0.031;109;7.7;10;11;14
+FORD ;New Fiesta Hatch ;1.6 -16V ;Titanium ;DCT -6 ;0.031;109;7.7;10;11;14
+FORD ;New Fiesta Hatch ;1.6 -16V ;SE ;M -5 ;0.022;105;8;9.9;12;14
+FORD ;New Fiesta Hatch ;1.6 -16V ;Titanium ;M -5 ;0.022;105;8;9.9;12;14
+FORD ;KA+ (4 Portas) ;1.5 -16V ;SE ;M -5 ;0.018;108;7.9;9.5;12;14
+FORD ;KA+ (4 Portas) ;1.5 -16V ;SEL ;M -5 ;0.018;108;7.9;9.5;12;14
+FORD ;KA+ (4 Portas) ;1.0 -12V ;SE ;M -5 ;0.023;95;8.9;10.4;13;15
+FORD ;KA+ (4 Portas) ;1.0 -12V ;SEL ;M -5 ;0.023;95;8.9;10.4;13;15
+FORD ;New Fiesta Sedan ;1.6 -16V ;SE ;DCT -6 ;0.025;113;7.5;9.5;11;14
+FORD ;New Fiesta Sedan ;1.6 -16V ;Titanium ;DCT -6 ;0.025;113;7.5;9.5;11;14
+FORD ;New Fiesta Sedan ;1.6 -16V ;SE ;M -5 ;0.014;106;7.6;9.7;12;14
+FORD ;New Fiesta Sedan ;1.6 -16V ;Titanium ;M -5 ;0.014;106;7.6;9.7;12;14
+FORD ;Focus Fastback ;2.0 -16V ;SE ;DCT -6 ;0.005;123;6.7;9.2;10;13
+FORD ;Focus Fastback ;2.0 -16V ;Titanium ;DCT -6 ;0.005;123;6.7;9.2;10;13
+FORD ;Focus Hatch ;1.6 -16V ;S ;DCT -6 ;0.021;117;7.2;9;10;13
+FORD ;Focus Hatch ;1.6 -16V ;SE ;DCT -6 ;0.021;117;7.2;9;10;13
+FORD ;Focus Hatch ;1.6 -16V ;S ;M -5 ;0.018;112;7.5;9.3;11;14
+FORD ;Focus Hatch ;1.6 -16V ;SE ;M -5 ;0.018;112;7.5;9.3;11;14
+FORD ;Focus Hatch ;2.0 -16V ;SE ;DCT -6 ;0.005;123;6.7;9.2;10;13
+FORD ;Focus Hatch ;2.0 -16V ;Titanium ;DCT -6 ;0.005;123;6.7;9.2;10;13
+FORD ;Fusion ;2.0 -16V ;AWD Titanium ;A -6 ;0.012;151;0 ;0 ;8;11
+FORD ;Fusion ;2.5 -16V ;Flex SEL ;A -6 ;0.034;148;5.4;8.2;8;12
+FORD ;Fusion ;2.0 -16V ;FWD Titanium ;A -6 ;0.03;150;0 ;0 ;8;11
+FORD ;Fusion ;2.0 -16V ;Hybrid ;CVT ;0.005;81;0 ;0 ;17;15
+FORD ;Ecosport ;2.0 -16V ;Freestyle ;M -5 ;0.035;135;6.5;8.1;9;12
+FORD ;Ecosport ;1.6 -16V ;S ;M -5 ;0.033;124;7;8.2;10;12
+FORD ;Ecosport ;1.6 -16V ;SE ;M -5 ;0.033;124;7;8.2;10;12
+FORD ;Ecosport ;1.6 -16V ;Titanium ;M -5 ;0.033;124;7;8.2;10;12
+FORD ;Ecosport ;1.6 -16V ;Freestyle ;M -5 ;0.033;124;7;8.2;10;12
+FORD ;Ecosport ;1.6 -16V ;SE ;DCT -6 ;0.022;123;7.2;8.3;10;12
+FORD ;Ecosport ;1.6 -16V ;Freestyle ;DCT -6 ;0.022;123;7.2;8.3;10;12
+FORD ;Ecosport ;2.0 -16V ;SE ;DCT -6 ;0.009;129;6.6;8;10;12
+FORD ;Ecosport ;2.0 -16V ;Titanium ;DCT -6 ;0.009;129;6.6;8;10;12
+FORD ;Ecosport ;2.0 -16V ;Freestyle ;DCT -6 ;0.009;129;6.6;8;10;12
+FORD ;Ecosport ;2.0 -16V ;Freestyle 4WD ;M -6 ;0.026;146;5.7;7;9;10
+FORD ;Ranger 4x4 C. Dupla ;3.2 -20V ;LTD ;A -6 ;0.321;219;0 ;0 ;9;10
+FORD ;Ranger 4x4 C. Dupla ;3.2 -20V ;XLT ;A -6 ;0.324;229;0 ;0 ;8;10
+FORD ;Ranger 4x4 C. Dupla ;3.2 -20V ;XLT ;M -6 ;0.319;218;0 ;0 ;9;10
+FORD ;Ranger 4x4 C. Dupla ;2.2 -16V ;XLS ;A -6 ;0.247;218;0 ;0 ;8;10
+HONDA ;Fit ;1.5 -16V ;DX ;M -5 ;0.02;107;8.3;9.5;12;14
+HONDA ;Fit ;1.5 -16V ;LX ;M -5 ;0.02;107;8.3;9.5;12;14
+HONDA ;Fit ;1.5 -16V ;DX ;CVT ;0.016;102;8.3;9.9;12;14
+HONDA ;Fit ;1.5 -16V ;LX ;CVT ;0.016;102;8.3;9.9;12;14
+HONDA ;Fit ;1.5 -16V ;EX ;CVT ;0.016;102;8.3;9.9;12;14
+HONDA ;Fit ;1.5 -16V ;EXL ;CVT ;0.016;102;8.3;9.9;12;14
+HONDA ;City ;1.5 -16V ;DX ;M -5 ;0.014;100;8.6;10.3;12;15
+HONDA ;City ;1.5 -16V ;LX ;CVT ;0.016;101;8.5;10.3;12;15
+HONDA ;City ;1.5 -16V ;EX ;CVT ;0.016;101;8.5;10.3;12;15
+HONDA ;City ;1.5 -16V ;EXL ;CVT ;0.016;101;8.5;10.3;12;15
+HONDA ;Civic ;2.4 -16V ;Coupe SI ;M -6 ;0.012;143;0 ;0 ;8;12
+HONDA ;Civic ;2.0 -16V ;LXR ;A -5 ;0.018;122;6.4;9.4;10;14
+HONDA ;Civic ;2.0 -16V ;EXR ;A -5 ;0.018;122;6.4;9.4;10;14
+HONDA ;Civic ;1.8 -16V ;LXS ;A -5 ;0.03;113;6.8;9.6;11;14
+HONDA ;Civic ;1.8 -16V ;LXS ;M -6 ;0.031;113;7.2;9.2;11;14
+HONDA ;CR -V ;2.0 -16V ;EXL FLEX4WD ;A -5 ;0.014;135;6.4;8.1;9;12
+HONDA ;Accord ;3.5 -24V ;EX V6 ;A -6 ;0.013;148;0 ;0 ;8;12
+HONDA ;HR -V ;1.8 -16V ;EX ;CVT ;0.028;120;7.1;8.5;11;12
+HONDA ;HR -V ;1.8 -16V ;LX ;M -6 ;0.016;123;6.7;8.6;10;13
+HONDA ;HR -V ;1.8 -16V ;LX ;CVT ;0.028;120;7.1;8.5;11;12
+HONDA ;HR -V ;1.8 -16V ;EX ;CVT ;0.028;120;7.1;8.5;11;12
+HONDA ;HR -V ;1.8 -16V ;EXL ;CVT ;0.028;120;7.1;8.5;11;12
+HYUNDAI ;HB20 ;1.0 -12V ;Comfort ;M -5 ;0.011;101;8.5;9.9;13;14
+HYUNDAI ;HB20 ;1.0 -12V ;Plus ;M -5 ;0.011;101;8.5;9.9;13;14
+HYUNDAI ;HB20 ;1.0 -12V ;Style ;M -5 ;0.011;101;8.5;9.9;13;14
+HYUNDAI ;HB20 ;1.6 -16V ;Plus ;A -6 ;0.02;121;7.1;9.4;10;13
+HYUNDAI ;HB20 ;1.6 -16V ;Style ;A -6 ;0.02;121;7.1;9.4;10;13
+HYUNDAI ;HB20 ;1.6 -16V ;Premium ;A -6 ;0.02;121;7.1;9.4;10;13
+HYUNDAI ;HB20 ;1.6 -16V ;R spec ;A -6 ;0.02;121;7.1;9.4;10;13
+HYUNDAI ;HB20 ;1.6 -16V ;Plus ;M -6 ;0.019;107;8.1;9.9;12;14
+HYUNDAI ;HB20 ;1.6 -16V ;Style ;M -6 ;0.019;107;8.1;9.9;12;14
+HYUNDAI ;HB20 ;1.6 -16V ;Premium ;M -6 ;0.019;107;8.1;9.9;12;14
+HYUNDAI ;HB20 ;1.6 -16V ;R spec ;M -6 ;0.019;107;8.1;9.9;12;14
+HYUNDAI ;HB20 ;1.0 -12V ;Plus turbo ;M -6 ;0.016;105;8.2;10.1;12;14
+HYUNDAI ;HB20 ;1.0 -12V ;Style turbo ;M -6 ;0.016;105;8.2;10.1;12;14
+HYUNDAI ;HB20S ;1.0 -12V ;Plus ;M -5 ;0.006;110;8.5;9.4;11;13
+HYUNDAI ;HB20S ;1.0 -12V ;Style ;M -5 ;0.006;110;8.5;9.4;11;13
+HYUNDAI ;HB20S ;1.6 -16V ;Plus ;M -6 ;0.014;117;7.7;9.6;11;13
+HYUNDAI ;HB20S ;1.6 -16V ;Style ;M -6 ;0.014;117;7.7;9.6;11;13
+HYUNDAI ;HB20S ;1.6 -16V ;Premium ;M -6 ;0.014;117;7.7;9.6;11;13
+HYUNDAI ;HB20S ;1.0 -12V ;Plus  - Turbo ;M -6 ;0.014;101;8.4;10.5;12;15
+HYUNDAI ;HB20S ;1.0 -12V ;Style  - Turbo ;M -6 ;0.014;101;8.4;10.5;12;15
+HYUNDAI ;Elantra ;2.0 -16V ;;A -6 ;0.021;118;6.3;9.1;10;13
+HYUNDAI ;New i30 FL ;1.8 -16V ;;A -6 ;0.008;129;0 ;0 ;9;12
+HYUNDAI ;Azera ;3.0 -24V ;3.0 V6 ;A -6 ;0.014;169;0 ;0 ;7;10
+HYUNDAI ;HB20X ;1.6 -16V ;Style ;M -6 ;0.014;108;8.3;9.8;12;13
+HYUNDAI ;HB20X ;1.6 -16V ;Style ;A -6 ;0.01;127;7.1;8.7;10;11
+HYUNDAI ;HB20X ;1.6 -16V ;Premium ;A -6 ;0.01;127;7.1;8.7;10;11
+HYUNDAI ;Tucson ;2.0 -16V ;GLB ;A -4 ;0.044;181;5;5.9;7;8
+HYUNDAI ;Tucson ;2.0 -16V ;GLSB ;A -4 ;0.044;181;5;5.9;7;8
+JAC ;J3 ;1.5 -16V ;J3 Flex ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3 Flex Sport ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3 Flex Turin ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3S ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3S Flex ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3S Flex Turin ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3S Turin ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3S Jetflex ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J3 ;1.5 -16V ;J3 S Jetflex T ;M -5 ;0.041;126;6.5;8.4;10;13
+JAC ;J5 ;1.5 -16V ;;M -5 ;0.07;131;0 ;0 ;10;12
+JAC ;J6 ;2.0 -16V ;Jetflex 5S ;M -5 ;0.034;175;5;6.2;7;9
+JAC ;T5 ;1.5 -16V ;JETFLEX ;M -6 ;0.011;126;6.8;8.2;10;12
+JAC ;J6 ;2.0 -16V ;Jetflex 7S ;M -5 ;0.034;175;5;6.2;7;9
+JAGUAR ;XE ;2.0 -16V ;2.0 Pure SI4 ;A -8 ;0.006;141;0 ;0 ;9;12
+JAGUAR ;XE ;2.0 -16V ;2.0 R -Sport SI4 ;A -8 ;0.006;141;0 ;0 ;9;12
+JAGUAR ;XE ;3.0 -24V ;3.0 V6SC ;A -8 ;0.006;165;0 ;0 ;7;11
+JAGUAR ;XF ;2.0 -16V ;2.0T Prestig ;A -8 ;0.007;137;0 ;0 ;9;12
+JAGUAR ;XF ;2.0 -16V ;2.0T Pure TC ;A -8 ;0.007;137;0 ;0 ;9;12
+JAGUAR ;XF ;2.0 -16V ;2.0T Pure ;A -8 ;0.007;137;0 ;0 ;9;12
+JAGUAR ;XF ;2.0 -16V ;2.0T R -Sport ;A -8 ;0.007;137;0 ;0 ;9;12
+JAGUAR ;XF ;3.0 -24V ;V6 380CV ;A -8 ;0.005;177;0 ;0 ;7;10
+JAGUAR ;XF ;3.0 -24V ;V6 Portfolio ;A -8 ;0.004;175;0 ;0 ;7;10
+JAGUAR ;XJ ;3.0 -24V ;3.0SC R -Sport ;A -8 ;0.014;179;0 ;0 ;7;10
+JAGUAR ;XJ ;3.0 -24V ;3.0SC Portfolio ;A -8 ;0.014;179;0 ;0 ;7;10
+JAGUAR ;F -TYPE ;3.0 -24V ;Cabrio ;A -8 ;0.011;167;0 ;0 ;7;10
+JAGUAR ;F -TYPE ;3.0 -24V ;Coupe ;A -8 ;0.011;167;0 ;0 ;7;10
+JAGUAR ;F -TYPE ;3.0 -24V ;S Cabrio ;A -8 ;0.004;169;0 ;0 ;7;10
+JAGUAR ;F -TYPE ;3.0 -24V ;S Coupe ;A -8 ;0.004;169;0 ;0 ;7;10
+JEEP ;Renegade ;1.8 -16V ;Sport ;M -5 ;0.027;133;6.7;7.4;10;11
+JEEP ;Renegade ;2.0 -16V ;Sport ;A -9 ;0.263;195;0 ;0 ;9;12
+JEEP ;Renegade ;2.0 -16V ;Longitude ;A -9 ;0.263;195;0 ;0 ;9;12
+JEEP ;Cherokee ;3.2 -24V ;Limited ;A -9 ;0.007;170;0 ;0 ;7;9
+JEEP ;Compass ;2.0 -16V ;VVT ;CVT ;0.049;156;0 ;0 ;8;9
+JEEP ;Grand Cherokee ;3.6 -24V ;Laredo ;A -8 ;0.01;209;0 ;0 ;6;8
+JEEP ;Grand Cherokee ;3.6 -24V ;Limited ;A -8 ;0.01;209;0 ;0 ;6;8
+JEEP ;Renegade ;2.0 -16V ;Trailhawk ;A -9 ;0.263;195;0 ;0 ;9;12
+JEEP ;Wrangler ;3.6 -24V ;Unlimited Sport ;A -5 ;0.018;223;0 ;0 ;6;7
+JEEP ;Wrangler ;3.6 -24V ;Sport ;A -5 ;0.018;223;0 ;0 ;6;7
+KIA ;Picanto ;1.0 -12V ;EX4 ;A -4 ;0.006;119;8;8.9;11;12
+KIA ;Picanto ;1.0 -12V ;LX4 ;A -4 ;0.006;119;8;8.9;11;12
+KIA ;Picanto ;1.0 -12V ;EX4 ;M -5 ;0.005;104;8.2;10;12;14
+KIA ;Picanto ;1.0 -12V ;LX4 ;M -5 ;0.005;104;8.2;10;12;14
+KIA ;Cerato ;1.6 -16V ;LX3 ;A -6 ;0.023;127;6.6;9.1;10;12
+KIA ;Cerato ;1.6 -16V ;EX3 ;A -6 ;0.023;127;6.6;9.1;10;12
+KIA ;Cerato ;1.6 -16V ;SX3 ;A -6 ;0.023;127;6.6;9.1;10;12
+KIA ;Cerato ;1.6 -16V ;LX3 ;M -6 ;0.02;118;6.8;9.3;10;14
+KIA ;Cerato ;1.6 -16V ;EX3 ;M -6 ;0.02;118;6.8;9.3;10;14
+KIA ;Cerato ;1.6 -16V ;SX3 ;M -6 ;0.02;118;6.8;9.3;10;14
+KIA ;Cadenza ;3.5 -24V ;EX ;A -6 ;0.014;167;0 ;0 ;7;10
+KIA ;Optima ;2.0 -16V ;EX ;A -6 ;0.033;138;0 ;0 ;9;12
+KIA ;New Soul ;1.6 -16V ;EX ;A -6 ;0.009;132;6.7;8.4;9;11
+KIA ;New Soul ;1.6 -16V ;LX ;A -6 ;0.009;132;6.7;8.4;9;11
+KIA ;Sportage ;2.0 -16V ;EX G3 ;A -6 ;0.006;136;6.3;7.7;9;11
+KIA ;Sportage ;2.0 -16V ;LX G3 ;A -6 ;0.006;136;6.3;7.7;9;11
+KIA ;Sportage ;2.0 -16V ;EX G4 ;A -6 ;0.006;136;6.3;7.7;9;11
+KIA ;Sportage ;2.0 -16V ;LX G4 ;A -6 ;0.006;136;6.3;7.7;9;11
+KIA ;Sorento ;3.3 -24V ;EX3 G27 ;A -6 ;0.021;172;0 ;0 ;7;9
+KIA ;Carnival ;3.3 -24V ;EX ;A -6 ;0.034;187;0 ;0 ;7;9
+LAMBORGHINI ;Aventador ;6.5 -48V ;;DCT -7 ;0.015;274;0 ;0 ;3;7
+LAMBORGHINI ;Huracan ;5.0 -40V ;;DCT -7 ;0.018;234;0 ;0 ;5;7
+LAND ROVER ;Discovery ;3.0 -24V ;SDV6 S ;A -8 ;0.297;141;0 ;0 ;8;10
+LAND ROVER ;Discovery ;3.0 -24V ;SDV6 Black ;A -8 ;0.297;141;0 ;0 ;8;10
+LAND ROVER ;Discovery ;3.0 -24V ;SDV6 HSE ;A -8 ;0.297;141;0 ;0 ;8;10
+LAND ROVER ;Discovery ;3.0 -24V ;Graphite ;A -8 ;0.297;141;0 ;0 ;8;10
+LAND ROVER ;Discovery ;3.0 -24V ;Graphite 5 ;A -8 ;0.297;141;0 ;0 ;8;10
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 HSE ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 HSE L ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 HSE 7L ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 HSEL7L ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 S ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 SE ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.2 -16V ;SD4 SE 7L ;A -9 ;0.293;197;0 ;0 ;9;11
+LAND ROVER ;Discovery Sport ;2.0 -16V ;SI4 S ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;SI4 SE ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;SI4 HSE ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;SI4 HSEL ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;SI4 SE7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;HSE7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;HSEL 7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;SI4 S ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;SI4 SE ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;SI4 HSE ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;SI4 HSEL ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;SI4 SE7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;HSE7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport BR ;2.0 -16V ;HSEL 7L ;A -9 ;0.006;182;0 ;0 ;7;9
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 HSE ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 HSE L ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 HSE 7L ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 HSEL7L ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 S ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 SE ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Discovery Sport ;2.0 -16V ;TD4 SE 7L ;A -9 ;0.286;166;0 ;0 ;11;13
+LAND ROVER ;Evoque ;2.2 -16V ;Pure SD4 ;A -9 ;0.204;105;0 ;0 ;11;13
+LAND ROVER ;Evoque ;2.2 -16V ;HSE SD4 ;A -9 ;0.204;105;0 ;0 ;11;13
+LAND ROVER ;Evoque ;2.0 -16V ;Pure ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque ;2.0 -16V ;SE ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque ;2.0 -16V ;SE Dynamic ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque ;2.0 -16V ;HSE Dynamic ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque BR ;2.0 -16V ;Pure ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque BR ;2.0 -16V ;SE ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque BR ;2.0 -16V ;SE Dynamic ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque BR ;2.0 -16V ;HSE Dynamic ;A -9 ;0.006;151;0 ;0 ;8;12
+LAND ROVER ;Evoque ;2.0 -16V ;HSE TD4 ;A -9 ;0.235;146;0 ;0 ;12;16
+LAND ROVER ;Evoque ;2.0 -16V ;SE TD4 ;A -9 ;0.235;146;0 ;0 ;12;16
+LAND ROVER ;Range Rover ;3.0 -24V ;TDV6 HSE ;A -8 ;0.296;186;0 ;0 ;10;12
+LAND ROVER ;Range Rover ;3.0 -24V ;TDV6 Vogue ;A -8 ;0.296;186;0 ;0 ;10;12
+LAND ROVER ;Range Rover ;5.0 -32V ;V8 SC VOGUESE ;A -8 ;0.009;251;0 ;0 ;5;8
+LAND ROVER ;Range Rover ;5.0 -32V ;V8 SC AB ;A -8 ;0.009;251;0 ;0 ;5;8
+LAND ROVER ;Range Rover ;5.0 -32V ;V8 SC AB L ;A -8 ;0.009;251;0 ;0 ;5;8
+LAND ROVER ;Range Rover ;5.0 -32V ;ABLACKL ;A -8 ;0.009;251;0 ;0 ;5;8
+LAND ROVER ;Range Rover ;5.0 -32V ;V8SC SVAB ;A -8 ;0.007;244;0 ;0 ;5;7
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 SC HST ;A -8 ;0.008;198;0 ;0 ;6;8
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 SC S ;A -8 ;0.009;212;0 ;0 ;6;8
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 SC SE ;A -8 ;0.009;212;0 ;0 ;6;8
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 SE HSE ;A -8 ;0.009;212;0 ;0 ;6;8
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 TD HSE ;A -8 ;0.326;188;0 ;0 ;9;13
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 TD S ;A -8 ;0.326;188;0 ;0 ;9;13
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 TD SE ;A -8 ;0.326;188;0 ;0 ;9;13
+LAND ROVER ;Range Rover Sport ;3.0 -24V ;3.0 TD ABD ;A -8 ;0.326;188;0 ;0 ;9;13
+LAND ROVER ;Range Rover Sport ;5.0 -32V ;5.0 SC DYN ;A -8 ;0.007;243;0 ;0 ;5;7
+LAND ROVER ;Range Rover Sport ;5.0 -32V ;5.0 SC AB ;A -8 ;0.007;243;0 ;0 ;5;7
+LAND ROVER ;Range Rover Sport ;5.0 -32V ;5.0 SC AB D ;A -8 ;0.007;243;0 ;0 ;5;7
+LAND ROVER ;Range Rover Sport ;5.0 -32V ;SVR 550 ;A -8 ;0.009;242;0 ;0 ;5;7
+LEXUS ;CT200H ;1.8 -16V ;CT200H ;CVT ;0.003;87;0 ;0 ;16;14
+LEXUS ;CT200H ;1.8 -16V ;F Sport ;CVT ;0.003;87;0 ;0 ;16;14
+LEXUS ;IS200 ;2.0 -16V ;Luxury ;A -8 ;0.029;152;0 ;0 ;8;11
+LEXUS ;IS200 ;2.0 -16V ;F Sport ;A -8 ;0.029;152;0 ;0 ;8;11
+LEXUS ;ES350 ;3.5 -24V ;;A -6 ;0.018;154;0 ;0 ;8;11
+LEXUS ;LS460 ;4.6 -32V ;;A -8 ;0.036;197;0 ;0 ;6;9
+LEXUS ;NX200 4X4 ;2.0 -16V ;Luxury ;A -6 ;0.009;152;0 ;0 ;8;10
+LEXUS ;NX200 4X4 ;2.0 -16V ;Sport ;A -6 ;0.009;152;0 ;0 ;8;10
+LEXUS ;RX350 4X4 ;3.5 -24V ;LUXURY ;A -8 ;0.037;168;0 ;0 ;7;10
+LEXUS ;RX350 4X4 ;3.5 -24V ;F SPORT ;A -8 ;0.037;168;0 ;0 ;7;10
+MASERATI ;Ghibli ;3.0 -24V ;Euro 6 ;A -8 ;0.05;188;0 ;0 ;6;9
+MASERATI ;Ghibli ;3.0 -24V ;SQ4 Euro 6 ;A -8 ;0.012;187;0 ;0 ;6;9
+MASERATI ;Gran ;4.7 -32V ;TurismoS ;A -6 ;0.007;236;0 ;0 ;5;7
+MASERATI ;Quattroporte ;4.0 -32V ;;A -8 ;0.013;245;0 ;0 ;5;7
+MERCEDES -BENZ ;A200 FF ;1.6 -16V ;;DCT -7 ;0.002;119;7.2;8.8;11;13
+MERCEDES -BENZ ;A250 ;2.0 -16V ;Turbo Sport ;DCT -7 ;0.013;119;0 ;0 ;10;14
+MERCEDES -BENZ ;AMG A 45 4M ;2.0 -16V ;;DCT -7 ;0.025;132;0 ;0 ;9;12
+MERCEDES -BENZ ;B200 FF ;1.6 -16V ;;DCT -7 ;0.003;117;6.8;9.7;10;14
+MERCEDES -BENZ ;AMG CLA 45 4M ;2.0 -16V ;;DCT -7 ;0.029;126;0 ;0 ;10;12
+MERCEDES -BENZ ;AMG GLA 45 4M ;2.0 -16V ;;DCT -7 ;0.017;139;0 ;0 ;9;11
+MERCEDES -BENZ ;CLA200 FF ;1.6 -16V ;;DCT -7;0.002;6.9;8.6;10;13;1.99
+MERCEDES -BENZ ;CLA250 4Matic ;2.0 -16V;;DCT -7;0.010;0 ;0 ;9;14;2.05
+MERCEDES -BENZ ;GLA200 FF ;1.6 -16V ;;DCT -7;0.003;7;8.6;10;13;1.98
+MERCEDES -BENZ ;GLA200 FF BR ;1.6 -16V ;;DCT -7 ;0.003;7;8.6;10;13;1.98
+MERCEDES -BENZ ;GLA250 ;2.0 -16V ;;DCT -7 ;0.011;0 ;0 ;10;14;1.9
+MERCEDES -BENZ ;GLA250 BR ;2.0 -16V ;;DCT -7 ;0.014;0 ;0 ;10;15;1.92
+MERCEDES -BENZ ;AMG C 63 ;4.0 -32V ;;A -7 ;0.009;176;0 ;0 ;7;9
+MERCEDES -BENZ ;AMG C 63 S ;4.0 -32V ;;A -7 ;0.009;176;0 ;0 ;7;9
+MERCEDES -BENZ ;AMG S 63 L 4M ;5.5 -32V ;;A -7 ;0.016;189;0 ;0 ;6;9
+MERCEDES -BENZ ;C180 ;1.6 -16V ;;A -7 ;0.01;105;0 ;0 ;11;16
+MERCEDES -BENZ ;C180 ;1.6 -16V ;Estate ;A -7 ;0.009;119;0 ;0 ;10;14
+MERCEDES -BENZ ;C180 FF ;1.6 -16V ;;A -7 ;0.006;119;7;9.2;10;13
+MERCEDES -BENZ ;C180 FF BR ;1.6 -16V ;;A -7 ;0.006;119;7;9.2;10;13
+MERCEDES -BENZ ;C200 ;2.0 -16V ;;A -7 ;0.012;124;0 ;0 ;10;13
+MERCEDES -BENZ ;C200 BR ;2.0 -16V ;;A -7 ;0.012;124;0 ;0 ;10;13
+MERCEDES -BENZ ;C250 ;2.0 -16V ;;A -7 ;0.011;122;0 ;0 ;10;14
+MERCEDES -BENZ ;C250 BR ;2.0 -16V ;;A -7 ;0.011;122;0 ;0 ;10;14
+MERCEDES -BENZ ;E250 ;2.0 -16V ;;A -7 ;0.006;124;0 ;0 ;10;13
+MERCEDES -BENZ ;AMG GLE 63 ;5.5 -32V ;;A -9 ;0.012;232;0 ;0 ;6;7
+MERCEDES -BENZ ;AMG GLE 63 ;5.5 -32V ;Coupé ;A -7 ;0.012;232;0 ;0 ;6;7
+MERCEDES -BENZ ;GLC 250 4M ;2.0 -16V ;;A -9 ;0.01;145;0 ;0 ;9;10
+MERCEDES -BENZ ;GLE 400 ;3.0 -24V ;Coupé ;A -9 ;0.006;179;0 ;0 ;7;9
+MERCEDES -BENZ ;GLE 350d ;3.0 -32V ;;A -9 ;0.101;197;0 ;0 ;9;13
+MERCEDES -BENZ ;Vito Tourer 119 ;2.0 -16V ;;M -6 ;0.024;149;5.6;7.5;8;11
+MERCEDES -BENZ ;Vito 111 CDI ;1.6 -16V ;;M -6 ;0.226;191;0 ;0 ;8;12
+MERCEDES -BENZ ;Sprinter Street 313 ;2.1 -16V ;;M -6 ;0.116;246;0 ;0 ;8;9
+MERCEDES -BENZ ;AMG GT ;4.0 -32V ;;A -7 ;0.01;179;0 ;0 ;7;9
+MERCEDES -BENZ ;AMG GT S ;4.0 -32V ;;A -7 ;0.01;179;0 ;0 ;7;9
+MERCEDES -BENZ ;AMG S 63 4M ;5.5 -32V ;Coupé ;A -7 ;0.017;190;0 ;0 ;6;9
+MERCEDES -BENZ ;E250 ;2.0 -16V ;Cabrio ;A -7 ;0.006;124;0 ;0 ;10;13
+MERCEDES -BENZ ;E250 ;2.0 -16V ;Coupé ;A -7 ;0.006;124;0 ;0 ;10;13
+MERCEDES -BENZ ;SLC 300 ;2.0 -16V ;;A -7 ;0.006;133;0 ;0 ;10;11
+MERCEDES -BENZ ;SLK 300 ;2.0 -16V ;;A -7 ;0.006;133;0 ;0 ;10;11
+MERCEDES -BENZ ;SL 400 ;3.0 -24V ;;A -7 ;0.012;125;0 ;0 ;9;14
+MINI ;Cooper ;1.5 -12V ;;A -6 ;0.064;119;0 ;0 ;11;12
+MINI ;Cooper ;1.5 -12V ;5P ;A -6 ;0.02;109;0 ;0 ;11;14
+MINI ;Cooper ;2.0 -16V ;S 5P ;A -6 ;0.044;121;0 ;0 ;10;13
+MINI ;Cooper ;1.6 -16V ;S Countryman All4;A -6 ;0.065;149;0 ;0 ;8;10
+MINI ;Cooper ;2.0 -16V ;S ;A -6 ;0.012;121;0 ;0 ;10;13
+MITSUBISHI ;Lancer ;2.0 -16V ;;M -5 ;0.027;0;148;0 ;0 ;8;10
+MITSUBISHI ;Lancer ;2.0 -16V ;GT ;CVT ;0.004;140;0 ;0 ;9;11
+MITSUBISHI ;Lancer ;2.0 -16V ;HLE ;CVT ;0.004;140;0 ;0 ;9;11
+MITSUBISHI ;Lancer ;2.0 -16V ;HL ;CVT ;0.004;140;0 ;0 ;9;11
+MITSUBISHI ;ASX ;2.0 -16V ;4X2 ;M -5 ;0.019;146;0 ;0 ;9;10
+MITSUBISHI ;ASX ;2.0 -16V ;4X2 ;CVT ;0.016;148;0 ;0 ;9;11
+MITSUBISHI ;ASX ;2.0 -16V ;4X4 ;CVT ;0.016;156;0 ;0 ;10;10
+MITSUBISHI ;New Outlander ;2.0 -16V ;4X2 ;CVT ;0.008;140;0 ;0 ;9;10
+MITSUBISHI ;ASX ;2.0 -16V ;Outdoor ;M -5 ;0.019;167;0 ;0 ;8;9
+MITSUBISHI ;Outlander ;2.2 -16V ;4WD ;A -6 ;0.297;169;0 ;0 ;11;13
+MITSUBISHI ;New Outlander ;3.0 -24V ;GT 4WD ;A -6 ;0.005;183;0 ;0 ;7;8
+MITSUBISHI ;Pajero 5 portas ;3.8 -24V ;4X4 ;A -5 ;0.063;238;0 ;0 ;5;7
+MITSUBISHI ;L200 Triton ;2.4 -16V ;4X2 ;M -5 ;0.015;211;4.3;4.8;6;7
+MITSUBISHI ;L200 Triton ;3.5 -24V ;HPE 4X4 ;A -4 ;0.076;273;3.2;3.9;5;6
+MITSUBISHI ;L200 Triton HPE ;3.2 -16V ;GLS ;M -5 ;0.321;216;0 ;0 ;9;11
+MITSUBISHI ;L200 Triton HPE ;3.2 -16V ;GLX ;M -5 ;0.321;216;0 ;0 ;9;11
+MITSUBISHI ;L200 Triton HPE ;3.2 -16V ;GL ;M -5 ;0.321;216;0 ;0 ;9;11
+NISSAN ;New March ;1.0 -12V ;10 MT ;M -5 ;0.003;96;8.8;10.4;13;15
+NISSAN ;New March ;1.0 -12V ;10 S ;M -5 ;0.003;96;8.8;10.4;13;15
+NISSAN ;New March ;1.0 -12V ;10 SV ;M -5 ;0.003;96;8.8;10.4;13;15
+NISSAN ;New March ;1.6 -16V ;16 S ;M -5 ;0.005;99;8.5;9.9;13;14
+NISSAN ;New March ;1.6 -16V ;16 SV ;M -5 ;0.005;99;8.5;9.9;13;14
+NISSAN ;New March ;1.6 -16V ;16 SL ;M -5 ;0.005;99;8.5;9.9;13;14
+NISSAN ;New March ;1.6 -16V ;16 SV ;CVT ;0.014;104;7.8;9.8;12;15
+NISSAN ;New March ;1.6 -16V ;16 SL ;CVT ;0.014;104;7.8;9.8;12;15
+NISSAN ;New Versa ;1.0 -12V ;10;M -5 ;0.004;95;8.8;10.5;13;15
+NISSAN ;New Versa ;1.0 -12V ;10 S ;M -5 ;0.004;95;8.8;10.5;13;15
+NISSAN ;New Versa ;1.6 -16V ;16 SV ;M -5 ;0.013;99;8.4;10;13;14
+NISSAN ;New Versa ;1.6 -16V ;16 SL ;M -5 ;0.013;99;8.4;10;13;14
+NISSAN ;New Versa ;1.6 -16V ;16 Unique ;M -5 ;0.013;99;8.4;10;13;14
+NISSAN ;New Versa ;1.6 -16V ;16 SV ;CVT ;0.025;106;7.8;10;12;14
+NISSAN ;New Versa ;1.6 -16V ;16 SL ;CVT ;0.025;106;7.8;10;12;14
+NISSAN ;New Versa ;1.6 -16V ;16 UNIQUE ;CVT ;0.025;106;7.8;10;12;14
+NISSAN ;Novo Sentra ;2.0 -16V ;20SV CVT ;CVT ;0.008;123;6.6;9;10;13
+NISSAN ;Novo Sentra ;2.0 -16V ;20SL CVT ;CVT ;0.008;123;6.6;9;10;13
+NISSAN ;Novo Sentra ;2.0 -16V ;Unique ;CVT ;0.008;123;6.6;9;10;13
+NISSAN ;Novo Sentra MY17 ;2.0 -16V ;20 S ;CVT ;0.017;123;6.7;9.1;10;13
+NISSAN ;Novo Sentra MY17 ;2.0 -16V ;20 SV ;CVT ;0.017;123;6.7;9.1;10;13
+NISSAN ;Novo Sentra MY17 ;2.0 -16V ;20 SL ;CVT ;0.017;123;6.7;9.1;10;13
+NISSAN ;Altima ;2.5 -16V ;25SL ;CVT ;0.007;123;0 ;0 ;10;13
+NISSAN ;Kicks ;1.6 -16V ;16 SL ;CVT ;0.008;108;8.1;9.6;11;14
+PEUGEOT ;208;1.2 -12V ;Active MT ;M -5 ;0.037;82;10.9;11.7;15;17
+PEUGEOT ;208;1.2 -12V ;Act Pack MT ;M -5 ;0.037;82;10.9;11.7;15;17
+PEUGEOT ;208;1.2 -12V ;Allure MT ;M -5 ;0.037;82;10.9;11.7;15;17
+PEUGEOT ;208;1.5 -8V ;Active ;M -5 ;0.033;104;8;9.6;12;14
+PEUGEOT ;208;1.5 -8V ;Active Pack ;M -5 ;0.033;104;8;9.6;12;14
+PEUGEOT ;208;1.5 -8V ;Allure ;M -5 ;0.033;104;8;9.6;12;14
+PEUGEOT ;208;1.6 -16V ;Griffe ;M -5 ;0.036;116;7.1;8.9;11;13
+PEUGEOT ;208;1.6 -16V ;Sport MT ;M -5 ;0.027;102;8.5;10;12;14
+PEUGEOT ;208;1.6 -16V ;Griffe MT ;M -5 ;0.027;102;8.5;10;12;14
+PEUGEOT ;208;1.6 -16V ;Allure AT ;A -4 ;0.03;109;8.1;9.1;12;13
+PEUGEOT ;208;1.6 -16V ;Griffe AT ;A -4 ;0.03;109;8.1;9.1;12;13
+PEUGEOT ;208;1.6 -16V ;GT THP ;M -6 ;0.031;104;8.2;9.5;12;14
+PEUGEOT ;3008;1.6 -16V ;Griffe ;A -6 ;0.02;145;0 ;0 ;8;11
+PEUGEOT ;408;2.0 -16V ;Allure ;A -6 ;0.019;147;5.6;7.8;8;11
+PEUGEOT ;408;1.6 -16V ;Griffe THP A ;A -6 ;0.018;115;7.3;9.2;11;13
+PEUGEOT ;408;1.6 -16V ;Allure THP A ;A -6 ;0.018;115;7.3;9.2;11;13
+PEUGEOT ;2008;1.6 -16V ;Allure ;A -4 ;0.044;134;6.8;7.9;9;11
+PEUGEOT ;2008;1.6 -16V ;Griffe ;A -4 ;0.044;134;6.8;7.9;9;11
+PEUGEOT ;2008;1.6 -16V ;Allure ;M -5 ;0.035;125;7.3;8.2;10;12
+PEUGEOT ;2008;1.6 -16V ;Griffe ;M -5 ;0.035;125;7.3;8.2;10;12
+PEUGEOT ;2008;1.6 -16V ;Griffe THP ;M -6 ;0.017;118;7.1;8.5;11;12
+PEUGEOT ;Boxer ;2.3 -16V ;Minibus 330M ;M -5 ;0.289;236;0 ;0 ;8;10
+PEUGEOT ;Boxer ;2.3 -16V ;Furgéo 350LH ;M -5 ;0.289;236;0 ;0 ;8;10
+PORSCHE ;Cayenne (New) ;3.6 -24V ;S ;A -8 ;0.016;189;0 ;0 ;6;9
+PORSCHE ;Cayenne (New) ;4.8 -32V ;Turbo ;A -8 ;0.021;218;0 ;0 ;6;8
+PORSCHE ;Macan ;2.0 -16V ;;DCT -7 ;0.036;149;0 ;0 ;8;11
+PORSCHE ;Macan ;3.0 -24V ;S ;DCT -7 ;0.066;208;0 ;0 ;6;8
+PORSCHE ;Macan ;3.6 -24V ;Turbo ;DCT -7 ;0.01;216;0 ;0 ;6;8
+PORSCHE ;911;3.8 -24V ;Carrera 4S ;DCT -7 ;0.018;178;0 ;0 ;7;10
+PORSCHE ;911;3.8 -24V ;Carrera 4S Cabriolet;DCT -7 ;0.018;178;0 ;0 ;7;10
+PORSCHE ;911;3.8 -24V ;Carrera S ;DCT -7 ;0.034;178;0 ;0 ;7;10
+PORSCHE ;911;3.8 -24V ;Carrera S Cabriolet;DCT -7 ;0.034;178;0 ;0 ;7;10
+PORSCHE ;911;4.0 -24V ;GT3 ;DCT -7 ;0.009;205;0 ;0 ;6;8
+PORSCHE ;911;3.8 -24V ;Turbo ;DCT -7 ;0.033;181;0 ;0 ;7;10
+PORSCHE ;911;3.8 -24V ;Turbo S ;DCT -7 ;0.043;181;0 ;0 ;7;10
+PORSCHE ;Boxster ;2.7 -24V ;;DCT -7 ;0.018;145;0 ;0 ;8;12
+PORSCHE ;Boxster ;3.4 -24V ;GTS ;DCT -7 ;0.021;160;0 ;0 ;7;11
+PORSCHE ;Boxster ;3.4 -24V ;S ;DCT -7 ;0.017;156;0 ;0 ;8;11
+PORSCHE ;Cayenne (New) ;3.6 -24V ;GTS ;A -8 ;0.025;190;0 ;0 ;6;9
+PORSCHE ;Cayman ;2.7 -24V ;;DCT -7 ;0.018;145;0 ;0 ;8;12
+PORSCHE ;Cayman ;3.8 -24V ;GT4 ;M -6 ;0.014;191;0 ;0 ;6;9
+PORSCHE ;Cayman ;3.4 -24V ;GTS ;DCT -7 ;0.021;160;0 ;0 ;7;11
+PORSCHE ;Cayman ;3.4 -24V ;S ;DCT -7 ;0.017;156;0 ;0 ;8;11
+PORSCHE ;Panamera ;3.6 -24V ;;DCT -7 ;0.022;169;0 ;0 ;7;10
+PORSCHE ;Panamera ;4.8 -32V ;4S ;DCT -7 ;0.034;218;0 ;0 ;6;8
+PORSCHE ;Panamera ;4.8 -32V ;GTS ;DCT -7 ;0.028;207;0 ;0 ;6;8
+PORSCHE ;Panamera ;3.0 -24V ;S ;DCT -7 ;0.034;181;0 ;0 ;7;10
+PORSCHE ;Panamera ;4.8 -32V ;Turbo ;DCT -7 ;0.019;232;0 ;0 ;5;7
+RELY ;Van ;1.0 -16V ;;M -5 ;0.028;169;0 ;0 ;8;9
+RELY ;Pick -Up ;1.0 -16V ;;M -5 ;0.029;170;0 ;0 ;8;8
+RELY ;Pick -Up Cabine Dupla ;1.0 -16V ;Basic ;M -5 ;0.048;179;0 ;0 ;7;8
+RELY ;Pick -Up Cabine Dupla ;1.0 -16V ;CC ;M -5 ;0.048;179;0 ;0 ;7;8
+RELY ;Pick -Up Cabine Dupla ;1.0 -16V ;Comfort ;M -5 ;0.048;179;0 ;0 ;7;8
+RELY ;Pick -Up Ex Basic ;1.0 -16V ;EX Basic ;M -5 ;0.035;164;0 ;0 ;8;9
+RENAULT ;Sandero ;1.0 -16V ;Authentique ;M -5 ;0.055;100;8.7;9.6;13;14
+RENAULT ;Sandero ;1.0 -16V ;Expression ;M -5 ;0.055;100;8.7;9.6;13;14
+RENAULT ;Sandero ;1.6 -8V ;Dynamique ;M -5 ;0.027;117;7.5;8.7;11;12
+RENAULT ;Sandero ;1.6 -8V ;Expression ;M -5 ;0.027;117;7.5;8.7;11;12
+RENAULT ;Sandero ;1.6 -8V ;GT Line ;M -5 ;0.027;117;7.5;8.7;11;12
+RENAULT ;Sandero RS ;2.0 -16V ;Renault Sport ;M -6 ;0.043;148;5.9;7.6;8;11
+RENAULT ;Logan ;1.0 -16V ;Authentique ;M -5 ;0.04;116;7.2;9.1;11;13
+RENAULT ;Logan ;1.0 -16V ;Expression ;M -5 ;0.04;116;7.2;9.1;11;13
+RENAULT ;Logan ;1.6 -8V ;Dynamique ;M -5 ;0.032;117;7.5;8.7;11;13
+RENAULT ;Logan ;1.6 -8V ;Expression ;M -5 ;0.032;117;7.5;8.7;11;13
+RENAULT ;Logan ;1.6 -8V ;Dynamique ;MTA -5 ;0.035;125;6.2;8.9;10;13
+RENAULT ;Logan ;1.6 -8V ;Expression ;MTA -5 ;0.035;125;6.2;8.9;10;13
+RENAULT ;Fluence ;2.0 -16V ;Dynamique ;CVT ;0.041;143;6.1;7.4;9;11
+RENAULT ;Fluence ;2.0 -16V ;Expression ;CVT ;0.041;143;6.1;7.4;9;11
+RENAULT ;Fluence ;2.0 -16V ;Privilége ;CVT ;0.041;143;6.1;7.4;9;11
+RENAULT ;Fluence ;2.0 -16V ;Dynamique ;M -6 ;0.028;130;6.4;8.1;10;12
+RENAULT ;Fluence ;2.0 -16V ;Expression ;M -6 ;0.028;130;6.4;8.1;10;12
+RENAULT ;Fluence ;2.0 -16V ;Privilége ;M -6 ;0.028;130;6.4;8.1;10;12
+RENAULT ;Sandero Stepway ;1.6 -8V ;Stepway ;M -5 ;0.048;123;7.4;8;10;12
+RENAULT ;Sandero Stepway ;1.6 -8V ;Stepway ;MTA -5 ;0.035;125;6.2;8.9;10;13
+RENAULT ;Duster ;2.0 -16V ;;A -4 ;0.049;153;5.6;7;8;10
+RENAULT ;Duster ;2.0 -16V ;;M -6 ;0.036;139;6.4;7.4;9;11
+RENAULT ;Duster ;1.6 -16V ;Dynamique (4x2);M -5 ;0.033;135;6.6;7.4;10;11
+RENAULT ;Duster ;1.6 -16V ;Expression (4x2);M -5 ;0.033;135;6.6;7.4;10;11
+RENAULT ;Duster ;2.0 -16V ;Dynamique (4x4);M -6 ;0.032;141;6.2;7.1;9;10
+RENAULT ;Kangoo ;1.6 -16V ;Express ;M -5 ;0.033;144;6.1;7.1;9;10
+RENAULT ;Oroch ;1.6 -16V ;Dynamique ;M -5 ;0.043;133;6.6;7.5;10;11
+RENAULT ;Oroch ;1.6 -16V ;Expression ;M -5 ;0.043;133;6.6;7.5;10;11
+RENAULT ;Oroch ;1.6 -16V ;Outsider ;M -5 ;0.043;133;6.6;7.5;10;11
+RENAULT ;Oroch ;2.0 -16V ;Dynamique ;M -6 ;0.036;137;6.4;7.3;9;11
+RENAULT ;Oroch ;2.0 -16V ;Outsider ;M -6 ;0.036;137;6.4;7.3;9;11
+ROLLS -ROYCE ;Ghost ;6.5 -48V ;Series II ;A -8 ;0.019;248;0 ;0 ;5;7
+SMART ;Fortwo ;1.0 -12V ;71cv MHD Coupé ;MTA -5 ;0.024;96;0 ;0 ;13;14
+SMART ;Fortwo ;1.0 -12V ;84cv Turbo Cabrio ;MTA -5 ;0.015;97;0 ;0 ;13;14
+SMART ;Fortwo ;1.0 -12V ;84cv Turbo Cabrio ;MTA -5 ;0.015;97;0 ;0 ;13;14
+SUBARU ;Impreza ;2.0 -16V ;XV ;CVT ;0.017;130;0 ;0 ;10;12
+SUBARU ;Forester ;2.0 -16V ;L ;CVT ;0.016;116;0 ;0 ;10;14
+SUBARU ;Forester ;2.0 -16V ;S ;CVT ;0.016;116;0 ;0 ;10;14
+SUBARU ;Forester ;2.0 -16V ;XT ;CVT ;0.01;129;0 ;0 ;9;13
+SUBARU ;Legacy ;3.6 -24V ;3.6 R -S ;CVT ;0.021;171;0 ;0 ;7;10
+SUBARU ;Outback ;3.6 -24V ;3.6 R -S ;CVT ;0.019;172;0 ;0 ;7;10
+SUBARU ;WRX ;2.0 -16V ;2;CVT ;0.028;145;0 ;0 ;9;11
+SUBARU ;WRX ;2.5 -16V ;STI 2.5 ;CVT ;0.037;185;0 ;0 ;7;9
+SUZUKI ;Swift Sport ;1.6 -16V ;2WD ;M -6 ;0.009;109;0 ;0 ;12;13
+SUZUKI ;S -Cross 2WD ;1.6 -16V ;GL ;CVT ;0.008;106;0 ;0 ;12;13
+SUZUKI ;S -Cross 2WD ;1.6 -16V ;GLX ;CVT ;0.008;106;0 ;0 ;12;13
+SUZUKI ;S -Cross 2WD ;1.6 -16V ;GL ;M -5 ;0.017;114;0 ;0 ;11;13
+SUZUKI ;S -Cross 2WD ;1.6 -16V ;GLX ;M -5 ;0.017;114;0 ;0 ;11;13
+SUZUKI ;S -Cross 4WD ;1.6 -16V ;GLX ;CVT ;0.008;117;0 ;0 ;11;12
+SUZUKI ;S -Cross 4WD ;1.6 -16V ;GLS ;CVT ;0.008;117;0 ;0 ;11;12
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X2 ;A -4 ;0.009;162;0 ;0 ;8;10
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X2 Premium ;A -4 ;0.009;162;0 ;0 ;8;10
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X2 ;M -5 ;0.04;166;0 ;0 ;8;9
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X2 Sport ;M -5 ;0.04;166;0 ;0 ;8;9
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X4 ;A -4 ;0.009;172;0 ;0 ;7;9
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X4 Premium ;A -4 ;0.009;172;0 ;0 ;7;9
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X4 ;M -5 ;0.04;167;0 ;0 ;8;9
+SUZUKI ;Grand Vitara ;2.0 -16V ;4X4 Sport ;M -5 ;0.04;167;0 ;0 ;8;9
+SUZUKI ;Jimny 4X4 ;1.3 -16V ;4All ;M -5 ;0.017;134;0 ;0 ;10;11
+SUZUKI ;Jimny 4X4 ;1.3 -16V ;4Sun ;M -5 ;0.017;134;0 ;0 ;10;11
+SUZUKI ;Jimny 4X4 ;1.3 -16V ;4Sport ;M -5 ;0.017;134;0 ;0 ;10;11
+SUZUKI ;Jimny 4X4 ;1.3 -16V ;4Work ;M -5 ;0.017;134;0 ;0 ;10;11
+TOYOTA ;Etios Hatchback ;1.3 -16V ;X ;M -6 ;0.043;100;8.6;9.8;13;14
+TOYOTA ;Etios Hatchback ;1.3 -16V ;X ;A -4 ;0.004;107;8.2;9.2;12;13
+TOYOTA ;Etios Hatchback ;1.5 -16V ;XS ;M -6 ;0.018;101;8.3;9.8;12;14
+TOYOTA ;Etios Hatchback ;1.5 -16V ;XLS ;M -6 ;0.018;101;8.3;9.8;12;14
+TOYOTA ;Etios Hatchback ;1.5 -16V ;PLATINUM ;M -6 ;0.018;101;8.3;9.8;12;14
+TOYOTA ;Etios Hatchback ;1.5 -16V ;CROSS ;M -6 ;0.018;101;8.3;9.8;12;14
+TOYOTA ;Etios Hatchback ;1.5 -16V ;XS ;A -4 ;0.009;107;8.1;9.2;12;13
+TOYOTA ;Etios Hatchback ;1.5 -16V ;XLS ;A -4 ;0.009;107;8.1;9.2;12;13
+TOYOTA ;Etios Hatchback ;1.5 -16V ;PLATINUM ;A -4 ;0.009;107;8.1;9.2;12;13
+TOYOTA ;Etios Hatchback ;1.5 -16V ;CROSS ;A -4 ;0.009;107;8.1;9.2;12;13
+TOYOTA ;Etios Sedé ;1.5 -16V ;X ;A -4 ;0.01;100;8.4;10.4;12;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;XS ;A -4 ;0.01;100;8.4;10.4;12;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;XLS ;A -4 ;0.01;100;8.4;10.4;12;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;PLATINUM ;A -4 ;0.01;100;8.4;10.4;12;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;X ;M -6 ;0.01;98;8.5;10.3;13;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;XS ;M -6 ;0.01;98;8.5;10.3;13;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;XLS ;M -6 ;0.01;98;8.5;10.3;13;15
+TOYOTA ;Etios Sedé ;1.5 -16V ;PLATINUM ;M -6 ;0.01;98;8.5;10.3;13;15
+TOYOTA ;Prius ;1.8 -16V ;NGA ;CVT ;0.006;71;0 ;0 ;19;17
+TOYOTA ;Prius ;1.8 -16V ;NGA Top ;CVT ;0.006;71;0 ;0 ;19;17
+TOYOTA ;Corolla ;2.0 -16V ;ALTIS ;CVT ;0.016;118;7.2;8.8;11;13
+TOYOTA ;Corolla ;2.0 -16V ;XEI ;CVT ;0.016;118;7.2;8.8;11;13
+TOYOTA ;Corolla ;1.8 -16V ;GLI ;CVT ;0.011;110;7.8;9.2;11;13
+TOYOTA ;Corolla ;1.8 -16V ;GLI ;M -6 ;0.04;114;7.3;9.1;11;13
+TOYOTA ;Camry ;3.5 -24V ;XLE ;A -6 ;0.013;160;0 ;0 ;8;10
+TOYOTA ;RAV4 4X2 ;2.0 -16V ;2.0 4X2 ;CVT ;0.013;134;0 ;0 ;10;11
+TOYOTA ;RAV4 4X4 ;2.5 -16V ;4X4 ;A -6 ;0.019;142;0 ;0 ;9;11
+TOYOTA ;RAV4 4X4 ;2.0 -16V ;4X4 ;CVT ;0.013;134;0 ;0 ;10;11
+TOYOTA ;Hilux SW4 Diesel 4X4 ;2.8 -16V ;SRV ;A -6 ;0.279;208;0 ;0 ;9;11
+TOYOTA ;Hilux SW4 Diesel 4X4 ;2.8 -16V ;SRX ;A -6 ;0.279;208;0 ;0 ;9;11
+TOYOTA ;Hilux SW4 Gasolina 4X4 ;4.0 -24V ;SRX ;A -6 ;0.01;209;0 ;0 ;6;8
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;SRX ;A -6 ;0.279;208;0 ;0 ;9;11
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;SRV ;A -6 ;0.279;208;0 ;0 ;9;11
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;SR ;A -6 ;0.279;208;0 ;0 ;9;11
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;STD ;M -6 ;0.294;199;0 ;0 ;9;11
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;SC ;M -6 ;0.294;199;0 ;0 ;9;11
+TOYOTA ;Hilux Diesel 4X4 ;2.8 -16V ;CC ;M -6 ;0.294;199;0 ;0 ;9;11
+VOLKSWAGEN ;Up! ;1.0 -12V ;Cross ;M -5 ;0.034;95;9.2;10.4;13;15
+VOLKSWAGEN ;Up! ;1.0 -12V ;Cross (IMotion) ;MTA -5 ;0.024;96;8.9;9.9;13;14
+VOLKSWAGEN ;Up! ;1.0 -12V ;Move (IMotion) ;MTA -5 ;0.018;89;9.4;10.6;14;16
+VOLKSWAGEN ;Up! ;1.0 -12V ;High (IMotion) ;MTA -5 ;0.018;89;9.4;10.6;14;16
+VOLKSWAGEN ;Up! ;1.0 -12V ;Take (Rodas aro 14é) ;M -5 ;0.032;89;9.6;10.6;14;15
+VOLKSWAGEN ;Up! ;1.0 -12V ;Move ;M -5 ;0.032;89;9.6;10.6;14;15
+VOLKSWAGEN ;Up! ;1.0 -12V ;High ;M -5 ;0.032;89;9.6;10.6;14;15
+VOLKSWAGEN ;Up! TSI ;1.0 -12V ;Cross ;M -5 ;0.032;93;9.5;10.4;14;15
+VOLKSWAGEN ;Up! TSI ;1.0 -12V ;Move ;M -5 ;0.035;89;9.6;11.1;14;16
+VOLKSWAGEN ;Up! TSI ;1.0 -12V ;High ;M -5 ;0.035;89;9.6;11.1;14;16
+VOLKSWAGEN ;Up! TSI ;1.0 -12V ;BWR ;M -5 ;0.035;89;9.6;11.1;14;16
+VOLKSWAGEN ;Up! TSI ;1.0 -12V ;Speed ;M -5 ;0.035;89;9.6;11.1;14;16
+VOLKSWAGEN ;Gol ;1.6 -16V ;Rallye (IMotion) ;MTA -5 ;0.036;130;7;7.5;10;11
+VOLKSWAGEN ;Novo Gol ;1.0 -12V ;Trendline ;M -5 ;0.034;97;8.8;10.3;13;15
+VOLKSWAGEN ;Novo Gol ;1.0 -12V ;Comfortline ;M -5 ;0.034;97;8.8;10.3;13;15
+VOLKSWAGEN ;Novo Gol ;1.6 -8V ;Trendline ;M -5 ;0.012;112;7.6;9.2;11;13
+VOLKSWAGEN ;Novo Gol ;1.6 -8V ;"Comfortline (Exceto Rodas aro 16"")";M -5 ;0.012;112;7.6;9.2;11;13
+VOLKSWAGEN ;Novo Gol ;1.6 -8V ;"Comfortline (Exceto Rodas aro 16"")";M -5 ;0.012;112;7.6;9.2;11;13
+VOLKSWAGEN ;Novo Gol ;1.6 -8V ;"Comfortline (I -Motion) (Exceto Rodas aro 16"")";MTA -5 ;0.019;112;7.7;9.2;11;13
+VOLKSWAGEN ;Novo Gol ;1.6 -8V ;"Highline (IMotion) (Exceto Rodas aro 16"")";MTA -5 ;0.019;112;7.7;9.2;11;13
+VOLKSWAGEN ;Novo Fox ;1.0 -12V ;BlueMotion ;M -5 ;0.021;99;8.5;9.9;13;14
+VOLKSWAGEN ;Novo Fox ;1.6 -16V ;Highline ;M -6 ;0.024;115;7.7;9.2;11;13
+VOLKSWAGEN ;Novo Fox ;1.6 -16V ;Pepper ;M -6 ;0.024;115;7.7;9.2;11;13
+VOLKSWAGEN ;Novo Fox ;1.0 -12V ;Trendline ;M -5 ;0.03;104;8.6;9.3;12;14
+VOLKSWAGEN ;Novo Fox ;1.0 -12V ;Comfortline ;M -5 ;0.03;104;8.6;9.3;12;14
+VOLKSWAGEN ;Novo Fox ;1.0 -12V ;Track ;M -5 ;0.03;104;8.6;9.3;12;14
+VOLKSWAGEN ;Novo Golf ;1.6 -16V ;Comfortline ;M -5 ;0.019;120;7;9.2;10;13
+VOLKSWAGEN ;Novo Golf ;1.6 -16V ;Comfortline ;A -6 ;0.012;123;6.8;8.9;10;13
+VOLKSWAGEN ;Novo Golf TSI ;1.4 -16V ;Highline ;M -6 ;0.022;107;7.9;9.5;12;14
+VOLKSWAGEN ;Novo Golf TSI ;1.4 -16V ;Highline ;A -6 ;0.01;109;7.7;9.5;11;14
+VOLKSWAGEN ;Novo Golf GTI ;2.0 -16V ;;DCT -6 ;0.041;122;0 ;0 ;10;12
+VOLKSWAGEN ;Novo Voyage ;1.0 -12V ;Trendline ;M -5 ;0.027;95;8.7;10.5;13;15
+VOLKSWAGEN ;Novo Voyage ;1.0 -12V ;Comfortline ;M -5 ;0.027;95;8.7;10.5;13;15
+VOLKSWAGEN ;Novo Voyage ;1.6 -8V ;Trendline ;M -5 ;0.013;111;7.5;9.4;11;13
+VOLKSWAGEN ;Novo Voyage ;1.6 -8V ;"Comfortline (Exceto Rodasaro 16"")";M -5 ;0.013;111;7.5;9.4;11;13
+VOLKSWAGEN ;Novo Voyage ;1.6 -8V ;"Highline (Exceto Rodas aro 16"")";M -5 ;0.013;111;7.5;9.4;11;13
+VOLKSWAGEN ;Novo Voyage ;1.6 -8V ;"Comfortline (I -Motion) (Exceto Rodas aro 16"")";MTA -5 ;0.024;110;7.8;9.5;11;14
+VOLKSWAGEN ;Novo Voyage ;1.6 -8V ;"Highline (IMotion) (Exceto Rodas aro 16"")";MTA -5 ;0.024;110;7.8;9.5;11;14
+VOLKSWAGEN ;Golf Variant ;1.4 -16V ;Comfortline ;M -6 ;0.031;110;0 ;0 ;12;13
+VOLKSWAGEN ;Golf Variant ;1.4 -16V ;Comfortline ;DCT -7 ;0.046;113;0 ;0 ;11;12
+VOLKSWAGEN ;Golf Variant ;1.4 -16V ;Highline ;DCT -7 ;0.046;113;0 ;0 ;11;12
+VOLKSWAGEN ;Jetta ;2.0 -16V ;Highline ;DCT -6 ;0.007;128;0 ;0 ;9;13
+VOLKSWAGEN ;Jetta ;1.4 -16V ;Trendline ;M -6 ;0.034;109;0 ;0 ;11;14
+VOLKSWAGEN ;Jetta ;1.4 -16V ;Trendline ;A -6 ;0.016;115;0 ;0 ;10;14
+VOLKSWAGEN ;Jetta ;1.4 -16V ;Comfortline ;A -6 ;0.016;115;0 ;0 ;10;14
+VOLKSWAGEN ;Novo Passat ;2.0 -16V ;Comfortline ;DCT -6 ;0.027;118;0 ;0 ;10;13
+VOLKSWAGEN ;Novo Passat ;2.0 -16V ;Highline ;DCT -6 ;0.027;118;0 ;0 ;10;13
+VOLKSWAGEN ;CC ;2.0 -16V ;;DCT -6 ;0.012;152;0 ;0 ;8;11
+VOLKSWAGEN ;Touareg V6 ;3.6 -24V ;;A -8 ;0.018;216;0 ;0 ;6;7
+VOLKSWAGEN ;Touareg V8 ;4.2 -32V ;;A -8 ;0.021;214;0 ;0 ;6;8
+VOLKSWAGEN ;Novo CrossFox ;1.6 -16V ;;M -6 ;0.027;126;7.4;8.2;10;11
+VOLKSWAGEN ;Novo CrossFox ;1.6 -16V ;(I -Motion) ;MTA -5 ;0.008;136;6.8;7.3;10;10
+VOLKSWAGEN ;Novo SpaceCross ;1.6 -16V ;;M -6 ;0.014;130;7;7.5;10;11
+VOLKSWAGEN ;Novo SpaceCross ;1.6 -16V ;(I -Motion) ;MTA -5 ;0.009;136;6.7;7.5;9;11
+VOLKSWAGEN ;Tiguan ;2.0 -16V ;;A -6 ;0.056;181;0 ;0 ;7;9
+VOLKSWAGEN ;Saveiro CS ;1.6 -8V ;Startline ;M -5 ;0.02;123;7.3;7.9;11;11
+VOLKSWAGEN ;Saveiro CS ;1.6 -8V ;Trendline ;M -5 ;0.02;123;7.3;7.9;11;11
+VOLKSWAGEN ;Saveiro CS ;1.6 -8V ;Surf ;M -5 ;0.02;123;7.3;7.9;11;11
+VOLKSWAGEN ;Nova Saveiro CS ;1.6 -8V ;Robust ;M -5 ;0.024;117;7.5;8.8;11;12
+VOLKSWAGEN ;Nova Saveiro CS ;1.6 -8V ;Trendline ;M -5 ;0.024;117;7.5;8.8;11;12
+VOLKSWAGEN ;Nova Saveiro CE ;1.6 -8V ;Trendline ;M -5 ;0.023;114;7.5;8.8;11;13
+VOLKSWAGEN ;Nova Saveiro CD ;1.6 -8V ;Trendline ;M -5 ;0.024;117;7.6;8.6;11;12
+VOLKSWAGEN ;Nova Saveiro CD ;1.6 -8V ;Highline ;M -5 ;0.024;117;7.6;8.6;11;12
+VOLKSWAGEN ;Amarok ;2.0 -16V ;SE ;M -6 ;0.287;228;0 ;0 ;9;9
+VOLKSWAGEN ;Amarok ;2.0 -16V ;Trendline ;M -6 ;0.287;228;0 ;0 ;9;9
+VOLKSWAGEN ;Amarok ;2.0 -16V ;Trendline ;A -8 ;0.246;220;0 ;0 ;9;9
+VOLKSWAGEN ;Amarok ;2.0 -16V ;Darklabel ;A -8 ;0.246;220;0 ;0 ;9;9
+VOLKSWAGEN ;Amarok ;2.0 -16V ;Highline ;A -8 ;0.246;220;0 ;0 ;9;9
+VOLKSWAGEN ;Fusca ;2.0 -16V ;;DCT -6 ;0.009;138;0 ;0 ;9;11
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 Top ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 Comfort ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0T5 Dynamic ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 Inscript ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 Kinetic ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 Momentum ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;2.0 T5 RDesign ;A -6 ;0.011;136;0 ;0 ;9;12
+VOLVO ;V40 ;2.0 -16V ;CCT5 AWD Dynamic ;A -6 ;0.014;144;0 ;0 ;8;11
+VOLVO ;V40 ;1.5 -16V ;T3 CCountry ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;1.5 -16V ;T3 Inscript ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;1.5 -16V ;T3 Kinetic ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;1.5 -16V ;T3 Momentum ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;1.5 -16V ;T3 R -Design ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;1.5 -16V ;T3 Summum ;A -6 ;0.012;127;0 ;0 ;10;12
+VOLVO ;V40 ;2.0 -16V ;T4 Kinetic T ;A -6 ;0.014;119;0 ;0 ;10;13
+VOLVO ;V40 ;2.0 -16V ;T4 Inscript ;A -6 ;0.014;119;0 ;0 ;10;13
+VOLVO ;V40 ;2.0 -16V ;T4 Momentum ;A -6 ;0.014;119;0 ;0 ;10;13
+VOLVO ;V40 ;2.0 -16V ;T4 R -Design ;A -6 ;0.014;119;0 ;0 ;10;13
+VOLVO ;V40 ;2.0 -16V ;T4 Summum ;A -6 ;0.014;119;0 ;0 ;10;13
+VOLVO ;S60 ;2.0 -16V ;2.0 T6 Inscript ;A -8 ;0.013;145;0 ;0 ;8;11
+VOLVO ;S60 ;2.0 -16V ;2.0 T6 Kinetic ;A -8 ;0.013;145;0 ;0 ;8;11
+VOLVO ;S60 ;2.0 -16V ;2.0 T6 Momentum ;A -8 ;0.013;145;0 ;0 ;8;11
+VOLVO ;S60 ;2.0 -16V ;2.0 T6 R - Design ;A -8 ;0.013;145;0 ;0 ;8;11
+VOLVO ;S60 ;2.0 -16V ;2.0 T5 Comfort ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;S60 ;2.0 -16V ;2.0T5 Dynamic ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;S60 ;2.0 -16V ;2.0 T5 Inscript ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;S60 ;2.0 -16V ;2.0 T5 Kinetic ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;S60 ;2.0 -16V ;2.0 T5 Momentum ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;S60 ;2.0 -16V ;2.0 T5 R - Design ;A -8 ;0.006;142;0 ;0 ;8;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T5 Comfort ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0T5 Dynamic ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T5 Inscript ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T5 Kinetic ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T5 Momentum ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T5 R - Design ;A -8 ;0.007;136;0 ;0 ;9;12
+VOLVO ;V60 ;2.0 -16V ;2.0 T6 R - Design ;A -8 ;0.016;149;0 ;0 ;8;11
+VOLVO ;V60 ;2.0 -16V ;2.0 T6 Inscript ;A -8 ;0.016;149;0 ;0 ;8;11
+VOLVO ;V60 ;2.0 -16V ;2.0 T6 Kinetic ;A -8 ;0.016;149;0 ;0 ;8;11
+VOLVO ;V60 ;2.0 -16V ;2.0 T6 Moment ;A -8 ;0.016;149;0 ;0 ;8;11
+VOLVO ;XC60 ;2.0 -16V ;2.O T5 Dynamic ;A -8 ;0.007;148;0 ;0 ;8;11
+VOLVO ;XC60 ;2.0 -16V ;2.0 T5 Comfort ;A -8 ;0.007;148;0 ;0 ;8;11
+VOLVO ;XC60 ;2.0 -16V ;2.0 Kinetic ;A -8 ;0.007;148;0 ;0 ;8;11
+VOLVO ;XC60 ;2.0 -16V ;2.0 T5 Momentum;A -8 ;0.007;148;0 ;0 ;8;11
+VOLVO ;XC60 ;2.0 -16V ;2.O T5 Inscript;A -8 ;0.008;154;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;2.0 T5 R - Design ;A -8 ;0.008;154;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;T6 Dynamic ;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;R -Design ;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;T6 TOP ;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;2.0 T6 Inscript ;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;2.0 T6 Kinetic ;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC60 ;2.0 -16V ;2.0 T6 Momentum;A -8 ;0.018;161;0 ;0 ;8;10
+VOLVO ;XC90 ;2.0 -16V ;T6 Inscription ;A -8 ;0.014;175;0 ;0 ;7;9
+VOLVO ;XC90 ;2.0 -16V ;T6 Kinetic ;A -8 ;0.014;175;0 ;0 ;7;9
+VOLVO ;XC90 ;2.0 -16V ;T6 Momentum ;A -8 ;0.014;175;0 ;0 ;7;9
+VOLVO ;XC90 ;2.0 -16V ;T6 R -Design ;A -8 ;0.014;175;0 ;0 ;7;9
+VOLVO ;XC90 ;2.0 -16V ;T6 1Edition ;A -8 ;0.014;175;0 ;0 ;7;9
