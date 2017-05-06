@@ -31,12 +31,21 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import static android.R.attr.angle;
 import static android.R.attr.pivotX;
 import static android.R.attr.pivotY;
+import static android.content.Context.MODE_PRIVATE;
+import static android.usuario.driverrating.R.styleable.NavigationView;
+import static android.usuario.driverrating.R.styleable.SelectableRoundedImageView;
+import static android.usuario.driverrating.R.styleable.Toolbar;
 
 
 public class DriverRatingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences sharedPreferences;
+    public static final String JANELATEMPO_NAME = "janela_tempo";
+    public static final String JANELATEMPO_KEY = "janela";
+    public static final String TIPOCOMBUSTIVEL_NAME = "tipo_combustivel";
+    public static final String TIPOCOMBUSTIVEL_KEY = "combustivel";
+
     private TextView txtNomePerfil, txtMarca, txtModelo;
     private SelectableRoundedImageView imgPerfil;
     private ImageLoader mImageLoader;
@@ -69,19 +78,15 @@ public class DriverRatingActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //read(OBDInfo.INTAKE_PRESSURE|OBDInfo.RPM);
 
-
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
         headerReflesh();
     }
-
 
     @Override
     public void onBackPressed() {
@@ -92,7 +97,6 @@ public class DriverRatingActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,7 +123,12 @@ public class DriverRatingActivity extends AppCompatActivity
         } else if (id == R.id.ic_bluetooth) {
             Intent it = new Intent(DriverRatingActivity.this, ProcurarActivity.class);
             startActivity(it);
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.ic_janelaTempo ) {
+            Intent it = new Intent(DriverRatingActivity.this, JanelaTempo.class);
+            startActivity(it);
+        } else if (id == R.id.ic_tipoCombustivel ) {
+            Intent it = new Intent(DriverRatingActivity.this, TipoCombustivel.class);
+            startActivity(it);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

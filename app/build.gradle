@@ -25,11 +25,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //Imagem Arredondada Min SDK 8
+    //Carregamento de Imagem
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.google.android.gms:play-services:9.6.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.joooonho:selectableroundedimageview:1.0.1'//Imagem Arredondada Min SDK 8
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'//Carregamento de Imagem
+    compile 'com.joooonho:selectableroundedimageview:1.0.1'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'com.github.anastr:speedviewlib:1.1.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
+    testCompile 'junit:junit:4.12'
 }

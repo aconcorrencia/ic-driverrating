@@ -8,5 +8,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="button_collect_text">Coletar Dados</string>
     <string name="title_activity_collect">Coletando Dados</string>
+    <string name="title_activity_tipo_combustivo">TipoCombustivo</string>
 
 </resources>

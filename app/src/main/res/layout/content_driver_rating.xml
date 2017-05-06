@@ -88,9 +88,4 @@
         android:text="Iniciar Classificação"
         android:textColor="@color/white" />
 
-    <!--com.github.anastr.speedviewlib.PointerSpeedometer
-        android:id="@+id/speedView"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content" /-->
-
 </RelativeLayout>

@@ -50,7 +50,6 @@ public class OBDReader {
         }
     }
 
-
     public void start() {
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);

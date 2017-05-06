@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="speedviewlib-1.1.4">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/e86d0a2d4bbe2c3102f3dd1a224e72f26c20ef4e/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/e86d0a2d4bbe2c3102f3dd1a224e72f26c20ef4e/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/c565e34c320d6faecdaa3b61ef7193440aeb513f/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/c565e34c320d6faecdaa3b61ef7193440aeb513f/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -25,6 +25,7 @@ public class DataBasePerfis extends SQLiteOpenHelper {
     private static final int VERSAO_AUX = 9;
 
     public static final String TABELA = "refveiculos";
+
     private static final String ID = "_id";
     public static final String NOME = "nome";
     public static final String MARCA = "marca";
@@ -117,7 +118,6 @@ public class DataBasePerfis extends SQLiteOpenHelper {
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
-
 
     public ArrayList<Veiculo> selectAll() {
         ArrayList<Veiculo> arrayList = new ArrayList<>();
