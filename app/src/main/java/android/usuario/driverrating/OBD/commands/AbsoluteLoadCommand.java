@@ -14,7 +14,7 @@ public class AbsoluteLoadCommand extends PercentageObdCommand {
         super(other);
     }
 
-    @Override
+    /*@Override
     protected void performCalculations() {
         // ignore first two bytes [hh hh] of the response
         int a = buffer.get(2);
@@ -26,7 +26,7 @@ public class AbsoluteLoadCommand extends PercentageObdCommand {
 
     public double getRatio() {
         return percentage;
-    }
+    }*/
 
 
     @Override

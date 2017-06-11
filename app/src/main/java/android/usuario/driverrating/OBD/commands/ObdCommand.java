@@ -59,7 +59,10 @@ public abstract class ObdCommand {
      * @throws java.io.IOException            if any.
      * @throws java.lang.InterruptedException if any.
      */
-    public void run(InputStream in, OutputStream out) throws IOException,
+    public void
+
+
+    run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
         synchronized (ObdCommand.class) {//Only one command can write and read a data in one time.
             start = System.currentTimeMillis();
@@ -114,7 +117,8 @@ public abstract class ObdCommand {
      * @param in a {@link java.io.InputStream} object.
      * @throws java.io.IOException if any.
      */
-    protected void readResult(InputStream in) throws IOException {
+    protected void
+    readResult(InputStream in) throws IOException {
         readRawData(in);
         fillBuffer();
         performCalculations();

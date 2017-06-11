@@ -27,7 +27,7 @@ public class CollectActivity extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         gpsreader=new GPSReader(this,this);
-        overpassReader=new OverpassReader(this);
+        //overpassReader=new OverpassReader(this);
         tvVia=(TextView)findViewById(R.id.textViewVia);
         tvVelVia=(TextView)findViewById(R.id.textViewVelVia);
         tvVelVeic=(TextView)findViewById(R.id.textViewVelVeic);

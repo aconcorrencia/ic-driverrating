@@ -154,7 +154,7 @@ public class DataBasePerfis extends SQLiteOpenHelper {
         Veiculo v = new Veiculo();
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT *FROM " + TABELA + " WHERE "+ID+"=" + id, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+ID+"=" + id, null);
             int count=cursor.getCount();
             if(count>0) {
                 cursor.moveToNext();

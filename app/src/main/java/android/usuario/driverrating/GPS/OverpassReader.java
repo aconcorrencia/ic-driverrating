@@ -1,6 +1,7 @@
 package android.usuario.driverrating.GPS;
 
 import android.os.AsyncTask;
+import android.usuario.driverrating.IniciarClassificacao;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -23,7 +24,7 @@ public class OverpassReader {
     private OverpassInfo overpassInfo;
 
 
-    public OverpassReader(IOverpassReader listener) {
+    public OverpassReader(IniciarClassificacao listener) {
         this.listener=listener;
         try {
             xmlPullParserFactory = XmlPullParserFactory.newInstance();

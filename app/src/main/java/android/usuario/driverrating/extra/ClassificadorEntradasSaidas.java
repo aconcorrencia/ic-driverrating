@@ -10,11 +10,11 @@ import static android.usuario.driverrating.extra.ClassificadorFuzzy.SAIDAS;
 public class ClassificadorEntradasSaidas {
 
     public static void SaidasParaClassificador() {
-        ENTRADAS.clear();
+
         SAIDAS.clear();
 
         SAIDAS.add(1.65);
-        SAIDAS.add(2.75);
+        SAIDAS.add(2.50);
         SAIDAS.add(4.00);
     }
 
@@ -23,10 +23,11 @@ public class ClassificadorEntradasSaidas {
         /*
           Dados de acordo com artigo de referência:
 
-          Baixo -  Rampa Esquerda( 0 , 0,5 , 1 )
-          Medio -  Triangular( 0,65 , 1 , 1,35 )
-          Alto  -  Rampa Direita( 1 , 1,4 , 1,5 )
+          Baixo -  Rampa Esquerda( 0.00 , 0.50 , 1.00 )
+          Medio -  Triangular( 0.65 , 1.00 , 1.35 )
+          Alto  -  Rampa Direita( 1.00 , 1.40 , 1.50)
          */
+        ENTRADAS.clear();
 
         ENTRADAS.add(0, 0.0);
         ENTRADAS.add(1, 0.5);
@@ -37,6 +38,30 @@ public class ClassificadorEntradasSaidas {
         ENTRADAS.add(6, 1.0);
         ENTRADAS.add(7, 1.4);
         ENTRADAS.add(8, 1.5);
+
+    }
+
+    public static void EntradasParaCO2() {
+
+        /*
+          Dados de acordo com artigo de referência:
+
+          Baixo -  Rampa Esquerda( 0.00 , 9.50 , 12.50 )
+          Medio -  Triangular( 0.65 , 1.00 , 1.35 )
+          Alto  -  Rampa Direita( 1.00 , 1.40 , 1.50 )
+         */
+
+        ENTRADAS.clear();
+
+        ENTRADAS.add(0, 0.0);
+        ENTRADAS.add(1, 9.5);
+        ENTRADAS.add(2, 12.5);
+        ENTRADAS.add(3, 12.0);
+        ENTRADAS.add(4, 13.0);
+        ENTRADAS.add(5, 14.0);
+        ENTRADAS.add(6, 13.5);
+        ENTRADAS.add(7, 15.0);
+        ENTRADAS.add(8, 20.0);
 
     }
 
@@ -63,6 +88,8 @@ public class ClassificadorEntradasSaidas {
            //Na Entrada (7) o valor está definido dentro da seguinte regra:
 
            Para satisfazer a função de pertinência na logica fuzzy, foi adotado o valor de (20% + 50%) / 2 = 35%*/
+
+        ENTRADAS.clear();
 
         ENTRADAS.add(0, 0.0);
         ENTRADAS.add(1, 10.0);

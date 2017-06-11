@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import static android.usuario.driverrating.DriverRatingActivity.menorValorCO2;
 
 import com.joooonho.SelectableRoundedImageView;
 
@@ -209,6 +210,7 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
             veiculo = dataBaseDriverRating.leituraArqVeiculosByQueryWhereAll(veiculo);
             DataBasePerfis dataBasePerfis = new DataBasePerfis(PerfilVeiculoActivity.this);
             final long id = dataBasePerfis.inserirVeiculo(veiculo);
+            final float fatPenaliz = CalcularFatorPenalizacao();
             if (id != -1) {
                 new android.app.AlertDialog.Builder(this)
                         .setMessage("Deseja tornar este perfil como padrão?")
@@ -216,6 +218,7 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
                             public void onClick(DialogInterface dialog, int which) {
                                 editor = sharedPreferences.edit();
                                 editor.putLong("ID", id);
+                                editor.putFloat("FatorCorrecao", fatPenaliz);  //Nielson: 10/06/2017
                                 editor.apply();
                                 Toast.makeText(PerfilVeiculoActivity.this, "Perfil selecionado como padrão!", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -278,6 +281,16 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    //Responsável pelo cálculo do fator de penalização do motorista em relação à variável CO2.
+    private float CalcularFatorPenalizacao(){
+        DataBaseDriverRating dataBaseDriverRating = new DataBaseDriverRating(PerfilVeiculoActivity.this);
+        menorValorCO2 =  dataBaseDriverRating.selectSmallerCO2();
+
+        float calcValorPenalizacaoCO2 = (float) (menorValorCO2 / veiculo.getCo2());
+
+        return calcValorPenalizacaoCO2;
     }
 
 }

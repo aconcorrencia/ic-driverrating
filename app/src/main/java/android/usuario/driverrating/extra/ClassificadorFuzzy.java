@@ -45,12 +45,10 @@ public class ClassificadorFuzzy {
 
     public static Double nota = 0.0;
 
-    public static String classe;
-
-    //public static String[] resultado;
+    public static String classe = "";
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static final void calcularNotas(String origem, Double dadosSensores) {
+    public static final void calcularNotas(String origem, double dadosSensores) {
 
         classe = null;
 
@@ -89,7 +87,7 @@ public class ClassificadorFuzzy {
 
             if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto){
 
-                if (origem == "consumo") {
+                if ((origem == "consumo") || (origem == "velocidade")) {
                     classe = "Bom";
                 }
                 else if ((origem == "co2") || (origem == "nox")) {
@@ -98,7 +96,7 @@ public class ClassificadorFuzzy {
 
             } else if (grauPertinMedio > grauPertinAlto){
 
-                if (origem == "consumo") {
+                if ((origem == "consumo") || (origem == "velocidade")) {
                     classe = "Médio";
                 }
                 else if ((origem == "co2") || (origem == "nox")){
@@ -106,7 +104,7 @@ public class ClassificadorFuzzy {
                 }
             } else {
 
-                if (origem == "consumo") {
+                if ((origem == "consumo") || (origem == "velocidade")) {
                     classe = "Ruim";
                 }
                 else if ((origem == "co2") || (origem == "nox")){
@@ -116,11 +114,7 @@ public class ClassificadorFuzzy {
 
             //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
             nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
+
         }
-
-        //resultado[0] = String.valueOf(nota); //new DecimalFormat("0.00").format(nota);
-        //resultado[1] = classe;
-
-        //return String.valueOf(nota)+"-"+classe;
     }
 }

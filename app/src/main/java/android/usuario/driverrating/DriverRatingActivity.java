@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.usuario.driverrating.OBD.IOBDBluetooth;
 import android.usuario.driverrating.OBD.OBDInfo;
+import android.usuario.driverrating.database.DataBaseDriverRating;
 import android.usuario.driverrating.database.DataBasePerfis;
 import android.usuario.driverrating.domain.Veiculo;
 import android.util.Log;
@@ -28,6 +29,8 @@ import com.github.anastr.speedviewlib.base.Speedometer;
 import com.joooonho.SelectableRoundedImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.DecimalFormat;
+
 import static android.R.attr.angle;
 import static android.R.attr.pivotX;
 import static android.R.attr.pivotY;
@@ -45,13 +48,36 @@ public class DriverRatingActivity extends AppCompatActivity
     public static final String JANELATEMPO_KEY = "janela";
     public static final String TIPOCOMBUSTIVEL_NAME = "tipo_combustivel";
     public static final String TIPOCOMBUSTIVEL_KEY = "combustivel";
+    public static float densityFuel = 0; //Densidade do combstível
+    public static String tipoCombustivel = "1";
 
-    private TextView txtNomePerfil, txtMarca, txtModelo;
+    //Atributos responsáveis por armazenar os resultados das classificações - Início
+    public static String notaConsumoCombustivel;
+    public static String classificacaoConsumoCombustivel;
+
+    public static String notaEmissaoCO2;
+    public static String classificacaoEmissaoCO2;
+
+    public static String notaVelocidade;
+    public static String classificacaoVelocidade;
+
+    public static String notaAceleracaoLongitudinal;
+    public static String classificacaoAceleracaoLongitudinal;
+
+    public static String notaAceleracaoTransversal;
+    public static String classificacaoAceleracaoTransversal;
+    //Atributos responsáveis por armazenar os resultados das classificações - Final
+
+    private TextView txtNomePerfil, txtMarca, txtModelo, txtFatorPenaliz;
     private SelectableRoundedImageView imgPerfil;
     private ImageLoader mImageLoader;
     private int rotate = -80;
     private ImageView imageView;
     float newAngle, oldAngle;
+
+    public static double menorValorCO2;
+
+    public static double fatorPenalizacaoCO2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +101,7 @@ public class DriverRatingActivity extends AppCompatActivity
         txtNomePerfil = (TextView) headerView.findViewById(R.id.txtNomePerfil);
         txtMarca = (TextView) headerView.findViewById(R.id.txtMarca);
         txtModelo = (TextView) headerView.findViewById(R.id.txtModelo);
+        txtFatorPenaliz = (TextView) headerView.findViewById(R.id.txtFatorPenaliz);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -140,6 +167,7 @@ public class DriverRatingActivity extends AppCompatActivity
      */
     public void headerReflesh() {
         long id = sharedPreferences.getLong("ID", -1);
+        float fatorPenalizacaoCO2 = sharedPreferences.getFloat("FatorCorrecao",-1);
         if (id != -1) {
             DataBasePerfis dataBasePerfis = new DataBasePerfis(this);
             Veiculo veiculo = dataBasePerfis.selectPerfilById(id);
@@ -147,6 +175,8 @@ public class DriverRatingActivity extends AppCompatActivity
                 txtNomePerfil.setText("Perfil: " + veiculo.getNomeUsuario());
                 txtMarca.setText("Marca: " + veiculo.getMarca().trim());
                 txtModelo.setText("Modelo: " + veiculo.getModelo().trim());
+                txtFatorPenaliz.setText("Fator de Penalização CO2: " + new DecimalFormat("0.000").format(fatorPenalizacaoCO2));
+
                 if (veiculo.getFoto() == null)
                     imgPerfil.setImageResource(R.drawable.img_car2);
                 else

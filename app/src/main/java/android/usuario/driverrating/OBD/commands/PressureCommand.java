@@ -39,7 +39,7 @@ public abstract class PressureCommand extends ObdCommand implements
     }
 
     public float getImperialUnit() {
-        return pressure * 0.145037738F;
+        return pressure * 0.145037738f;
     }
 
 

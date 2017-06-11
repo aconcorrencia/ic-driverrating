@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.usuario.driverrating.OBD.ConfigEML327.AutoProtocolCommand;
 import android.usuario.driverrating.OBD.ConfigEML327.ObdResetCommand;
+import android.usuario.driverrating.OBD.commands.AbsoluteLoadCommand;
 import android.usuario.driverrating.OBD.commands.AirIntakeTemperatureCommand;
 import android.usuario.driverrating.OBD.commands.AvailablePidsCommand_01_20;
 import android.usuario.driverrating.OBD.commands.IntakeManifoldPressureCommand;
@@ -97,6 +98,11 @@ public class OBDReader {
                 speedCommand.run(mmInStream, mmOutStream);
                 obdbundle.putInt(OBDInfo.KEY_SPEED, speedCommand.getMetricSpeed());
             }
+            if ((OBDInfo.ABS_LOAD & OBDparameters) != 0) { //Nielson: 12/05/2017
+                AbsoluteLoadCommand absoluteLoadCommand = new AbsoluteLoadCommand();
+                absoluteLoadCommand.run(mmInStream, mmOutStream);
+                obdbundle.putFloat(OBDInfo.KEY_ABS_LOAD, absoluteLoadCommand.getPercentage());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -104,7 +110,6 @@ public class OBDReader {
         }
         listener.obdUpdate(new OBDInfo(obdbundle));
     }
-
 
     /**
      * Estabelece conexão com o dispositivo,
@@ -117,7 +122,6 @@ public class OBDReader {
         mConnectThread = new ConnectThread(device);
         mConnectThread.start();
     }
-
 
     /**
      * GET SOCKET

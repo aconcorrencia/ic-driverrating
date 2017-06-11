@@ -11,12 +11,15 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvCodigo"
+            android:id="@+id/textViewTituloCons"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Consumo de Combustível" />
+            android:textColor="@color/wallet_link_text_light"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="CONSUMO DE COMBISTÍVEL" />
 
     </LinearLayout>
 
@@ -29,6 +32,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
         android:layout_marginTop="5dp"/>
 
     <TextView
@@ -39,18 +45,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
         android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:text="Litros de Combustível: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewLitros"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,12 +58,62 @@
         android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tvCodigo"
+            android:id="@+id/textViewTituloCO2"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Velocidade" />
+            android:textColor="@color/wallet_link_text_light"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="ÓXIDO DE CARBONO (CO2)" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="Nota: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNotaCO2"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:text="Classificação: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewClassCO2"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:background="@color/wallet_holo_blue_light"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp">
+
+        <TextView
+            android:id="@+id/textViewTituloVeloc"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/wallet_link_text_light"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="VELOCIDADE" />
 
     </LinearLayout>
 
@@ -78,6 +126,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
         android:layout_marginTop="5dp"/>
 
     <TextView
@@ -88,7 +139,107 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16dp"
         android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp">
+
+        <TextView
+            android:id="@+id/textViewTituloCons"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="RESULTADOS GERAIS" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="Distância percorrida: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDistancia"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"/>
+
+    <TextView
+        android:text="Litros de Combustível: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewLitros"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:text="Total de Litros: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTotLitros"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:text="Média Motorista: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewMdMotorista"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:text="Consumo Normalizado: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNormalizCons"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:text="Valor maf: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewMaf"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:text="CO2 g/km: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewCO2"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"/>
 
     <TextView
         android:text="Nome da Via: "
@@ -120,15 +271,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="270dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/btnEncerrarColetar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:layout_weight="0.04"
         android:background="@color/colorPrimary"
         android:onClick="btnEncerrarColetar"
         android:text="Encerrar Coleta de Dados"

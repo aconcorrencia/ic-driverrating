@@ -99,15 +99,6 @@ public class DataBaseDriverRating extends SQLiteOpenHelper {
                     String consgascid = dados[9]; //pega o nono campo que representa o consumo de gasolina na cidade
                     String consgasestr = dados[10]; //pega o décimo campo que representa o consumo de gasolina na estrada
 
-                    /*if (modelo.equals("CLA200 FF "))
-                        MensagemTermino();*/
-
-                    /*String marca_aux = marca.replace (" ", "");
-                    String modelo_aux = modelo.replaceAll(" ", "");
-                    String motor_aux = motor.replaceAll(" ", "");
-                    String versao_aux = versao.replaceAll(" ", "");
-                    String transmissao_aux = transmissao.replaceAll(" ", "");*/
-
                     double emissnox_aux = Double.parseDouble(emissnox.replaceAll(" ", ""));
                     double emissco2_aux = Double.parseDouble(emissco2.replaceAll(" ", ""));
                     double consetancid_aux = Double.parseDouble(consetancid.replaceAll(" ", ""));
@@ -219,7 +210,6 @@ public class DataBaseDriverRating extends SQLiteOpenHelper {
 
     }
 
-
     public Veiculo leituraArqVeiculosByQueryWhereAll(Veiculo veiculo) {
         try {
             SQLiteDatabase db = getReadableDatabase();
@@ -252,4 +242,25 @@ public class DataBaseDriverRating extends SQLiteOpenHelper {
         else return false;
     }
 
+    //Recupera o menor valor de CO2 na tabela de referência do INMETRO.
+    public double selectSmallerCO2() {
+        double smallerCO2 = 10000.0;
+
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA, null);
+
+            while (cursor.moveToNext()) {
+
+                if ((cursor.getDouble(7) < smallerCO2) && (Double.parseDouble(cursor.getString(7)) != 0.0)) {
+                   smallerCO2 = Double.parseDouble(cursor.getString(7));
+                }
+            }
+
+            db.close();
+        } catch (SQLiteException e) {
+            System.out.println(e.getMessage());
+        }
+        return smallerCO2;
+    }
 }
