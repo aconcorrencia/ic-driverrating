@@ -50,21 +50,23 @@ public class DriverRatingActivity extends AppCompatActivity
     public static final String TIPOCOMBUSTIVEL_KEY = "combustivel";
     public static float densityFuel = 0; //Densidade do combstível
     public static String tipoCombustivel = "1";
+    public static final String PERCENTUALALCOOL_NAME = "percentualalcool_name";
+    public static final String PERCENTUALALCOOL_KEY = "percentualalcool";
 
     //Atributos responsáveis por armazenar os resultados das classificações - Início
-    public static String notaConsumoCombustivel;
+    public static double notaConsumoCombustivel;
     public static String classificacaoConsumoCombustivel;
 
-    public static String notaEmissaoCO2;
+    public static double notaEmissaoCO2;
     public static String classificacaoEmissaoCO2;
 
-    public static String notaVelocidade;
+    public static double notaVelocidade;
     public static String classificacaoVelocidade;
 
-    public static String notaAceleracaoLongitudinal;
+    public static double notaAceleracaoLongitudinal;
     public static String classificacaoAceleracaoLongitudinal;
 
-    public static String notaAceleracaoTransversal;
+    public static double notaAceleracaoTransversal;
     public static String classificacaoAceleracaoTransversal;
     //Atributos responsáveis por armazenar os resultados das classificações - Final
 
@@ -76,6 +78,8 @@ public class DriverRatingActivity extends AppCompatActivity
     float newAngle, oldAngle;
 
     public static double menorValorCO2;
+    public static int ultimaJanela;
+    public static int ultimoLog;
 
     public static double fatorPenalizacaoCO2;
 

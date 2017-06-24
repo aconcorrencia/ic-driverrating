@@ -1,5 +1,7 @@
 package android.usuario.driverrating.extra;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.usuario.driverrating.database.DataBaseColetadosSensores;
@@ -7,14 +9,17 @@ import android.usuario.driverrating.domain.DadosColetadosSensores;
 import android.usuario.driverrating.domain.Veiculo;
 import java.text.DecimalFormat;
 
+import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_KEY;
+import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_NAME;
 import static android.usuario.driverrating.DriverRatingActivity.densityFuel;
 import static android.usuario.driverrating.DriverRatingActivity.fatorPenalizacaoCO2;
+import static android.usuario.driverrating.DriverRatingActivity.tipoCombustivel;
 
 /**
  * Created by NIELSON on 27/05/2017.
  */
 
-public class TratarVariaveisDimensoesClassificar {
+public class TratarVariaveisDimensoesClassificar{
 
     private static int somaCarbonoOxigenio = 0;
 
@@ -57,16 +62,14 @@ public class TratarVariaveisDimensoesClassificar {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void ClassificarEmissaoCO2(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo){
+    public static void ClassificarEmissaoCO2(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo, Context context){
 
         //Envia para o classificador, os dados de Entrada da variável Emissão de Óxido de Carbobo.
         ClassificadorEntradasSaidas.EntradasParaCO2();
 
         //Total de litro(s) de combustível gasto(s) a cada janela estabelecida no experimento.
-        //float litrosCombustivel = acumulaLitrosCombustivelConsumidos / 1000;
         float litrosCombustivel = dadosColetadosSensores.getLitrosCombustivel() / 1000;
-        //Total da distância percorrida na janela estabelecida no experimento.
-        //float quilometragem = distanciaPercorrida / 1000;
+        //Total da distância percorrida na janela estabelecida para o percurso.
         float quilometragem = dadosColetadosSensores.getDistanciaPercorrida() / 1000;
 
         /**
@@ -105,20 +108,24 @@ public class TratarVariaveisDimensoesClassificar {
         }
 
         double EmissaoCO2Fabricante = veiculo.getCo2();
+
         double EmissaoCO2Motorista = ((litrosCombustivel * somaCarbonoOxigenio) / quilometragem);
 
-        //Mudança no cálculo.
-        /** Abaixo é extraído o percentual por quilômetro em relação ao resultado da emissão de CO2 dada em g/km.
-         ** Portanto esse percentual encontrado será analisado pela lógica fuzzy, classificando e dando uma nota para o motorista.*/
-        //double percentualGramasPorQuilometrosCO2 = (gramasPorQuilometrosCO2 / 1000) * 100;
+        //Caso o tipo de combustível seja FLEX, deduz da quantidade de CO2 emitido pelo motorista o percentual de etanol.
+        if (tipoCombustivel.equals("3")){
+            //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
+            SharedPreferences recuperaSharedPercAlc = context.getSharedPreferences(PERCENTUALALCOOL_NAME, 0);
+            String percentualAlcool = recuperaSharedPercAlc.getString(PERCENTUALALCOOL_KEY, "");
 
-        /** Envia os dois parâmetros para a classe classificadorFuzzy. Parâmetro1: indica a variável: "ÓXIDO DE CARBONO", Paâmetro 2: indica o co2 normalizado.
-         ** Para fase de fuzificação, o resultado acima será analisado em percentuais, pois, de acordo com o artigo referência [], é afirmado que
-         ** entre 10% e 15% é possível classificar o motorista analisado com comportamento: calmo ou normal ou agressivo, sendo que para o presente
-         ** trabalho, está sendo adotado os termos linguisticos, característicos da lógica fuzzy em: a classificação fica: bom ou medio ou ruim.*/
+            EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
+        }
 
+        //Envia os dois parâmetros para a classe classificadorFuzzy. Parâmetro1: indica a variável: "ÓXIDO DE CARBONO", Parâmetro 2: indica o co2 normalizado.
         double NCCO2 =  EmissaoCO2Fabricante / EmissaoCO2Motorista;
 
+        /** Classifica o motorista quanto à variável Emissão de CO2 penalizando-o de acordo com a escolha do veículo.
+         *  Quanto maior for a emissão de CO2, maior será a penalização .
+         */
         ClassificadorFuzzy.calcularNotas("co2", NCCO2 * fatorPenalizacaoCO2);
 
         //tvTituloCO2.setText("ÓXIDO DE CARBONO (CO2) - Nº " + controleClassificacao);
@@ -127,31 +134,5 @@ public class TratarVariaveisDimensoesClassificar {
         tvClassCO2.setText("Classificação: "+ClassificadorFuzzy.classe);
         tvCO2gkm.setText("CO2 em g/km : "+ new DecimalFormat("0.00").format(gramasPorQuilometrosCO2));*/
     }
-
-    public static void ClassificarVelocidade(DadosColetadosSensores dadosColetadosSensores){
-
-        /* Calcula a média das notas do motorista obtidas antes do fechamento da janela de tempo, para fazer uma classificação geral
-         */
-        double notaMediaDoMotorista = dadosColetadosSensores.getNotaVelocidade() / dadosColetadosSensores.getControleCalcVelocidade();
-
-        /*tvTituloVeloc.setText(("VELOCIDADE - Nº " + controleClassificacao));
-        tvNotaVeloc.setText("Nota: "+new DecimalFormat("0.00").format(notaMediaDoMotorista));*/
-
-        String classificaoNotaVelocMotorista = "";
-
-        //Analisa qual a maior ocorrência de classificação.
-        if (((dadosColetadosSensores.getContarClassificarVelocidadeMedio() == dadosColetadosSensores.getContarClassificarVelocidadeBom()) && (dadosColetadosSensores.getContarClassificarVelocidadeMedio() == dadosColetadosSensores.getContarClassificarVelocidadeRuim())) ||
-                ((dadosColetadosSensores.getContarClassificarVelocidadeMedio() > dadosColetadosSensores.getContarClassificarVelocidadeBom()) && (dadosColetadosSensores.getContarClassificarVelocidadeMedio() > dadosColetadosSensores.getContarClassificarVelocidadeRuim()))) {
-            classificaoNotaVelocMotorista = "Médio";
-        }
-        else if ((dadosColetadosSensores.getContarClassificarVelocidadeBom() > dadosColetadosSensores.getContarClassificarVelocidadeMedio()) && (dadosColetadosSensores.getContarClassificarVelocidadeBom() > dadosColetadosSensores.getContarClassificarVelocidadeRuim())){
-            classificaoNotaVelocMotorista = "Bom";
-        }else {
-            classificaoNotaVelocMotorista = "Ruim";
-        }
-
-        //tvClassVeloc.setText("Classificação: "+classificaoNotaVelocMotorista);
-    }
-
 
 }

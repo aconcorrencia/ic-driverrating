@@ -55,7 +55,8 @@
             android:name=".GPS.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".JanelaTempo" />
-        <activity android:name=".TipoCombustivel"></activity>
+        <activity android:name=".TipoCombustivel" />
+        <activity android:name=".ResultadosClassificacao"></activity>
     </application>
 
 </manifest>

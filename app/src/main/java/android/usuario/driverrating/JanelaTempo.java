@@ -36,7 +36,6 @@ public class JanelaTempo extends AppCompatActivity {
         else{
             edtJanelaTempo.setText("0");
         }
-
     }
 
     //Guardar valor da janela de tempo

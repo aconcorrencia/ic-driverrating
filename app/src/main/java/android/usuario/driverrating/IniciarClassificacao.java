@@ -21,9 +21,14 @@ import android.usuario.driverrating.OBD.IOBDBluetooth;
 import android.usuario.driverrating.OBD.OBDInfo;
 import android.usuario.driverrating.OBD.OBDReader;
 import android.usuario.driverrating.database.DataBaseColetadosSensores;
-import android.usuario.driverrating.database.DataBaseDriverRating;
+import android.usuario.driverrating.database.DataBaseLogClassificacao;
+import android.usuario.driverrating.database.DataBasePercursosViagem;
 import android.usuario.driverrating.database.DataBasePerfis;
+import android.usuario.driverrating.database.DataBaseResultadosClassificacaoMotorista;
 import android.usuario.driverrating.domain.DadosColetadosSensores;
+import android.usuario.driverrating.domain.DadosLogClassificacao;
+import android.usuario.driverrating.domain.DadosPercursosViagem;
+import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista;
 import android.usuario.driverrating.domain.Veiculo;
 import android.usuario.driverrating.extra.Calculate;
 import android.usuario.driverrating.extra.ClassificadorEntradasSaidas;
@@ -42,10 +47,19 @@ import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_NAME
 import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_KEY;
 import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_NAME;
 import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_KEY;
+import static android.usuario.driverrating.DriverRatingActivity.classificacaoAceleracaoLongitudinal;
+import static android.usuario.driverrating.DriverRatingActivity.classificacaoAceleracaoTransversal;
+import static android.usuario.driverrating.DriverRatingActivity.classificacaoEmissaoCO2;
+import static android.usuario.driverrating.DriverRatingActivity.classificacaoVelocidade;
+import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoLongitudinal;
+import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoTransversal;
 import static android.usuario.driverrating.DriverRatingActivity.notaConsumoCombustivel;
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoConsumoCombustivel ;
+import static android.usuario.driverrating.DriverRatingActivity.notaEmissaoCO2;
+import static android.usuario.driverrating.DriverRatingActivity.notaVelocidade;
 import static android.usuario.driverrating.DriverRatingActivity.tipoCombustivel;
-import static android.usuario.driverrating.DriverRatingActivity.menorValorCO2;
+import static android.usuario.driverrating.DriverRatingActivity.ultimoLog;
+import static android.usuario.driverrating.DriverRatingActivity.ultimaJanela;
 import static android.usuario.driverrating.extra.ClassificadorEntradasSaidas.EntradasParaVelocidade;
 
 /**
@@ -68,8 +82,8 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     private OverpassReader overpassReader;
 
     //Armazena dados coletados referentes aos sensores
-    ArrayList<DadosColetadosSensores> dadosColetadosSensoresArray = new ArrayList<>();
-    DataBaseColetadosSensores dataBaseColetadosSensores = new DataBaseColetadosSensores(IniciarClassificacao.this);
+    /*ArrayList<DadosColetadosSensores> dadosColetadosSensoresArray = new ArrayList<>();
+    DataBaseColetadosSensores dataBaseColetadosSensores = new DataBaseColetadosSensores(IniciarClassificacao.this);*/
 
     //**********--> Atributos referentes à variável: consumo de combustíveis:
     private float litrosCombustivelConsumidos = 0;
@@ -85,8 +99,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     //**********--> Atributos referentes à variável: Velocidade:
     private int velocidadeMotorista = 0;
     private int velocidadeMaximaDaVia = 0;
-    private float acumulaNotaVelocidade = 0;
-    private int contarClassVelocBom = 0;
+    private double menorNotaVelocidade = 1000;
+    //private int contarClassVelocBom = 0;
+    private String classeVelocidade = "";
     private int contarClassVelocMedio = 0;
     private int contarClassVelocRuim = 0;
     //**********
@@ -95,20 +110,20 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     private int tempoAnterior = 0;
     private int tempoAtual = 0;
     private int tempoAnteriorAuxiliar = 0;
-    private double guardaLogitudeInicial;
-    private double guardaLatitudeInicial;
-    private double guardaLogitudeFinal;
-    private double guardaLatitudeFinal;
+    //private double guardaLogitude;
+    //private double guardaLatitude;
     private int janelaTempo;
     private int acumulaTempo = 0;
 
-    private int controleClassificacao;
-    private int controleCalcVeloc = 0;
+    private int numeroLog;
+    private  int numeroJanela;
 
     private float distanciaPercorrida = 0;
     private GPSInfo lastGPSInfo = null;
     private boolean start = true;
     //***********
+
+    ArrayList<Double> dadosPercViag = new ArrayList<>();
 
     Button btnEncerrarColetar;
 
@@ -200,10 +215,16 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             tipoCombustivel = "3";
         }
 
-        // Controlador de classificação, ou seja, informa a classificações corrente.
-        controleClassificacao = 0;
+        //Persiste na tabela de Logs da classificação. Gravando a Data e a Hora da Classificação.
+        PersistirLog();
 
-        // Envia para o classificador, os dados de saída.
+        //Buscar o id do log atual.
+        DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(this);
+        ultimoLog  = dataBaseLogClassificacao.selectUltimoLog(idPerfil);
+
+        dadosPercViag.clear();
+
+        //Envia para o classificador, os dados de saída.
         ClassificadorEntradasSaidas.SaidasParaClassificador();
 
     }
@@ -256,15 +277,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         tvTotLitros.setText("Total de Litros: "+new DecimalFormat("0.0000").format(acumulaLitrosCombustivelConsumidos)+" ml");*/
 
         velocidadeMotorista = obdinfo.getSpeed();
-
-        /*tvmaf.setText(//"maf Cálculo 1: "+new DecimalFormat("0.0000000000").format(valormaf1) +"\n" +
-                      //"litros maf 1: "+new DecimalFormat("0.0000000000").format(trazmaf1) + "\n" +
-                      //"Abs_Load: "+new DecimalFormat("0.0000000000").format(valormaf3) +"\n" +
-                      //"maf Cálculo 2: "+new DecimalFormat("0.000").format(valormaf2)); //+"\n" + //para testar o maf 2
-                      //"tempo Atual: "+new DecimalFormat("0.00").format(valordelta)+" segundos" +"\n" +
-                      //"CO2: "+new DecimalFormat("0.0000000000").format(quilogramasPorSegundosCO2) + "\n " +   //para testar o maf 1
-                      //"Acumulo CO2: "+new DecimalFormat("0.0000000000").format(acumulaQuilogramasPorSegundosCO2) + "\n " +
-                      //"Acumulo de tempo: "+new DecimalFormat("0.00").format(acumulaTempo) + " segundos");*/
 
         //********** Final - Consumo Combustível **********
     }
@@ -320,9 +332,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             //Guarda a última leitura do GPS a cada ciclo de X segundos.
             lastGPSInfo = gpsInfo;
 
-            //Guarda a longitude e latitude inicial
-            guardaLogitudeInicial = gpsInfo.getLongitude();
-            guardaLatitudeInicial = gpsInfo.getLatitude();
         } else {
             //Guarda o tempo atual.
             tempoAtual = (int) hora.getTime();
@@ -330,6 +339,10 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             Location lastLocation, currentLocation;
             lastLocation = lastGPSInfo.getLocation();
             currentLocation = gpsInfo.getLocation();
+
+            //Guarda a longitude e latitude no arraylist e persiste após o fechamento de cada janela zerando-o para a próxima jelala se houver.
+            dadosPercViag.add(gpsInfo.getLongitude());
+            dadosPercViag.add(gpsInfo.getLatitude());
 
             //Far a leitura dos dados do dispositivo OBD. Ativa o método obdUpdate.
             obdReader.read(OBDInfo.RPM | OBDInfo.SPEED | OBDInfo.INTAKE_PRESSURE | OBDInfo.INTAKE_TEMP | OBDInfo.ABS_LOAD);
@@ -346,15 +359,13 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
             Nessa etapa de classificação dos motoristas através da variável (dimensão) Velocidade, será executada da seguinte
             maneira: a nota será calculada a cada atualização do GPS, pois existe aqui a dependência instantânea da velocidade
-            atual do motorista e da velocidade máxima da via onde o veículo está trafegando naquele momento, portanto o método
-            "ClassificarVeloidadeParcial()" tem essa função. Após a janela de tempo ser completada será executado o método
-            "ClassificarVelocidade", onde se dá assim a classificação de acordo com a média das somas das notas parciais no
-            quesito Velocidade.
+            atual do motorista e da velocidade máxima da via onde o veículo está trafegando naquele momento. A nota será atualizada
+            toda vez que o Classificador Fuzzy enviar uma nota inferior. O propósito é obter a nota mais baixa do motorista naquela
+            viagem (percurso), pois, existe a possibilidade do motorista por conta da velocidade excessíva cometer um acidente.
            */
             overpassReader.read(gpsInfo.getLatitude(), gpsInfo.getLongitude(), 10);
 
             if (velocidadeMaximaDaVia != 0) {
-                controleCalcVeloc += 1;
                 ClassificarVelocidadeParcial();
             }
 
@@ -366,15 +377,12 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                 toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500); // 500 is duration in ms
 
                 //Controlador de classificação
-                controleClassificacao += 1;
-
-                //Guarda a longitude e latitude final
-                guardaLogitudeFinal = gpsInfo.getLongitude();
-                guardaLatitudeFinal = gpsInfo.getLatitude();
+                //controleClassificacao += 1;
 
                 // Persiste os dados colhidos do OBD-II, do GPS do SmartPhone e dos Acelerômetros a cada janela de tempo.
-                dadosColetadosSensoresArray.clear();
-                PersistenciaDosDadosColhidos();
+                //dadosColetadosSensoresArray.clear();
+                //Último Registro
+                PersistirDadosColhidos();
 
                 //Buscar dados do veículo referentes ao ID do perfil do motorista.
                 DataBasePerfis dataBasePerfis = new DataBasePerfis(IniciarClassificacao.this);
@@ -389,14 +397,8 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                  */
                 if (acumulaLitrosCombustivelConsumidos != 0.0) {
 
-                    //Classificação do motorista através da variável: "CONSUMO DE COMBUSTÍVEL"
-                    //sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                    //idPerfil = sharedPreferences.getLong("ID", -1);
-
-                    //Posicionar no último registro.(ver com Sillas ou Prof. Jorge)
-
                     TratarVariaveisDimensoesClassificar.ClassificarConsumoDeCombustivel(dadosColetadosSensores, veiculo);
-                    notaConsumoCombustivel = new DecimalFormat("0.00").format(ClassificadorFuzzy.nota);
+                    notaConsumoCombustivel = ClassificadorFuzzy.nota;
                     classificacaoConsumoCombustivel = ClassificadorFuzzy.classe;
 
                     tvNotaCons.setText("Nota: "+new DecimalFormat("0.00").format(notaConsumoCombustivel));
@@ -406,16 +408,35 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                     tvNormalizCons.setText("Consumo Normalizado: "+new DecimalFormat("0.00").format(NC)+" .");*/
 
                     //Classificação do motorista através da variável: "EMISSÃO DE ÓXIDO DE CARBONO"
-                     TratarVariaveisDimensoesClassificar.ClassificarEmissaoCO2(dadosColetadosSensores, veiculo);
-                    //Classificação do motorista através da variável: "VELOCIDADE"
+                    TratarVariaveisDimensoesClassificar.ClassificarEmissaoCO2(dadosColetadosSensores, veiculo, null);
+                    notaEmissaoCO2 = ClassificadorFuzzy.nota;
+                    classificacaoEmissaoCO2 = ClassificadorFuzzy.classe;
                 }
 
                 /** Abaixo faz-se uma verificação das velocidades da via e do motorista, caso as mesmas sejam diferentes de o, a classificação da varíavel
                  *  Velocidade será calculada.
                  */
-                if (velocidadeMaximaDaVia != 0) {
+                /*if (velocidadeMaximaDaVia != 0) {
                     TratarVariaveisDimensoesClassificar.ClassificarVelocidade(dadosColetadosSensores);
+                    notaVelocidade = new DecimalFormat("0.00").format(ClassificadorFuzzy.nota);
+                    classificacaoVelocidade = ClassificadorFuzzy.classe;
+                }*/
+
+                // Controlador de número de janela.
+                DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
+                ultimaJanela = dataBaseResultadosClassificacaoMotorista.selectUltimoPercurso(ultimoLog);
+
+                if (ultimaJanela == 0) {
+                  numeroJanela = 1;
                 }
+                else{
+                  numeroJanela = ultimaJanela + 1;
+                }
+
+                //Persiste os resultados das classificações a cada janela, com a identificação de percurso.
+                PersistirClassificacoesMotorista();
+
+                PersistirPercursosViagem();
 
                 //Zera os atributos acumuladores dentro da janela.
                 distanciaPercorrida = 0;
@@ -424,21 +445,16 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                 tempoAtual = 0;
                 tempoAnteriorAuxiliar = 0;
 
-                guardaLogitudeInicial = 0.0;
-                guardaLatitudeInicial = 0.0;
-                guardaLogitudeFinal = 0.0;
-                guardaLatitudeFinal = 0.0;
+                menorNotaVelocidade = 1000;
 
-                acumulaNotaVelocidade = 0;
-                controleCalcVeloc = 0;
-
-                contarClassVelocBom = 0;
+                classeVelocidade = "";
                 contarClassVelocMedio = 0;
                 contarClassVelocRuim = 0;
 
                 acumulaTempo = 0;
-                //*********************
 
+                dadosPercViag.clear();
+                //*********************
             }
         }
         //********** Final - Monitoramento de Janela de Tempo **********
@@ -454,42 +470,67 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         *  "ClassificaçãoVelocidade" após a janela de tempo ser fechada.
         */
 
-        if (ClassificadorFuzzy.classe.equals("Bom")) {
-            contarClassVelocBom += 1;
-        } else if (ClassificadorFuzzy.classe.equals("Médio")) {
-            contarClassVelocMedio += 1;
-        } else {
-            contarClassVelocRuim += 1;
+        if (ClassificadorFuzzy.nota < menorNotaVelocidade) {
+            menorNotaVelocidade = ClassificadorFuzzy.nota;
+            classeVelocidade = ClassificadorFuzzy.classe;
+
+            notaVelocidade = menorNotaVelocidade;
+            classificacaoVelocidade = classeVelocidade;
         }
-
-        acumulaNotaVelocidade += ClassificadorFuzzy.nota;
-
     }
 
-    private void PersistenciaDosDadosColhidos() {
+    private void PersistirDadosColhidos() {
 
-        // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
+        // Será utilizado a base de dados colhidos para armazenamento a cada valor da janela de tempo estabelecida pelo motorista.
         DadosColetadosSensores dadosColetadosSensores = new DadosColetadosSensores();
 
         dadosColetadosSensores.setUsuario((int) idPerfil);
         dadosColetadosSensores.setDistanciaPercorrida(distanciaPercorrida);
         dadosColetadosSensores.setLitrosCombustivel(acumulaLitrosCombustivelConsumidos);
-        dadosColetadosSensores.setNotaVelocidade(acumulaNotaVelocidade);
-        dadosColetadosSensores.setControleCalcVelocidade(controleCalcVeloc);
-        dadosColetadosSensores.setControleCalcVelocidade(controleCalcVeloc);
-        dadosColetadosSensores.setContarClassificarVelocidadeBom(contarClassVelocBom);
-        dadosColetadosSensores.setContarClassificarVelocidadeMedio(contarClassVelocMedio);
-        dadosColetadosSensores.setContarClassificarVelocidadeRuim(contarClassVelocRuim);
         Date dataOcorrencia = new Date();
         dadosColetadosSensores.setData(dataOcorrencia);
         dadosColetadosSensores.setHora(dataOcorrencia.getTime());
-        dadosColetadosSensores.setLongitudeInicial(guardaLogitudeInicial);
-        dadosColetadosSensores.setLatidudeInicial(guardaLatitudeInicial);
-        dadosColetadosSensores.setLongitudeFinal(guardaLogitudeFinal);
-        dadosColetadosSensores.setLatidudeFinal(guardaLatitudeFinal);
         dadosColetadosSensores.setTipoCombustivel(tipoCombustivel);
+
         DataBaseColetadosSensores dataBaseColetadosSensores = new DataBaseColetadosSensores(IniciarClassificacao.this);
         dataBaseColetadosSensores.inserirDadosColetadosSensores(dadosColetadosSensores);
+    }
+
+    private void PersistirPercursosViagem() {
+        for (int i=0; i < dadosPercViag.size() ;i++){
+
+            // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
+            DadosPercursosViagem dadosPercursosViagem = new DadosPercursosViagem();
+
+            dadosPercursosViagem.setId_janelaclassmot(numeroJanela);
+            dadosPercursosViagem.setLongitude(dadosPercViag.get(0));
+            dadosPercursosViagem.setLatitude(dadosPercViag.get(1));
+
+            DataBasePercursosViagem dataBasePercursosViagem = new DataBasePercursosViagem(IniciarClassificacao.this);
+            dataBasePercursosViagem.inserirDadosPercursosViagem(dadosPercursosViagem);
+        }
+    }
+
+    private void PersistirClassificacoesMotorista() {
+
+        // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
+        DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
+
+        dadosResultadosClassificacaoMotorista.setId_janclasmot(numeroJanela);
+        dadosResultadosClassificacaoMotorista.setId_log(ultimoLog);
+        dadosResultadosClassificacaoMotorista.setNota_cons_comb(notaConsumoCombustivel);
+        dadosResultadosClassificacaoMotorista.setClas_cons_comb(classificacaoConsumoCombustivel);
+        dadosResultadosClassificacaoMotorista.setNota_emis_co2(notaEmissaoCO2);
+        dadosResultadosClassificacaoMotorista.setClas_emis_co2(classificacaoEmissaoCO2);
+        dadosResultadosClassificacaoMotorista.setNota_velocid(notaVelocidade);
+        dadosResultadosClassificacaoMotorista.setClas_velocid(classificacaoVelocidade);
+        dadosResultadosClassificacaoMotorista.setNota_acel_long(notaAceleracaoLongitudinal);
+        dadosResultadosClassificacaoMotorista.setClas_acel_long(classificacaoAceleracaoLongitudinal);
+        dadosResultadosClassificacaoMotorista.setNota_acel_trans(notaAceleracaoTransversal);
+        dadosResultadosClassificacaoMotorista.setClas_acel_trans(classificacaoAceleracaoTransversal);
+
+        DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(IniciarClassificacao.this);
+        dataBaseResultadosClassificacaoMotorista.inserirDadosResultClassMot(dadosResultadosClassificacaoMotorista);
     }
 
     public void btnEncerrarColetar(View view) {
@@ -499,6 +540,20 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
         // Retorna para a tela anterior.
         finish();
+    }
+
+    // Será utilizado a base de dados para armazenamento dos logs de classificação.
+    private void PersistirLog() {
+
+        DadosLogClassificacao dadosLogClassificacao = new DadosLogClassificacao();
+
+        dadosLogClassificacao.setUsuario((int) idPerfil);
+        Date dataOcorrencia = new Date();
+        dadosLogClassificacao.setData(dataOcorrencia);
+        dadosLogClassificacao.setHora(dataOcorrencia.getTime());
+
+        DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(IniciarClassificacao.this);
+        dataBaseLogClassificacao.inserirDadosLogClassificacao(dadosLogClassificacao);
     }
 
 }

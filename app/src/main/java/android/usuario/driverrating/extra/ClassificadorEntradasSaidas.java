@@ -46,22 +46,22 @@ public class ClassificadorEntradasSaidas {
         /*
           Dados de acordo com artigo de referência:
 
-          Baixo -  Rampa Esquerda( 0.00 , 9.50 , 12.50 )
-          Medio -  Triangular( 0.65 , 1.00 , 1.35 )
-          Alto  -  Rampa Direita( 1.00 , 1.40 , 1.50 )
+          Baixo -  Rampa Esquerda( 0.00 , 0.35 , 0.99 )
+          Medio -  Triangular( 0.98 , 1.25 , 1.52 )
+          Alto  -  Rampa Direita( 1.50 , 1.65 , 2.00 )
          */
 
         ENTRADAS.clear();
 
         ENTRADAS.add(0, 0.0);
-        ENTRADAS.add(1, 9.5);
-        ENTRADAS.add(2, 12.5);
-        ENTRADAS.add(3, 12.0);
-        ENTRADAS.add(4, 13.0);
-        ENTRADAS.add(5, 14.0);
-        ENTRADAS.add(6, 13.5);
-        ENTRADAS.add(7, 15.0);
-        ENTRADAS.add(8, 20.0);
+        ENTRADAS.add(1, 0.35);
+        ENTRADAS.add(2, 0.99);
+        ENTRADAS.add(3, 0.98);
+        ENTRADAS.add(4, 1.25);
+        ENTRADAS.add(5, 1.52);
+        ENTRADAS.add(6, 1.50);
+        ENTRADAS.add(7, 1.65);
+        ENTRADAS.add(8, 2.00);
 
     }
 
