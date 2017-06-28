@@ -1,0 +1,27 @@
+package android.usuario.driverrating.ACC;
+
+/**
+ * Created by Matheus on 28/06/2017.
+ */
+
+public class ACCInfo {
+    private float accLongitudinal, accTranversal, accPerpendicular;
+
+    public ACCInfo(float accLongitudinal, float accTranversal, float accPerpendicular) {
+        this.accLongitudinal = accLongitudinal;
+        this.accTranversal = accTranversal;
+        this.accPerpendicular = accPerpendicular;
+    }
+
+    public float getAccLongitudinal() {
+        return accLongitudinal;
+    }
+
+    public float getAccTranversal() {
+        return accTranversal;
+    }
+
+    public float getAccPerpendicular() {
+        return accPerpendicular;
+    }
+}
