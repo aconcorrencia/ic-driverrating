@@ -85,35 +85,76 @@ public class ClassificadorFuzzy {
                 grauPertinAlto = (ENTRADAS.get(8) - dadosSensores) / (ENTRADAS.get(8) - ENTRADAS.get(7));
             }
 
-            if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto){
+            if (origem.substring(0,6).equals("gerais")) {
 
-                if ((origem == "consumo") || (origem == "velocidade")) {
-                    classe = "Bom";
-                }
-                else if ((origem == "co2") || (origem == "nox")) {
-                    classe = "Verde";
-                }
+                if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto) {
 
-            } else if (grauPertinMedio > grauPertinAlto){
+                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                        classe = "Ruim";
+                    } else if (origem == "geraisCO2") {
+                        classe = "Vermelho";
+                    } else if (origem == "geraisAcc") {
+                        classe = "Arriscado";
+                    }
 
-                if ((origem == "consumo") || (origem == "velocidade")) {
-                    classe = "Médio";
-                }
-                else if ((origem == "co2") || (origem == "nox")){
-                    classe = "Amarelo";
-                }
-            } else {
+                } else if (grauPertinMedio > grauPertinAlto) {
 
-                if ((origem == "consumo") || (origem == "velocidade")) {
-                    classe = "Ruim";
+                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                        classe = "Médio";
+                    } else if (origem == "geraisCO2") {
+                        classe = "Amarelo";
+                    } else if (origem == "geraisAcc") {
+                        classe = "Moderado";
+                    }
+                } else {
+
+                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                        classe = "Bom";
+                    } else if (origem == "geraisCO2") {
+                        classe = "Verde";
+                    } else if (origem == "geraisAcc") {
+                        classe = "Cauteloso";
+                    }
                 }
-                else if ((origem == "co2") || (origem == "nox")){
-                    classe = "Vermelho";
-                }
+                //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
+                nota = ((grauPertinBaixo * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinAlto * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
             }
+            else {
 
+                if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto) {
+
+                    if ((origem == "consumo") || (origem == "velocidade")) {
+                        classe = "Bom";
+                    } else if (origem == "co2") {
+                        classe = "Verde";
+                    } else if (origem == "aceleracoes") {
+                        classe = "Cauteloso";
+                    }
+
+                } else if (grauPertinMedio > grauPertinAlto) {
+
+                    if ((origem == "consumo") || (origem == "velocidade")) {
+                        classe = "Médio";
+                    } else if (origem == "co2") {
+                        classe = "Amarelo";
+                    } else if (origem == "aceleracoes") {
+                        classe = "Moderado";
+                    }
+                } else {
+
+                    if ((origem == "consumo") || (origem == "velocidade")) {
+                        classe = "Ruim";
+                    } else if (origem == "co2") {
+                        classe = "Vermelho";
+                    } else if (origem == "aceleracoes") {
+                        classe = "Arriscado";
+                    }
+                }
+                //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
+                nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
+            }
             //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
-            nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
+            //nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
 
         }
     }

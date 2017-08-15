@@ -50,6 +50,7 @@ public class DriverRatingActivity extends AppCompatActivity
     public static final String TIPOCOMBUSTIVEL_KEY = "combustivel";
     public static float densityFuel = 0; //Densidade do combstível
     public static String tipoCombustivel = "1";
+    public static String percentualAlcool = "0";
     public static final String PERCENTUALALCOOL_NAME = "percentualalcool_name";
     public static final String PERCENTUALALCOOL_KEY = "percentualalcool";
 
@@ -57,17 +58,28 @@ public class DriverRatingActivity extends AppCompatActivity
     public static double notaConsumoCombustivel;
     public static String classificacaoConsumoCombustivel;
 
+    public static double notaConsumoCombustivelGeral;
+
     public static double notaEmissaoCO2;
     public static String classificacaoEmissaoCO2;
+
+    public static double notaEmissaoCO2Geral;
 
     public static double notaVelocidade;
     public static String classificacaoVelocidade;
 
+    public static double notaVelocidadeGeral;
+
     public static double notaAceleracaoLongitudinal;
     public static String classificacaoAceleracaoLongitudinal;
 
+    public static double notaAceleracaoLongitudinalGeral;
+
     public static double notaAceleracaoTransversal;
     public static String classificacaoAceleracaoTransversal;
+
+    public static double notaAceleracaoTransversalGeral;
+
     //Atributos responsáveis por armazenar os resultados das classificações - Final
 
     private TextView txtNomePerfil, txtMarca, txtModelo, txtFatorPenaliz;
@@ -160,7 +172,11 @@ public class DriverRatingActivity extends AppCompatActivity
         } else if (id == R.id.ic_tipoCombustivel ) {
             Intent it = new Intent(DriverRatingActivity.this, TipoCombustivel.class);
             startActivity(it);
+        } else if (id == R.id.ic_ClassificacaoGeral ) {
+            Intent it = new Intent(DriverRatingActivity.this,  ResultadosClassificacao.class);
+            startActivity(it);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

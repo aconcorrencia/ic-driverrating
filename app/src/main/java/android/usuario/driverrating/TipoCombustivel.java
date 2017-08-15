@@ -38,13 +38,13 @@ public class TipoCombustivel extends AppCompatActivity {
         sharedTipoCombustivelEditor = sharedTipoCombustivel.edit();
 
         String tipoCombustivelExtenso = sharedTipoCombustivel.getString(TIPOCOMBUSTIVEL_KEY, "").toUpperCase();
-
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgopcoes);
         if (tipoCombustivelExtenso.equals("GASOLINA")) {
-            ((RadioGroup) findViewById(R.id.rgopcoes)).check(R.id.rbGasolina);
+            radioGroup.check(R.id.rbGasolina);
         } else if (tipoCombustivelExtenso.equals("DIESEL")) {
-            ((RadioGroup) findViewById(R.id.rgopcoes)).check(R.id.rbDiesel);
+            radioGroup.check(R.id.rbDiesel);
         } else if (tipoCombustivelExtenso.equals("FLEX")) {
-            ((RadioGroup) findViewById(R.id.rgopcoes)).check(R.id.rbFlex);
+            radioGroup.check(R.id.rbFlex);
         }
 
         edtPercentualAlcool = (EditText) findViewById(R.id.edtPercentAlcool);
@@ -63,8 +63,8 @@ public class TipoCombustivel extends AppCompatActivity {
     }
 
     //Guardar o tipo de combustível
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         if (sharedTipoCombustivelEditor != null) {
             sharedTipoCombustivelEditor.putString(TIPOCOMBUSTIVEL_KEY, valueOf(tipoCombustivel));
             sharedTipoCombustivelEditor.commit();

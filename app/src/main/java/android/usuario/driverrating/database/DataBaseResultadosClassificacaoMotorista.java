@@ -8,6 +8,13 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista;
 
+import static android.usuario.driverrating.DriverRatingActivity.notaConsumoCombustivelGeral;
+import static android.usuario.driverrating.DriverRatingActivity.notaEmissaoCO2Geral;
+import static android.usuario.driverrating.DriverRatingActivity.notaVelocidadeGeral;
+import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoLongitudinalGeral;
+import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoTransversalGeral;
+
+
 import java.util.Date;
 
 /**
@@ -34,6 +41,12 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
     public static final String CLASACELTRANS = "clasaceltrans";
 
     private Context context;
+
+    private float notaConsComb;
+    private float notaEmissaoCO2;
+    private float notaVelocidade;
+    private float notaAccLong;
+    private float notaAccTrans;
 
     public DataBaseResultadosClassificacaoMotorista(Context context) {
         super(context, NOME_BANCO, null, VERSAO_AUX);
@@ -85,52 +98,61 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
         db.insert(TABELA, null, valores);
     }
 
-    public DadosResultadosClassificacaoMotorista selectResultadosClassificacaoByIdPerc(long idlog) {
-        DadosResultadosClassificacaoMotorista d = new DadosResultadosClassificacaoMotorista();
-        try {
-            SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE " + ID_LOG + " = " + idlog, null);
-            int count=cursor.getCount();
-            if(count>0) {
-                cursor.moveToNext();
-                d.setId_janclasmot(cursor.getInt(0));
-                d.setId_log(cursor.getInt(1));
-                d.setNota_cons_comb(cursor.getDouble(4));
-                d.setClas_cons_comb(cursor.getString(5));
-                d.setNota_emis_co2(cursor.getDouble(6));
-                d.setClas_emis_co2(cursor.getString(7));
-                d.setNota_velocid(cursor.getDouble(8));
-                d.setClas_velocid(cursor.getString(9));
-                d.setNota_acel_long(cursor.getDouble(10));
-                d.setClas_acel_long(cursor.getString(11));
-                d.setNota_acel_trans(cursor.getDouble(12));
-                d.setClas_acel_trans(cursor.getString(13));
-            }else{
-                db.close();
-                return null;
-            }
-            db.close();
-        } catch (SQLiteException e) {
-            return null;
+    public void selectResultadosClassificacaoByIdLog(long idlog) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELA + " WHERE " + ID_LOG + " = " + idlog, null);
+
+        notaConsumoCombustivelGeral = 0;
+        notaEmissaoCO2Geral = 0;
+        notaVelocidadeGeral = 0;
+        notaAceleracaoLongitudinalGeral = 0;
+        notaAceleracaoTransversalGeral = 0;
+
+        notaConsComb = 0;
+        notaEmissaoCO2 = 0;
+        notaVelocidade = 0;
+        notaAccLong = 0;
+        notaAccTrans = 0;
+
+        int count=cursor.getCount();
+
+        if (count > 0){
+
+           int quant = 0;
+
+           while (cursor.moveToNext()) {
+              quant+=1;
+
+              notaConsComb += cursor.getDouble(2);
+              notaEmissaoCO2 += cursor.getDouble(4);
+              notaVelocidade += cursor.getDouble(6);
+              notaAccLong += cursor.getDouble(8);
+              notaAccTrans += cursor.getDouble(10);
+           }
+
+           notaConsumoCombustivelGeral = notaConsComb / quant;
+           notaEmissaoCO2Geral = notaEmissaoCO2 / quant;
+           notaVelocidadeGeral = notaVelocidade / quant;
+           notaAceleracaoLongitudinalGeral = notaAccLong / quant;
+           notaAceleracaoTransversalGeral = notaAccTrans / quant;
         }
-        return d;
+        db.close();
     }
 
     //Recupera a última janela.
-    public int selectUltimoPercurso(long idlog) {
-        int ultimaJanela = 0;
-
+    //public int selectUltimaJanela(long idlog) {
+    public int selectUltimaJanela() {
+        int ultimaJanela = -1;
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+ID_LOG+"=" + idlog, null);
+            Cursor cursor = db.rawQuery("SELECT MAX("+ID+") FROM " + TABELA, null);
 
-            while (cursor.moveToNext()) {
-
-                if (cursor.getInt(0) > ultimaJanela) {
-                    ultimaJanela = Integer.parseInt(cursor.getString(2));
+            if(cursor != null){
+                if (cursor.moveToNext()) {
+                        ultimaJanela = Integer.parseInt(cursor.getString(0));
                 }
             }
-
             db.close();
         } catch (SQLiteException e) {
             System.out.println(e.getMessage());

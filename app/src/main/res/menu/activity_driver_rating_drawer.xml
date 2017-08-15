@@ -22,6 +22,10 @@
                 android:id="@+id/ic_tipoCombustivel"
                 android:icon="@drawable/ic_timer"
                 android:title="Tipo de Conbustível" />
+            <item
+                android:id="@+id/ic_ClassificacaoGeral"
+                android:icon="@drawable/ic_timer"
+                android:title="Classificação Geral" />
         </menu>
     </item>
 

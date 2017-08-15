@@ -24,21 +24,10 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
     public static final String TABELA = "tabdadoscoletados";
 
     private static final String ID = "_id";
-    //private static final String IDPERCUSO=
     public static final String USUARIO = "usuario";
     public static final String DISTANCIAPERCORRIDA = "distanciapercorrida";
     public static final String LITROSCOMBUSTIVEL = "litroscombustivel";
     public static final String NOTAVELOCIDADE = "notavelocidade";
-    public static final String CONTROLECALCVELOCIDADE = "controlecalcvelocidade";
-    public static final String CONTARCLASSIFICARVELOCIDADEBOM = "contarclassificarvelocidadebom";
-    public static final String CONTARCLASSIFICARVELOCIDADEMEDIO = "contarclassificarvelocidademedio";
-    public static final String CONTARCLASSIFICARVELOCIDADERUIM = "contarclassificarvelocidaderuim";
-    public static final String DATA = "data";
-    public static final String HORA = "hora";
-    public static final String LONGITUDEINICIAL = "longitudeinicial";
-    public static final String LATITUDEINICIAL = "latidudeinicial";
-    public static final String LONGITUDEFINAL = "longitudefinal";
-    public static final String LATITUDEFINAL = "latidudefinal";
     public static final String TIPOCOMBUSTIVEL = "tipocombustivel";
 
     private Context context;
@@ -56,16 +45,6 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
                 + DISTANCIAPERCORRIDA + " float, "
                 + LITROSCOMBUSTIVEL + " float, "
                 + NOTAVELOCIDADE + " float, "
-                + CONTROLECALCVELOCIDADE + " int, "
-                + CONTARCLASSIFICARVELOCIDADEBOM + " int, "
-                + CONTARCLASSIFICARVELOCIDADEMEDIO + " int, "
-                + CONTARCLASSIFICARVELOCIDADERUIM + " int, "
-                + DATA + " date, "
-                + HORA + " long, "
-                + LONGITUDEINICIAL + " double, "
-                + LATITUDEINICIAL + " double, "
-                + LONGITUDEFINAL + " double, "
-                + LATITUDEFINAL + " double, "
                 + TIPOCOMBUSTIVEL + " text"
                 + ")";
         db.execSQL(sql);
@@ -85,16 +64,6 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
         valores.put(DISTANCIAPERCORRIDA, dadosColetadosSensores.getDistanciaPercorrida());
         valores.put(LITROSCOMBUSTIVEL, dadosColetadosSensores.getLitrosCombustivel());
         valores.put(NOTAVELOCIDADE, dadosColetadosSensores.getNotaVelocidade());
-        valores.put(CONTROLECALCVELOCIDADE, dadosColetadosSensores.getControleCalcVelocidade());
-        valores.put(CONTARCLASSIFICARVELOCIDADEBOM, dadosColetadosSensores.getContarClassificarVelocidadeBom());
-        valores.put(CONTARCLASSIFICARVELOCIDADEMEDIO, dadosColetadosSensores.getContarClassificarVelocidadeMedio());
-        valores.put(CONTARCLASSIFICARVELOCIDADERUIM, dadosColetadosSensores.getContarClassificarVelocidadeRuim());
-        valores.put(DATA, String.valueOf(dadosColetadosSensores.getData()));
-        valores.put(HORA, String.valueOf(dadosColetadosSensores.getHora()));
-        valores.put(LONGITUDEINICIAL, dadosColetadosSensores.getLongitudeInicial());
-        valores.put(LATITUDEINICIAL, dadosColetadosSensores.getLatidudeInicial());
-        valores.put(LONGITUDEFINAL, dadosColetadosSensores.getLongitudeFinal());
-        valores.put(LATITUDEFINAL, dadosColetadosSensores.getLatidudeFinal());
         valores.put(TIPOCOMBUSTIVEL, dadosColetadosSensores.getTipoCombustivel());
 
         db.insert(TABELA, null, valores);
@@ -114,17 +83,7 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
                 ds.setDistanciaPercorrida(cursor.getFloat(2));
                 ds.setLitrosCombustivel(cursor.getFloat(3));
                 ds.setNotaVelocidade (cursor.getFloat(4));
-                ds.setControleCalcVelocidade(cursor.getInt(5));
-                ds.setContarClassificarVelocidadeBom(cursor.getInt(6));
-                ds.setContarClassificarVelocidadeMedio(cursor.getInt(7));
-                ds.setContarClassificarVelocidadeRuim(cursor.getInt(8));
-                ds.setData(new Date(cursor.getLong(9)));
-                ds.setHora(new Long(cursor.getLong(10)));
-                ds.setLongitudeInicial(cursor.getDouble(11));
-                ds.setLatidudeInicial(cursor.getDouble(12));
-                ds.setLongitudeFinal(cursor.getDouble(13));
-                ds.setLatidudeFinal(cursor.getDouble(14));
-                ds.setTipoCombustivel(cursor.getString(15));
+                ds.setTipoCombustivel(cursor.getString(5));
 
                 arrayList.add(ds);
             }
@@ -142,23 +101,13 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+USUARIO+"=" + id, null);
             int count=cursor.getCount();
             if(count>0) {
-                cursor.moveToNext();
+                cursor.moveToLast();
                 d.setId(cursor.getInt(0));
                 d.setUsuario(cursor.getInt(1));
                 d.setDistanciaPercorrida(cursor.getFloat(2));
                 d.setLitrosCombustivel(cursor.getFloat(3));
                 d.setNotaVelocidade (cursor.getFloat(4));
-                d.setControleCalcVelocidade(cursor.getInt(5));
-                d.setContarClassificarVelocidadeBom(cursor.getInt(6));
-                d.setContarClassificarVelocidadeMedio(cursor.getInt(7));
-                d.setContarClassificarVelocidadeRuim(cursor.getInt(8));
-                d.setData(new Date(cursor.getLong(9)));
-                d.setHora(new Long(cursor.getLong(10)));
-                d.setLongitudeInicial(cursor.getDouble(11));
-                d.setLatidudeInicial(cursor.getDouble(12));
-                d.setLongitudeFinal(cursor.getDouble(13));
-                d.setLatidudeFinal(cursor.getDouble(14));
-                d.setTipoCombustivel(cursor.getString(15));
+                d.setTipoCombustivel(cursor.getString(5));
 
             }else{
                 db.close();

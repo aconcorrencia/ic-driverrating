@@ -612,6 +612,7 @@ RENAULT ;Sandero ;1.6 -8V ;GT Line ;M -5 ;0.027;117;7.5;8.7;11;12
 RENAULT ;Sandero RS ;2.0 -16V ;Renault Sport ;M -6 ;0.043;148;5.9;7.6;8;11
 RENAULT ;Logan ;1.0 -16V ;Authentique ;M -5 ;0.04;116;7.2;9.1;11;13
 RENAULT ;Logan ;1.0 -16V ;Expression ;M -5 ;0.04;116;7.2;9.1;11;13
+RENAULT ;Logan ;1.6 -16V ;Expression ;M -5 ;0.042;99;8.8;9.5;13;13.8
 RENAULT ;Logan ;1.6 -8V ;Dynamique ;M -5 ;0.032;117;7.5;8.7;11;13
 RENAULT ;Logan ;1.6 -8V ;Expression ;M -5 ;0.032;117;7.5;8.7;11;13
 RENAULT ;Logan ;1.6 -8V ;Dynamique ;MTA -5 ;0.035;125;6.2;8.9;10;13

@@ -17,6 +17,13 @@ import android.usuario.driverrating.OBD.commands.RPMCommand;
 import android.usuario.driverrating.OBD.commands.SpeedCommand;
 import android.util.Log;
 
+import com.github.pires.obd.commands.protocol.EchoOffCommand;
+import com.github.pires.obd.commands.protocol.LineFeedOffCommand;
+import com.github.pires.obd.commands.protocol.SelectProtocolCommand;
+import com.github.pires.obd.commands.protocol.TimeoutCommand;
+import com.github.pires.obd.commands.temperature.AmbientAirTemperatureCommand;
+import com.github.pires.obd.enums.ObdProtocols;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -91,6 +98,7 @@ public class OBDReader {
             if ((OBDInfo.RPM & OBDparameters) != 0) {
                 RPMCommand rpmCommand = new RPMCommand();
                 rpmCommand.run(mmInStream, mmOutStream);
+                Log.w("TESTE","T: "+rpmCommand.getRPM());
                 obdbundle.putInt(OBDInfo.KEY_RPM, rpmCommand.getRPM());
             }
             if ((OBDInfo.SPEED & OBDparameters) != 0) {
@@ -139,6 +147,7 @@ public class OBDReader {
         }
 
         public void run() {
+
             try {
                 mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
                 mmSocket.connect();
@@ -161,10 +170,16 @@ public class OBDReader {
             } catch (IOException e) {
                 listener.errorConnectBluetooth();
             }
+
             try {
-                new ObdResetCommand().run(mmInStream, mmOutStream);
+                new EchoOffCommand().run(mmInStream, mmOutStream);
+                new LineFeedOffCommand().run(mmInStream, mmOutStream);
+                new TimeoutCommand(125).run(mmInStream, mmOutStream);
+                new SelectProtocolCommand(ObdProtocols.AUTO).run(mmInStream, mmOutStream);
+                new AmbientAirTemperatureCommand().run(mmInStream,mmOutStream);
+           /*     new ObdResetCommand().run(mmInStream, mmOutStream);
                 new AutoProtocolCommand().run(mmInStream, mmOutStream);
-                new AvailablePidsCommand_01_20().run(mmInStream, mmOutStream);
+                new AvailablePidsCommand_01_20().run(mmInStream, mmOutStream);*/
             } catch (IOException e) {
                 connect = false;
                 e.printStackTrace();

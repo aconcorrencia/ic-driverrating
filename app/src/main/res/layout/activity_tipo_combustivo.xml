@@ -45,23 +45,29 @@
             android:layout_marginTop="10dp"/>
 
     </RadioGroup>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Percentual de Álcool (Flex):" />
+        android:text="Percentual de Álcool (Flex): " />
 
     <EditText
         android:id="@+id/edtPercentAlcool"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="200dp"
-        android:layout_weight="0.16"
-        android:ems="10"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+
         android:inputType="textPersonName"
         android:text="" />
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%" />
+</LinearLayout>
+
 
     <Space
         android:layout_width="match_parent"

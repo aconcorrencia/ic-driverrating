@@ -19,7 +19,7 @@
             android:textColor="@color/wallet_link_text_light"
             android:textStyle="bold"
             android:textSize="16dp"
-            android:text="CONSUMO DE COMBISTÍVEL" />
+            android:text="CONSUMO DE COMBUSTÍVEL" />
 
     </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:textColor="@color/wallet_link_text_light"
             android:textStyle="bold"
             android:textSize="16dp"
-            android:text="ÓXIDO DE CARBONO (CO2)" />
+            android:text="DIÓXIDO DE CARBONO (CO2)" />
 
     </LinearLayout>
 
@@ -216,8 +216,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="3dp"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="Valor maf: "
@@ -227,8 +226,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="3dp"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="CO2 g/km: "

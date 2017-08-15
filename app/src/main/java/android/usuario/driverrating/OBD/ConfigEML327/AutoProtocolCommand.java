@@ -8,6 +8,7 @@ package android.usuario.driverrating.OBD.ConfigEML327;
 public class AutoProtocolCommand extends ObdProtocolCommand {
 
     public AutoProtocolCommand() {
+        //super("AT SP0");
         super("AT SP0");
     }
 

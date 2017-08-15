@@ -103,4 +103,52 @@ public class ClassificadorEntradasSaidas {
 
     }
 
+    public static void EntradasParaAceleracoes() {
+
+        /*
+          Dados de acordo com artigo de referência:
+
+          Baixo -  Rampa Esquerda( 0.00 , 0.98 , 2.16 )
+          Medio -  Triangular( 1.77 , 2.84 , 4.02 )
+          Alto  -  Rampa Direita( 3.73 , 5.69 , 5.88 )
+         */
+
+        ENTRADAS.clear();
+
+        ENTRADAS.add(0, 0.00);
+        ENTRADAS.add(1, 0.98);
+        ENTRADAS.add(2, 2.16);
+        ENTRADAS.add(3, 1.77);
+        ENTRADAS.add(4, 2.84);
+        ENTRADAS.add(5, 4.02);
+        ENTRADAS.add(6, 3.73);
+        ENTRADAS.add(7, 5.69);
+        ENTRADAS.add(8, 5.88);
+
+    }
+
+    public static void EntradasParaGerais() {
+
+        /*
+          Dados de acordo com artigo de referência:
+
+          Baixo -  Rampa Esquerda( 0.00 , 1.50 , 2.10 )
+          Medio -  Triangular( 2.00 , 2.50 , 3.00 )
+          Alto  -  Rampa Direita( 2.90 , 3.50 , 4.00)
+         */
+        ENTRADAS.clear();
+
+        ENTRADAS.add(0, 0.00);
+        ENTRADAS.add(1, 1.50);
+        ENTRADAS.add(2, 2.10);
+        ENTRADAS.add(3, 2.00);
+        ENTRADAS.add(4, 2.50);
+        ENTRADAS.add(5, 3.00);
+        ENTRADAS.add(6, 2.90);
+        ENTRADAS.add(7, 3.50);
+        ENTRADAS.add(8, 4.00);
+
+    }
+
+
 }
