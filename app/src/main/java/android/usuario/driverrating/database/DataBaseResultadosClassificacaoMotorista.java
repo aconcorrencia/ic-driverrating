@@ -150,7 +150,8 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
 
             if(cursor != null){
                 if (cursor.moveToNext()) {
-                        ultimaJanela = Integer.parseInt(cursor.getString(0));
+                        //ultimaJanela = Integer.parseInt(cursor.getString(0));
+                    ultimaJanela = cursor.getInt(0);
                 }
             }
             db.close();

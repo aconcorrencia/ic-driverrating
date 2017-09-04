@@ -60,6 +60,7 @@ public class TratarVariaveisDimensoesClassificar{
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void ClassificarEmissaoCO2(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo){
 
+
         //Envia para o classificador, os dados de Entrada da variável Emissão de Óxido de Carbobo.
         ClassificadorEntradasSaidas.EntradasParaCO2();
 
@@ -124,7 +125,7 @@ public class TratarVariaveisDimensoesClassificar{
         /** Classifica o motorista quanto à variável Emissão de CO2 penalizando-o de acordo com a escolha do veículo.
          *  Quanto maior for a emissão de CO2, maior será a penalização .
          */
-        ClassificadorFuzzy.calcularNotas("co2", NCCO2 * fatorPenalizacaoCO2);
+        ClassificadorFuzzy.calcularNotas("co2", NCCO2 * Float.parseFloat(fatorPenalizacaoCO2));
 
         //tvTituloCO2.setText("ÓXIDO DE CARBONO (CO2) - Nº " + controleClassificacao);
 

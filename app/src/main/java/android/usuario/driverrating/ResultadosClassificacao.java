@@ -41,7 +41,12 @@ public class ResultadosClassificacao extends AppCompatActivity {
 
     tvTituloAccTrans,
             tvNotaAccTrans,
-            tvClassAccTrans;
+            tvClassAccTrans,
+
+    tvNotaGeral,
+    tvClassGeral;
+
+    float notasGerais = 0;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -62,16 +67,16 @@ public class ResultadosClassificacao extends AppCompatActivity {
         tvNotaVeloc = (TextView) findViewById(R.id.tvNotaVeloc);
         tvClassVeloc = (TextView) findViewById(R.id.tvClassVeloc);
 
-        tvTituloAccLong = (TextView) findViewById(R.id.tvTituloAccLong);
+        tvTituloAccLong = (TextView) findViewById(R.id.tvTituloAcelLong);
         tvNotaAccLong = (TextView) findViewById(R.id.tvNotaAccLong);
         tvClassAccLong = (TextView) findViewById(R.id.tvClassAccLong);
 
-        tvTituloAccTrans = (TextView) findViewById(R.id.tvTituloAccTrans);
+        tvTituloAccTrans = (TextView) findViewById(R.id.tvTituloAcelTrans);
         tvNotaAccTrans = (TextView) findViewById(R.id.tvNotaAccTrans);
         tvClassAccTrans = (TextView) findViewById(R.id.tvClassAccTrans);
 
         //Armazena o número do log desejado;
-        int logClass = 27;
+        int logClass = 1;
         DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
         dataBaseResultadosClassificacaoMotorista.selectResultadosClassificacaoByIdLog(logClass);
 
@@ -84,23 +89,32 @@ public class ResultadosClassificacao extends AppCompatActivity {
         ClassificadorFuzzy.calcularNotas("geraisConsumo", notaConsumoCombustivelGeral);
         tvNotaCons.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassCons.setText("Classificação: "+ClassificadorFuzzy.classe);
+        notasGerais += notaConsumoCombustivelGeral;
 
         ClassificadorFuzzy.calcularNotas("geraisCO2", notaEmissaoCO2Geral);
         tvNotaCO2.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassCO2.setText("Classificação: "+ClassificadorFuzzy.classe);
+        notasGerais += notaEmissaoCO2Geral;
 
         // Envia para o classificador, os dados de Entrada da variável Velocidade.
         ClassificadorFuzzy.calcularNotas("geraisVelocidade", notaVelocidadeGeral);
         tvNotaVeloc.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassVeloc.setText("Classificação: "+ClassificadorFuzzy.classe);
+        notasGerais += notaVelocidadeGeral;
 
         ClassificadorFuzzy.calcularNotas("geraisAcc", notaAceleracaoLongitudinalGeral);
         tvNotaAccLong.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassAccLong.setText("Classificação: "+ClassificadorFuzzy.classe);
+        notasGerais += notaAceleracaoLongitudinalGeral;
 
         ClassificadorFuzzy.calcularNotas("geraisAcc", notaAceleracaoTransversalGeral);
         tvNotaAccTrans.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassAccTrans.setText("Classificação: "+ClassificadorFuzzy.classe);
+        notasGerais += notaAceleracaoTransversalGeral;
+
+        double mediaNotasGerais = notasGerais / 5;
+
+        tvNotaGeral.setText("Nota: "+ mediaNotasGerais); //new DecimalFormat("0.00").format(mediaNotasGerais));
 
     }
 

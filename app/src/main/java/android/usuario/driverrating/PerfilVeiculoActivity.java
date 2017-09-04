@@ -2,6 +2,7 @@ package android.usuario.driverrating;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +28,11 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_KEY;
+import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_NAME;
 import static android.usuario.driverrating.DriverRatingActivity.menorValorCO2;
+import static java.lang.String.valueOf;
 
 import com.joooonho.SelectableRoundedImageView;
 
@@ -43,11 +48,17 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    public static SharedPreferences sharedFatorCorrecao;
+    public static SharedPreferences.Editor sharedFatorCorrecaoEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_veiculo);
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+
+        sharedFatorCorrecao = getSharedPreferences(FATORPENALIZACAO_NAME, Context.MODE_PRIVATE);
+        sharedFatorCorrecaoEditor = sharedFatorCorrecao.edit();
 
         edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
         spnMarca = (Spinner) findViewById(R.id.spnMarca);
@@ -216,10 +227,14 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
                         .setMessage("Deseja tornar este perfil como padrão?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                editor = sharedPreferences.edit();
+                                /*editor = sharedPreferences.edit();
                                 editor.putLong("ID", id);
                                 editor.putFloat("FatorCorrecao", fatPenaliz);  //Nielson: 10/06/2017
-                                editor.apply();
+                                editor.apply();*/
+                                if (sharedFatorCorrecaoEditor != null) {
+                                    sharedFatorCorrecaoEditor.putString(FATORPENALIZACAO_KEY, valueOf(fatPenaliz));
+                                    sharedFatorCorrecaoEditor.commit();
+                                }
                                 Toast.makeText(PerfilVeiculoActivity.this, "Perfil selecionado como padrão!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }

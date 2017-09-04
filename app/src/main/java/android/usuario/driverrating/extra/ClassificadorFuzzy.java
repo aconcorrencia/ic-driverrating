@@ -85,7 +85,7 @@ public class ClassificadorFuzzy {
                 grauPertinAlto = (ENTRADAS.get(8) - dadosSensores) / (ENTRADAS.get(8) - ENTRADAS.get(7));
             }
 
-            if (origem.substring(0,6).equals("gerais")) {
+            if (origem.substring(0,3).equals("ger")) {
 
                 if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto) {
 

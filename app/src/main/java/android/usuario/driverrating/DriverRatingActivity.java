@@ -1,5 +1,6 @@
 package android.usuario.driverrating;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,7 @@ import java.text.DecimalFormat;
 import static android.R.attr.angle;
 import static android.R.attr.pivotX;
 import static android.R.attr.pivotY;
+import static android.R.attr.sharedUserId;
 import static android.content.Context.MODE_PRIVATE;
 import static android.usuario.driverrating.R.styleable.NavigationView;
 import static android.usuario.driverrating.R.styleable.SelectableRoundedImageView;
@@ -46,13 +48,20 @@ public class DriverRatingActivity extends AppCompatActivity
     private SharedPreferences sharedPreferences;
     public static final String JANELATEMPO_NAME = "janela_tempo";
     public static final String JANELATEMPO_KEY = "janela";
+
     public static final String TIPOCOMBUSTIVEL_NAME = "tipo_combustivel";
     public static final String TIPOCOMBUSTIVEL_KEY = "combustivel";
+
+    public static final String PERCENTUALALCOOL_NAME = "percentualalcool_name";
+    public static final String PERCENTUALALCOOL_KEY = "percentualalcool";
+
+    public static final String FATORPENALIZACAO_NAME = "fatorcorrecao_name";
+    public static final String FATORPENALIZACAO_KEY = "fatorcorrecao";
+
     public static float densityFuel = 0; //Densidade do combstível
     public static String tipoCombustivel = "1";
     public static String percentualAlcool = "0";
-    public static final String PERCENTUALALCOOL_NAME = "percentualalcool_name";
-    public static final String PERCENTUALALCOOL_KEY = "percentualalcool";
+    public static String fatorPenalizacaoCO2 = "0";
 
     //Atributos responsáveis por armazenar os resultados das classificações - Início
     public static double notaConsumoCombustivel;
@@ -92,8 +101,6 @@ public class DriverRatingActivity extends AppCompatActivity
     public static double menorValorCO2;
     public static int ultimaJanela;
     public static int ultimoLog;
-
-    public static double fatorPenalizacaoCO2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,8 +193,14 @@ public class DriverRatingActivity extends AppCompatActivity
      * Atualiza o cabeçalho do menu para o perfil padrão
      */
     public void headerReflesh() {
-        long id = sharedPreferences.getLong("ID", -1);
-        float fatorPenalizacaoCO2 = sharedPreferences.getFloat("FatorCorrecao",-1);
+        long id =  sharedPreferences.getLong("ID", -1);
+        //float fatorPenalizacaoCO2 = sharedPreferences.getFloat("FatorCorrecao",-1);
+
+        //Restaura as preferencias gravadas em fator de penalização.
+        SharedPreferences recuperaSharedPercFP = getSharedPreferences(FATORPENALIZACAO_NAME, 0);
+        fatorPenalizacaoCO2 = recuperaSharedPercFP.getString(FATORPENALIZACAO_KEY, "");
+        float fatPenaCO2 = Float.parseFloat(fatorPenalizacaoCO2);
+
         if (id != -1) {
             DataBasePerfis dataBasePerfis = new DataBasePerfis(this);
             Veiculo veiculo = dataBasePerfis.selectPerfilById(id);
@@ -195,7 +208,7 @@ public class DriverRatingActivity extends AppCompatActivity
                 txtNomePerfil.setText("Perfil: " + veiculo.getNomeUsuario());
                 txtMarca.setText("Marca: " + veiculo.getMarca().trim());
                 txtModelo.setText("Modelo: " + veiculo.getModelo().trim());
-                txtFatorPenaliz.setText("Fator de Penalização CO2: " + new DecimalFormat("0.000").format(fatorPenalizacaoCO2));
+                txtFatorPenaliz.setText("Fator de Penalização CO2: " + new DecimalFormat("0.000").format(fatPenaCO2));
 
                 if (veiculo.getFoto() == null)
                     imgPerfil.setImageResource(R.drawable.img_car2);

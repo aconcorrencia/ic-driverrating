@@ -46,6 +46,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_KEY;
+import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_NAME;
 import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_NAME;
 import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_KEY;
 import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_KEY;
@@ -56,6 +58,7 @@ import static android.usuario.driverrating.DriverRatingActivity.classificacaoAce
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoAceleracaoTransversal;
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoEmissaoCO2;
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoVelocidade;
+import static android.usuario.driverrating.DriverRatingActivity.fatorPenalizacaoCO2;
 import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoLongitudinal;
 import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoTransversal;
 import static android.usuario.driverrating.DriverRatingActivity.notaConsumoCombustivel;
@@ -153,6 +156,14 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             tvVelocVia,
             tvVelocVeic,
 
+    tvTituloAcelLong,
+            tvNotaAcelLong,
+            tvClassAcelLong,
+
+    tvTituloAcelTrans,
+            tvNotaAcelTrans,
+            tvClassAcelTrans,
+
     tvLitros,
             tvTotLitros,
             tvDistPercor,
@@ -193,15 +204,23 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         tvNotaVeloc = (TextView) findViewById(R.id.textViewNotaVeloc);
         tvClassVeloc = (TextView) findViewById(R.id.textViewClassVeloc);
 
-        tvDistPercor = (TextView) findViewById(R.id.textViewDistancia);
-        tvMediaMotorista = (TextView) findViewById(R.id.textViewMdMotorista);
-        tvNormalizCons = (TextView) findViewById(R.id.textViewNormalizCons);
-        tvLitros = (TextView) findViewById(R.id.textViewLitros);
+        tvTituloAcelLong = (TextView) findViewById(R.id.textViewTituloAcelLong);
+        tvNotaAcelLong = (TextView) findViewById(R.id.textViewNotaAcelLong);
+        tvClassAcelLong = (TextView) findViewById(R.id.textViewClassAcelLong);
+
+        tvTituloAcelTrans = (TextView) findViewById(R.id.textViewTituloAcelTrans);
+        tvNotaAcelTrans = (TextView) findViewById(R.id.textViewNotaAcelTrans);
+        tvClassAcelTrans = (TextView) findViewById(R.id.textViewClassAcelTrans);
+
+        //tvDistPercor = (TextView) findViewById(R.id.textViewDistancia);
+        //tvMediaMotorista = (TextView) findViewById(R.id.textViewMdMotorista);
+        //tvNormalizCons = (TextView) findViewById(R.id.textViewNormalizCons);
+        //tvLitros = (TextView) findViewById(R.id.textViewLitros);
         tvTotLitros = (TextView) findViewById(R.id.textViewTotLitros);
         tvVelocVia = (TextView) findViewById(R.id.textViewVelocVia);
         tvVelocVeic = (TextView) findViewById(R.id.textViewVelocVeic);
         tvNomeVia = (TextView) findViewById(R.id.textViewNomeVia);
-        tvmaf = (TextView) findViewById(R.id.textViewMaf);
+        //tvmaf = (TextView) findViewById(R.id.textViewMaf);
 
         //Em Configurações no menu principal do aplicativo, a opção Janela de Tempo deverá possuir um valor informado, caso contrário levará o valor padrão de 300s.
         //Restaura as preferencias gravadas em janela de tempo para coletar os dados dos dispositivos.
@@ -242,6 +261,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         //Envia para o classificador, os dados de saída.
         ClassificadorEntradasSaidas.SaidasParaClassificador();
 
+        //Restaura as preferencias gravadas em fator de penalização.
+        //SharedPreferences recuperaSharedPercFP = getSharedPreferences(FATORPENALIZACAO_NAME, 0);
+        //fatorPenalizacaoCO2 = recuperaSharedPercFP.getString(FATORPENALIZACAO_KEY, "");
     }
 
     /***
@@ -261,8 +283,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     protected void onStart() {
         super.onStart();
         obdReader.start();
-        gpsReader.start();
-        accReader.start(ACCReader.NORMAL);
 
         //ACCUpdate();
     }
@@ -284,6 +304,8 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         //********** Início - Consumo de Combustível **********:
 
         //Calcular litros de combustível
+        Log.w("OBD","O: "+obdinfo.getRpm());
+        Toast.makeText(this,"RPM: "+obdinfo.getRpm(),Toast.LENGTH_SHORT).show();
         litrosCombustivelConsumidos = Calculate.getFuelflow(obdinfo, cilindrada, tempoAtual - tempoAnteriorAuxiliar);
 
         //Armazena a última hora atual que será deduzida da próxima hora atual.
@@ -292,14 +314,18 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         //Totaliza a média de litros de combustíveis dentro da janela estabelecida de 300s.
         acumulaLitrosCombustivelConsumidos += litrosCombustivelConsumidos;
 
-        tvLitros.setText("Litros de Combustível: "+new DecimalFormat("0.0000").format(litrosCombustivelConsumidos)+" ml");
-        tvTotLitros.setText("Total de Litros: "+new DecimalFormat("0.0000").format(acumulaLitrosCombustivelConsumidos)+" ml");
+        if (litrosCombustivelConsumidos > 0 ) {
+            tvLitros.setText("Litros de Combustível: " + new DecimalFormat("0.0000").format(litrosCombustivelConsumidos) + " ml");
+            tvTotLitros.setText("Total de Litros: " + new DecimalFormat("0.0000").format(acumulaLitrosCombustivelConsumidos) + " ml");
+        }
 
        // float testerpm;
 
         //teste = obdinfo.getRpm();
 
-        velocidadeMotorista = obdinfo.getSpeed();
+        if (obdinfo.getSpeed() != 0) {
+            velocidadeMotorista = obdinfo.getSpeed();
+        }
 
         //********** Final - Consumo Combustível **********
     }
@@ -346,14 +372,15 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     @Override
     public void bluetoothConnected() {
         Toast.makeText(IniciarClassificacao.this, "Conectado!", Toast.LENGTH_SHORT).show();
+
+        gpsReader.start();
+        accReader.start(ACCReader.NORMAL);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void GPSupdate(GPSInfo gpsInfo) {
-        Log.w("TESTE","GPS");
-
-
+        Log.w("OBD","GPS");
 
         if (!start) {
             finish();
@@ -361,6 +388,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         //********** Início - Monitorar o tempo de 300s, para classificar e armazenar os dados adquiridos **********
         Date hora = new Date();
         if (tempoAnterior == 0.0) {
+            Log.w("OBD","TEMPO = 0");
             //Guarda o último tempo.
             tempoAnterior = (int) hora.getTime();
             tempoAnteriorAuxiliar = tempoAnterior;
@@ -368,6 +396,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             lastGPSInfo = gpsInfo;
 
         } else {
+            Log.w("OBD","TEMPO != 0");
             //Guarda o tempo atual.
             tempoAtual = (int) hora.getTime();
             //Os dois atributos abaixo são utilizados para medir a distância percorrida.
@@ -384,7 +413,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
             //Acumula a distância percorrida entre a última leitura e a atual.
             distanciaPercorrida += lastLocation.distanceTo(currentLocation);
-            tvDistPercor.setText("Distância Percorrida: " + new DecimalFormat("0.00").format(distanciaPercorrida) + " metros");
+            //tvDistPercor.setText("Distância Percorrida: " + new DecimalFormat("0.00").format(distanciaPercorrida) + " metros");
 
             // A cada change do GPS, a última localizaçãopassa a ser a atual. Recomeçando o ciclo novamente.
             lastGPSInfo = gpsInfo;
@@ -459,12 +488,18 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                     TratarVariaveisDimensoesClassificar.ClassificarAceleracaoLongitudinal(acclongitudinal);
                     notaAceleracaoLongitudinal  = ClassificadorFuzzy.nota;
                     classificacaoAceleracaoLongitudinal = ClassificadorFuzzy.classe;
+
+                    tvNotaAcelLong.setText("Nota: "+new DecimalFormat("0.00").format(notaAceleracaoLongitudinal));
+                    tvClassAcelLong.setText("Classificação: "+classificacaoAceleracaoLongitudinal);
                 }
 
                 if (acctransversal != 0) {
                     TratarVariaveisDimensoesClassificar.ClassificarAceleracaoTransversal(acctransversal);
                     notaAceleracaoTransversal  = ClassificadorFuzzy.nota;
                     classificacaoAceleracaoTransversal = ClassificadorFuzzy.classe;
+
+                    tvNotaAcelTrans.setText("Nota: "+new DecimalFormat("0.00").format(notaAceleracaoTransversal));
+                    tvClassAcelTrans.setText("Classificação: "+classificacaoAceleracaoTransversal);
                 }
 
                 // Controlador de número de janela.
@@ -586,11 +621,11 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     public void btnEncerrarColetar(View view) {
         // Encerra a coleta de dados nos dispositivos.
         start = false;
-        /*Toast.makeText(IniciarClassificacao.this, "Classificação Geral", Toast.LENGTH_SHORT).show();
+        Toast.makeText(IniciarClassificacao.this, "Classificação Geral", Toast.LENGTH_SHORT).show();
 
         // Retorna para a tela anterior.
-        finish();*/
-        obdReader.read(OBDInfo.RPM);
+        finish();
+
     }
 
     // Será utilizado a base de dados para armazenamento dos logs de classificação.

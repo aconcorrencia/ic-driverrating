@@ -12,14 +12,14 @@
 
         <TextView
             android:id="@+id/tvTituloCons"
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:text="CONSUMO DE COMBUSTÍVEL"
             android:textColor="@color/wallet_link_text_light"
-            android:textStyle="bold"
             android:textSize="16dp"
-            android:text="CONSUMO DE COMBUSTÍVEL" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -152,7 +152,7 @@
         android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tvTituloAccLong"
+            android:id="@+id/tvTituloAcelLong"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -199,7 +199,7 @@
         android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tvTituloAccTrans"
+            android:id="@+id/tvTituloAcelTrans"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
