@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.usuario.driverrating.database.DataBaseDriverRating;
 import android.usuario.driverrating.database.DataBasePerfis;
 import android.usuario.driverrating.domain.Veiculo;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,8 +46,7 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     private Veiculo veiculo;
     private DataBaseDriverRating dataBaseDriverRating;
     private SelectableRoundedImageView imgPerfil;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+
 
     public static SharedPreferences sharedFatorCorrecao;
     public static SharedPreferences.Editor sharedFatorCorrecaoEditor;
@@ -55,7 +55,6 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_veiculo);
-        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
 
         sharedFatorCorrecao = getSharedPreferences(FATORPENALIZACAO_NAME, Context.MODE_PRIVATE);
         sharedFatorCorrecaoEditor = sharedFatorCorrecao.edit();

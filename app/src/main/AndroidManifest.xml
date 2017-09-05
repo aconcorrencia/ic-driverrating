@@ -15,6 +15,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+
+    <permission
+        android:name="android.usuario.driverrating.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.usuario.driverrating.permission.MAPS_RECEIVE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +33,7 @@
         <activity
             android:name=".DriverRatingActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,13 +41,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PerfilVeiculoActivity" />
-        <activity android:name=".IniciarClassificacao" />
+        <activity
+            android:name=".PerfilVeiculoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IniciarClassificacao"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListarPerfis"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProcurarActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -47,16 +63,28 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
+
+
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
+
 
         <activity
             android:name=".GPS.MapsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_maps" />
         <activity android:name=".JanelaTempo" />
-        <activity android:name=".TipoCombustivel" />
-        <activity android:name=".ResultadosClassificacao"></activity>
+        <activity
+            android:name=".TipoCombustivel"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".ResultadosClassificacao"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

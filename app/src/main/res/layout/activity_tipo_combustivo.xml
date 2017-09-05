@@ -1,89 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <TextView
-        android:id="@+id/textViewInforme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:text="Tipo de Combustível:"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"/>
-
-
-
-    <RadioGroup
-        android:id="@+id/rgopcoes"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <RadioButton
-            android:id="@+id/rbGasolina"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gasolina"
-            android:layout_marginTop="20dp"/>
-
-        <RadioButton
-            android:id="@+id/rbDiesel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Diesel"
-            android:layout_marginTop="10dp"/>
-
-        <RadioButton
-            android:id="@+id/rbFlex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Flex"
-            android:layout_marginTop="10dp"/>
-
-    </RadioGroup>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Percentual de Álcool (Flex): " />
-
-    <EditText
-        android:id="@+id/edtPercentAlcool"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-
-        android:inputType="textPersonName"
-        android:text="" />
-    <TextView
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="%" />
-</LinearLayout>
-
-
-    <Space
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/app_toolbar"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewInforme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:text="Tipo de Combustível:"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp" />
+
+
+        <RadioGroup
+            android:id="@+id/rgopcoes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <RadioButton
+                android:id="@+id/rbGasolina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Gasolina" />
+
+            <RadioButton
+                android:id="@+id/rbDiesel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Diesel" />
+
+            <RadioButton
+                android:id="@+id/rbFlex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Flex" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Percentual de Álcool (Flex): " />
+
+            <EditText
+                android:id="@+id/edtPercentAlcool"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="%" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnRetornar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:layout_weight="0.04"
         android:background="@color/colorPrimary"
         android:onClick="btnRetornar"
-        android:text="Retornar"
-        android:textColor="@color/white"/>
+        android:text="OK"
+        android:textColor="@color/white" />
 
-</LinearLayout>
+</RelativeLayout>

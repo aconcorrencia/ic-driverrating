@@ -13,7 +13,7 @@ public class DadosColetadosSensores {
     private float distanciaPercorrida;
     private float litrosCombustivel;
     private float notaVelocidade;
-    private String tipoCombustivel;
+    private int tipoCombustivel;
 
     public int getId() {
         return id;
@@ -55,11 +55,11 @@ public class DadosColetadosSensores {
         this.notaVelocidade = notaVelocidade;
     }
 
-    public String getTipoCombustivel() {
+    public int getTipoCombustivel() {
         return tipoCombustivel;
     }
 
-    public void setTipoCombustivel(String tipoCombustivel) {
+    public void setTipoCombustivel(int tipoCombustivel) {
         this.tipoCombustivel = tipoCombustivel;
     }
 

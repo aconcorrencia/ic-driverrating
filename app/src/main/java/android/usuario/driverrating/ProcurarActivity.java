@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +47,7 @@ public class ProcurarActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
         pairedListView = (ListView) findViewById(R.id.paired_devices);
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
         accessLocationPermission();
@@ -103,8 +104,8 @@ public class ProcurarActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
             setResult(Activity.RESULT_OK, intent);
             editor = sharedPreferences.edit();
-            editor.putString("nameDevice", name);
-            editor.putString("addressDevice", address);
+            editor.putString(SharedPreferencesKeys.NAME_DEVICE, name);
+            editor.putString(SharedPreferencesKeys.ADDRESS_DEVICE, address);
             editor.apply();
             Toast.makeText(ProcurarActivity.this, "Dispositivo " + name + " selecionado!", Toast.LENGTH_LONG).show();
             finish();

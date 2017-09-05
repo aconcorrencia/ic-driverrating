@@ -1,27 +1,30 @@
 package android.usuario.driverrating;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
+import android.usuario.driverrating.extra.Utils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-
-import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_NAME;
 import static java.lang.String.valueOf;
 
+/**
+ * Define o tipo de Combustivel e o Percentual de Álcool
+ * Valores Default:
+ *          Tipo de Combustivel: Gasolina
+ *          Percentual de Álcool: 25%
+ *
+ */
 public class TipoCombustivel extends AppCompatActivity {
 
-    public static SharedPreferences sharedTipoCombustivel;
-    public static SharedPreferences.Editor sharedTipoCombustivelEditor;
-    public static SharedPreferences sharedPercentualAlcool;
-    public static SharedPreferences.Editor sharedPercentualAlcoolEditor;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
-    private String tipoCombustivel;
+    private int tipoCombustivel;
     private int op;
 
     EditText edtPercentualAlcool;
@@ -32,64 +35,61 @@ public class TipoCombustivel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tipo_combustivo);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setSubtitle("Tipo de Combustível");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         rgOpcoes = (RadioGroup) findViewById(R.id.rgopcoes);
-
-        sharedTipoCombustivel = getSharedPreferences(TIPOCOMBUSTIVEL_NAME, MODE_PRIVATE);
-        sharedTipoCombustivelEditor = sharedTipoCombustivel.edit();
-
-        String tipoCombustivelExtenso = sharedTipoCombustivel.getString(TIPOCOMBUSTIVEL_KEY, "").toUpperCase();
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgopcoes);
-        if (tipoCombustivelExtenso.equals("GASOLINA")) {
-            radioGroup.check(R.id.rbGasolina);
-        } else if (tipoCombustivelExtenso.equals("DIESEL")) {
-            radioGroup.check(R.id.rbDiesel);
-        } else if (tipoCombustivelExtenso.equals("FLEX")) {
-            radioGroup.check(R.id.rbFlex);
-        }
-
         edtPercentualAlcool = (EditText) findViewById(R.id.edtPercentAlcool);
 
-        sharedPercentualAlcool = getSharedPreferences(PERCENTUALALCOOL_NAME, MODE_PRIVATE);
-        sharedPercentualAlcoolEditor = sharedPercentualAlcool.edit();
+        sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
+        int tipoCombustivelExtenso = sharedPreferences.getInt(SharedPreferencesKeys.TIPO_COMBUSTIVEL, Utils.GASOLINA);
 
-        String percentualalcool = sharedPercentualAlcool.getString(PERCENTUALALCOOL_KEY, "");
+        if (tipoCombustivelExtenso == Utils.GASOLINA) {
+            rgOpcoes.check(R.id.rbGasolina);
+        } else if (tipoCombustivelExtenso == Utils.DIESEL) {
+            rgOpcoes.check(R.id.rbDiesel);
+        } else if (tipoCombustivelExtenso == Utils.FLEX) {
+            rgOpcoes.check(R.id.rbFlex);
+        }
 
-        if (percentualalcool != "") {
-            edtPercentualAlcool.setText(percentualalcool);
-        }
-        else{
-            edtPercentualAlcool.setText("25");
-        }
+        int percentual_alcool = sharedPreferences.getInt(SharedPreferencesKeys.PERCENTUAL_ALCOOL, 25);
+
+        edtPercentualAlcool.setText(valueOf(percentual_alcool));
+
     }
 
-    //Guardar o tipo de combustível
-    protected void onDestroy() {
-        super.onDestroy();
-        if (sharedTipoCombustivelEditor != null) {
-            sharedTipoCombustivelEditor.putString(TIPOCOMBUSTIVEL_KEY, valueOf(tipoCombustivel));
-            sharedTipoCombustivelEditor.commit();
-        }
-
-        if (sharedPercentualAlcoolEditor != null) {
-            sharedPercentualAlcoolEditor.putString(PERCENTUALALCOOL_KEY, valueOf(edtPercentualAlcool.getText()));
-            sharedPercentualAlcoolEditor.commit();
-        }
-    }
-
+    /**
+     * Guardar o tipo de combustível
+     */
     public void btnRetornar(View view) {
-        RadioGroup rg = (RadioGroup) findViewById(R.id.rgopcoes);
+        int perc_alcool = Integer.parseInt(edtPercentualAlcool.getText().toString());
+        op = rgOpcoes.getCheckedRadioButtonId();
 
-        op = rg.getCheckedRadioButtonId();
+        if (op == R.id.rbGasolina)
+            tipoCombustivel = Utils.GASOLINA;
+        else if (op == R.id.rbDiesel)
+            tipoCombustivel = Utils.DIESEL;
+        else if (op == R.id.rbFlex)
+            tipoCombustivel = Utils.FLEX;
 
-        if(op==R.id.rbGasolina)
-            tipoCombustivel = "GASOLINA";
-        else
-        if(op==R.id.rbDiesel)
-            tipoCombustivel = "DIESEL";
-        else
-        if(op==R.id.rbFlex)
-            tipoCombustivel = "FLEX";
-
+        editor = sharedPreferences.edit();
+        editor.putInt(SharedPreferencesKeys.PERCENTUAL_ALCOOL,perc_alcool);
+        editor.putInt(SharedPreferencesKeys.TIPO_COMBUSTIVEL,tipoCombustivel);
+        editor.apply();
         finish();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

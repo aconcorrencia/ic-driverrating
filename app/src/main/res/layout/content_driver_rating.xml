@@ -5,87 +5,184 @@
     android:id="@+id/content_driver_rating"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#D3D3D3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="android.usuario.driverrating.DriverRatingActivity"
-    tools:showIn="@layout/app_bar_driver_rating"
-    android:background="#D3D3D3">
+    tools:showIn="@layout/app_bar_driver_rating">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:visibility="gone"
-    android:background="#000">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Instruções de Uso"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"/>
-    <TextView
-        android:id="@+id/textView4d"
-        android:layout_width="wrap_content"
+        android:background="#000"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Instruções de Uso"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView4d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="28dp"
+            android:text="1 - Conectar o scanner OBD ao veículo;"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView4dfg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView4d"
+            android:layout_alignStart="@+id/textView4d"
+            android:layout_below="@+id/textView4d"
+            android:layout_marginTop="14dp"
+            android:text="2 - Criar um perfil do seu veículo através do menu ao lado e colocar como padrão;"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView4ddf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView4dfg"
+            android:layout_alignStart="@+id/textView4dfg"
+            android:layout_below="@+id/textView4dfg"
+            android:layout_marginTop="14dp"
+            android:text="3 - Selecionar o dispositivo OBD através da configuração do Bluetooth no menu ao lado;"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textVidsew4ddf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView4ddf"
+            android:layout_alignStart="@+id/textView4ddf"
+            android:layout_below="@+id/textView4ddf"
+            android:layout_marginTop="16dp"
+            android:text="4 - Clicar no botão abaixo: 'Iniciar Classificação'"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyChecar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
-        android:text="1 - Conectar o scanner OBD ao veículo;"
-        android:textColor="@color/white"/>
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/textView4dfg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="2 - Criar um perfil do seu veículo através do menu ao lado e colocar como padrão;"
-        android:textColor="@color/white"
-        android:layout_below="@+id/textView4d"
-        android:layout_alignLeft="@+id/textView4d"
-        android:layout_alignStart="@+id/textView4d" />
+        <LinearLayout
 
-    <TextView
-        android:id="@+id/textView4ddf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="3 - Selecionar o dispositivo OBD através da configuração do Bluetooth no menu ao lado;"
-        android:textColor="@color/white"
-        android:layout_below="@+id/textView4dfg"
-        android:layout_alignLeft="@+id/textView4dfg"
-        android:layout_alignStart="@+id/textView4dfg" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/textVidsew4ddf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="4 - Clicar no botão abaixo: 'Iniciar Classificação'"
-        android:textColor="@color/white"
-        android:layout_below="@+id/textView4ddf"
-        android:layout_alignLeft="@+id/textView4ddf"
-        android:layout_alignStart="@+id/textView4ddf" />
+            android:orientation="vertical">
 
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
-    <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:text="Dispositivo OBD:" />
+
+                <ImageView
+                    android:id="@+id/imgCheckDispObd"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_ok" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:text="Perfil:" />
+
+                <ImageView
+                    android:id="@+id/imgCheckPerfil"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_ok" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtJanela"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="Janela de Tempo: 5s" />
+
+            <TextView
+                android:id="@+id/txtTipoComb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="Tipo de Combustível: Gasolina" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_eng"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/btnIniciarClassificacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:background="@color/colorPrimary"
-        android:onClick="btnIniciarClassificacao"
-        android:text="Iniciar Classificação"
-        android:textColor="@color/white" />
+        android:layout_below="@id/lyChecar"
+        android:layout_margin="5dp"
+        android:background="@drawable/bg_card">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/icon_rating" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:text="Iniciar Classificação"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

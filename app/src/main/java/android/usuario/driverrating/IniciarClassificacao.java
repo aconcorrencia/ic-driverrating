@@ -8,6 +8,8 @@ import android.location.Location;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Build;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
+import android.usuario.driverrating.extra.Utils;
 import android.util.Log;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -38,22 +40,29 @@ import android.usuario.driverrating.extra.ClassificadorEntradasSaidas;
 import android.usuario.driverrating.extra.ClassificadorFuzzy;
 import android.usuario.driverrating.extra.TratarVariaveisDimensoesClassificar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.JANELATEMPO_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.PERCENTUALALCOOL_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.TIPOCOMBUSTIVEL_KEY;
+
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoAceleracaoLongitudinal;
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoAceleracaoTransversal;
 import static android.usuario.driverrating.DriverRatingActivity.classificacaoEmissaoCO2;
@@ -66,23 +75,29 @@ import static android.usuario.driverrating.DriverRatingActivity.classificacaoCon
 import static android.usuario.driverrating.DriverRatingActivity.notaEmissaoCO2;
 import static android.usuario.driverrating.DriverRatingActivity.notaVelocidade;
 import static android.usuario.driverrating.DriverRatingActivity.tipoCombustivel;
-import static android.usuario.driverrating.DriverRatingActivity.percentualAlcool;
 import static android.usuario.driverrating.DriverRatingActivity.ultimoLog;
 import static android.usuario.driverrating.DriverRatingActivity.ultimaJanela;
 import static android.usuario.driverrating.extra.ClassificadorEntradasSaidas.EntradasParaVelocidade;
+import static android.usuario.driverrating.extra.SharedPreferencesKeys.JANELA_TEMPO;
 
 /**
  * Created by Sillas and Nielson on 24/04/2017.
  */
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class IniciarClassificacao extends AppCompatActivity implements IOBDBluetooth, IGPSReader, IOverpassReader{
+public class IniciarClassificacao extends AppCompatActivity implements IOBDBluetooth, IGPSReader, IOverpassReader,OnMapReadyCallback {
 
     private Veiculo veiculo;
     private DadosColetadosSensores dadosColetadosSensores;
     private long idPerfil;
     private Float cilindrada;
     private SharedPreferences sharedPreferences;
+
+    private ImageView tvImage;
+    private GoogleMap mMap;
+    private Marker marker = null;
+
+    private int percentualAlcool;
 
     //Leitura das classe responsáveis por acessar os dispositivos: OBD e GPS e também ler dados disponibilizados.
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -178,9 +193,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
         btnEncerrarColetar = (Button) findViewById(R.id.btnEncerrarColetar);
 
-        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        idPerfil = sharedPreferences.getLong("ID", -1);
-        String mac = sharedPreferences.getString("addressDevice", "");
+        sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
+        idPerfil = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
+        String mac = sharedPreferences.getString(SharedPreferencesKeys.ADDRESS_DEVICE, "");
 
         DataBasePerfis dataBasePerfis = new DataBasePerfis(this);
         veiculo = dataBasePerfis.selectPerfilById(idPerfil);
@@ -191,6 +206,51 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         overpassReader = new OverpassReader(this);
         accReader = new ACCReader(this);
 
+        tvImage = (ImageView) findViewById(R.id.tvImage);
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        tvImage.startAnimation(rotation);
+
+        setupTextViews();
+
+        //Em Configurações no menu principal do aplicativo, a opção Janela de Tempo deverá possuir um valor informado, caso contrário levará o valor padrão de 300s.
+        //Restaura as preferencias gravadas em janela de tempo para coletar os dados dos dispositivos.
+        janelaTempo = sharedPreferences.getInt(SharedPreferencesKeys.JANELA_TEMPO, 300);
+
+        /*//Verifica se o usuário não informou o valor da janela de tempo em segundos, então o aplicativo assume o valor de 300 segundos.
+        if (janelaTempo == 0) {
+            janelaTempo = 300;
+        }*/
+
+        //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
+        tipoCombustivel = sharedPreferences.getInt(SharedPreferencesKeys.TIPO_COMBUSTIVEL,Utils.GASOLINA);
+
+        if (tipoCombustivel == Utils.FLEX) {
+            //Caso o tipo de combustível seja FLEX, deduz da quantidade de CO2 emitido pelo motorista o percentual de etanol.
+            //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
+            percentualAlcool = sharedPreferences.getInt(SharedPreferencesKeys.PERCENTUAL_ALCOOL, 25);
+        }
+
+        //Persiste na tabela de Logs da classificação. Gravando a Data e a Hora da Classificação.
+        PersistirLog();
+
+        //Buscar o id do log atual.
+        DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(this);
+        ultimoLog  = dataBaseLogClassificacao.selectUltimoLog(idPerfil);
+
+        dadosPercViag.clear();
+
+        //Envia para o classificador, os dados de saída.
+        ClassificadorEntradasSaidas.SaidasParaClassificador();
+
+        //Restaura as preferencias gravadas em fator de penalização.
+        //SharedPreferences recuperaSharedPercFP = getSharedPreferences(FATORPENALIZACAO_NAME, 0);
+        //fatorPenalizacaoCO2 = recuperaSharedPercFP.getString(FATORPENALIZACAO_KEY, "");
+
+
+    }
+
+    public void setupTextViews(){
         tvTituloCons = (TextView) findViewById(R.id.textViewTituloCons);
         tvNotaCons = (TextView) findViewById(R.id.textViewNotaCons);
         tvClassCons = (TextView) findViewById(R.id.textViewClassCons);
@@ -221,49 +281,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         tvVelocVeic = (TextView) findViewById(R.id.textViewVelocVeic);
         tvNomeVia = (TextView) findViewById(R.id.textViewNomeVia);
         //tvmaf = (TextView) findViewById(R.id.textViewMaf);
-
-        //Em Configurações no menu principal do aplicativo, a opção Janela de Tempo deverá possuir um valor informado, caso contrário levará o valor padrão de 300s.
-        //Restaura as preferencias gravadas em janela de tempo para coletar os dados dos dispositivos.
-        SharedPreferences recuperaSharedJT = getSharedPreferences(JANELATEMPO_NAME, 0);
-        janelaTempo = Integer.parseInt(recuperaSharedJT.getString(JANELATEMPO_KEY, ""));
-
-        //Verifica se o usuário não informou o valor da janela de tempo em segundos, então o aplicativo assume o valor de 300 segundos.
-        if (janelaTempo == 0) {
-            janelaTempo = 300;
-        }
-
-        //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
-        SharedPreferences recuperaSharedTC = getSharedPreferences(TIPOCOMBUSTIVEL_NAME, 0);
-        String tipoCombustivelExtenso = recuperaSharedTC.getString(TIPOCOMBUSTIVEL_KEY, "").toUpperCase();
-
-        if (tipoCombustivelExtenso.equals("GASOLINA")) {
-            tipoCombustivel = "1";
-        } else if (tipoCombustivelExtenso.equals("DIESEL")) {
-            tipoCombustivel = "2";
-        } else if (tipoCombustivelExtenso.equals("FLEX")) {
-            tipoCombustivel = "3";
-            //Caso o tipo de combustível seja FLEX, deduz da quantidade de CO2 emitido pelo motorista o percentual de etanol.
-
-            //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
-            SharedPreferences recuperaSharedPercAlc = getSharedPreferences(PERCENTUALALCOOL_NAME, 0);
-            percentualAlcool = recuperaSharedPercAlc.getString(PERCENTUALALCOOL_KEY, "");
-        }
-
-        //Persiste na tabela de Logs da classificação. Gravando a Data e a Hora da Classificação.
-        PersistirLog();
-
-        //Buscar o id do log atual.
-        DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(this);
-        ultimoLog  = dataBaseLogClassificacao.selectUltimoLog(idPerfil);
-
-        dadosPercViag.clear();
-
-        //Envia para o classificador, os dados de saída.
-        ClassificadorEntradasSaidas.SaidasParaClassificador();
-
-        //Restaura as preferencias gravadas em fator de penalização.
-        //SharedPreferences recuperaSharedPercFP = getSharedPreferences(FATORPENALIZACAO_NAME, 0);
-        //fatorPenalizacaoCO2 = recuperaSharedPercFP.getString(FATORPENALIZACAO_KEY, "");
     }
 
     /***
@@ -295,17 +312,17 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         accReader.stop();
     }
 
+    /**
+     * Através do presente método "obdUpdate", será colhido e classificados dados de diversos sensores do dispositivo OBD,
+     * referentes às seguintes variáveis (dimensões): Consumo de combustível e a Emissão do gás Óxido de carbono (CO2).
+     * @param obdinfo
+     */
     @Override
     public void obdUpdate(OBDInfo obdinfo) {
-
-        //Através do presente método "obdUpdate", será colhido e classificados dados de diversos sensores do dispositivo OBD,
-        //referentes às seguintes variáveis (dimensões): Consumo de combustível e a Emissão do gás Óxido de carbono (CO2).
 
         //********** Início - Consumo de Combustível **********:
 
         //Calcular litros de combustível
-        Log.w("OBD","O: "+obdinfo.getRpm());
-        Toast.makeText(this,"RPM: "+obdinfo.getRpm(),Toast.LENGTH_SHORT).show();
         litrosCombustivelConsumidos = Calculate.getFuelflow(obdinfo, cilindrada, tempoAtual - tempoAnteriorAuxiliar);
 
         //Armazena a última hora atual que será deduzida da próxima hora atual.
@@ -355,7 +372,14 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     @Override
     public void errorConnectBluetooth() {
         Toast.makeText(IniciarClassificacao.this, "Erro ao conectar!", Toast.LENGTH_SHORT).show();
-        finish();
+        gpsReader.start();
+        accReader.start(ACCReader.NORMAL);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        findViewById(R.id.lyAnimation).setVisibility(View.GONE);
+        findViewById(R.id.lyMain).setVisibility(View.VISIBLE);
+        //finish();
     }
 
     @Override
@@ -366,7 +390,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
     @Override
     public void connectingBluetooth() {
-        Toast.makeText(IniciarClassificacao.this, "Conectando...", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -375,17 +399,30 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
         gpsReader.start();
         accReader.start(ACCReader.NORMAL);
-    }
 
+    }
+    private boolean flag = true;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void GPSupdate(GPSInfo gpsInfo) {
         Log.w("OBD","GPS");
+        Toast.makeText(this,"GPS: "+gpsInfo.getAltitude(),Toast.LENGTH_SHORT).show();
+        marker.setVisible(true);
+        LatLng myLocation;
+        myLocation = new LatLng(gpsInfo.getLatitude(), gpsInfo.getLongitude());
+        marker.setPosition(myLocation);
+        if (flag) {
+            flag = false;
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15.f));
+        } else {
+            CameraPosition cam = mMap.getCameraPosition();
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, cam.zoom));
+        }
 
-        if (!start) {
+/*        if (!start) {
             finish();
         }
-        //********** Início - Monitorar o tempo de 300s, para classificar e armazenar os dados adquiridos **********
+        /*//********** Início - Monitorar o tempo de 300s, para classificar e armazenar os dados adquiridos **********
         Date hora = new Date();
         if (tempoAnterior == 0.0) {
             Log.w("OBD","TEMPO = 0");
@@ -418,7 +455,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             // A cada change do GPS, a última localizaçãopassa a ser a atual. Recomeçando o ciclo novamente.
             lastGPSInfo = gpsInfo;
 
-          /*
+          *//*
             Recupera as coordenadas, em um raio de 10m.
 
             Nessa etapa de classificação dos motoristas através da variável (dimensão) Velocidade, será executada da seguinte
@@ -426,7 +463,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             atual do motorista e da velocidade máxima da via onde o veículo está trafegando naquele momento. A nota será atualizada
             toda vez que o Classificador Fuzzy enviar uma nota inferior. O propósito é obter a nota mais baixa do motorista naquela
             viagem (percurso), pois, existe a possibilidade do motorista por conta da velocidade excessíva cometer um acidente.
-           */
+           *//*
             overpassReader.read(gpsInfo.getLatitude(), gpsInfo.getLongitude(), 10);
 
             if (velocidadeMaximaDaVia != 0) {
@@ -462,9 +499,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                 DataBaseColetadosSensores dataBaseColetadosSensores = new DataBaseColetadosSensores(IniciarClassificacao.this);
                 dadosColetadosSensores = dataBaseColetadosSensores.selectPerfilById(idPerfil);
 
-                /** Abaixo faz-se uma verificação do acumulo de combustível, caso o mesmo seja diferente de o, a classificação de duas varíaveis,
+                *//** Abaixo faz-se uma verificação do acumulo de combustível, caso o mesmo seja diferente de o, a classificação de duas varíaveis,
                  *  Consumo de Combustível e Emissão de CO2 serão calculados.
-                 */
+                 *//*
                 if (acumulaLitrosCombustivelConsumidos != 0.0) {
 
                     TratarVariaveisDimensoesClassificar.ClassificarConsumoDeCombustivel(dadosColetadosSensores, veiculo);
@@ -517,9 +554,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                 //Persiste os resultados das classificações a cada janela, com a identificação de percurso.
                 PersistirClassificacoesMotorista();
 
-                /** Persiste as coordenadas do percurso da janela atual. Deve ser feita após a persistencia
+                *//** Persiste as coordenadas do percurso da janela atual. Deve ser feita após a persistencia
                  *  da classificação do motorista, pois, é necessário aguardar número atual da janela.
-                 */
+                 *//*
 
                 PersistirPercursosViagem();
 
@@ -542,10 +579,10 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
                 acctransversal = 0;
 
                 dadosPercViag.clear();
-                //*********************
+                /*//*********************
             }
         }
-        //********** Final - Monitoramento de Janela de Tempo **********
+        /*//********** Final - Monitoramento de Janela de Tempo ***********/
     }
 
     private void ClassificarVelocidadeParcial() {
@@ -642,4 +679,27 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         dataBaseLogClassificacao.inserirDadosLogClassificacao(dadosLogClassificacao);
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        Toast.makeText(this,"onMapReady",Toast.LENGTH_SHORT).show();
+        mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        // desabilita mapas indoor e 3D
+        mMap.setIndoorEnabled(false);
+        mMap.setBuildingsEnabled(false);
+        // Configura elementos da interface gráfica
+        UiSettings mapUI = mMap.getUiSettings();
+        // habilita: pan, zoom, tilt, rotate
+        mapUI.setAllGesturesEnabled(true);
+        // habilita norte
+        mapUI.setCompassEnabled(true);
+        // habilita controle do zoom
+        mapUI.setZoomControlsEnabled(true);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(0, 0));
+        markerOptions.title("Minha Localização");
+        marker = mMap.addMarker(markerOptions);
+        marker.setVisible(false);
+    }
 }

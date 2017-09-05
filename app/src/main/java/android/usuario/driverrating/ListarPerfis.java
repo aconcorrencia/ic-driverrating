@@ -13,6 +13,7 @@ import android.usuario.driverrating.adapter.ListViewAdapter;
 import android.usuario.driverrating.adapter.RecyclerViewOnClickListenerHack;
 import android.usuario.driverrating.database.DataBasePerfis;
 import android.usuario.driverrating.domain.Veiculo;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -40,8 +41,8 @@ public class ListarPerfis extends AppCompatActivity implements RecyclerViewOnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        idPadrao = sharedPreferences.getLong("ID", -1);
+        sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
+        idPadrao = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
@@ -69,7 +70,7 @@ public class ListarPerfis extends AppCompatActivity implements RecyclerViewOnCli
     @Override
     protected void onResume() {
         super.onResume();
-        idPadrao = sharedPreferences.getLong("ID", -1);
+        idPadrao = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
         adapter.setIdPadrao(idPadrao);
         mVeiculos = dataBasePerfis.selectAll();
         adapter.swap(mVeiculos);
@@ -78,7 +79,7 @@ public class ListarPerfis extends AppCompatActivity implements RecyclerViewOnCli
     @Override
     public void onClickListener(View view, int position) {
         editor = sharedPreferences.edit();
-        editor.putLong("ID", mVeiculos.get(position).getId());
+        editor.putLong(SharedPreferencesKeys.ID_USER, mVeiculos.get(position).getId());
         editor.apply();
         Toast.makeText(ListarPerfis.this, "Perfil selecionado!", Toast.LENGTH_SHORT).show();
         finish();
@@ -98,7 +99,7 @@ public class ListarPerfis extends AppCompatActivity implements RecyclerViewOnCli
                     public void onClick(DialogInterface dialog, int which) {
                         if (idPadrao == mVeiculos.get(position).getId()) {
                             editor = sharedPreferences.edit();
-                            editor.putLong("ID", -1);
+                            editor.putLong(SharedPreferencesKeys.ID_USER, -1);
                             editor.apply();
                         }
                         dataBasePerfis.deletaPerfil(mVeiculos.get(position).getId());

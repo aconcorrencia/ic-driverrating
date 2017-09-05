@@ -9,7 +9,7 @@ import android.usuario.driverrating.domain.Veiculo;
 
 import static android.usuario.driverrating.DriverRatingActivity.densityFuel;
 import static android.usuario.driverrating.DriverRatingActivity.fatorPenalizacaoCO2;
-import static android.usuario.driverrating.DriverRatingActivity.percentualAlcool;
+
 
 /**
  * Created by NIELSON on 27/05/2017.
@@ -27,15 +27,15 @@ public class TratarVariaveisDimensoesClassificar{
 
         // Analisa qual o tipo de combustível informado pelo perfil do motorista a ser classificado.
         Double mediaCombustivelFabricante = 0.0;
-        if ((dadosColetadosSensores.getTipoCombustivel().equals("1")) || (dadosColetadosSensores.getTipoCombustivel().equals("3"))){
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
             mediaCombustivelFabricante = veiculo.getGasolinaCidade();
-        }else if (dadosColetadosSensores.getTipoCombustivel().equals("2")){
+        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
             mediaCombustivelFabricante = veiculo.getEtanolCidade();
         }
 
-        if ((dadosColetadosSensores.getTipoCombustivel().equals("1")) || (dadosColetadosSensores.getTipoCombustivel().equals("3"))){
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
             densityFuel = 750; //Gasolina
-        }else if (dadosColetadosSensores.getTipoCombustivel().equals("2")){
+        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
             densityFuel = 820; //Diesel
         }
 
@@ -98,9 +98,9 @@ public class TratarVariaveisDimensoesClassificar{
          */
 
         //Tipo de Combustível Gasolina ou Flex
-        if ( (dadosColetadosSensores.getTipoCombustivel().equals("1")) || (dadosColetadosSensores.getTipoCombustivel().equals("3"))){
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
             somaCarbonoOxigenio = 2392; //consistem em 87% de carbono (652g)+  1740 gramas de oxigénio.
-        }else if (dadosColetadosSensores.getTipoCombustivel().equals("2")){
+        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
             somaCarbonoOxigenio = 2627; //consistem em 86,2% de carbono (707g) + 1920 gramas de oxigénio.
         }
 
@@ -117,7 +117,7 @@ public class TratarVariaveisDimensoesClassificar{
             EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
         }*/
 
-        EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
+        //EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
 
         //Envia os dois parâmetros para a classe classificadorFuzzy. Parâmetro1: indica a variável: "ÓXIDO DE CARBONO", Parâmetro 2: indica o co2 normalizado.
         double NCCO2 =  EmissaoCO2Fabricante / EmissaoCO2Motorista;

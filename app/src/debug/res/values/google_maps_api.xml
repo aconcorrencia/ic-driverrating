@@ -7,7 +7,7 @@
     https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=51:1E:9D:63:43:EB:DE:1C:CA:6B:53:AA:68:7D:A6:17:81:CB:9D:A1%3Bandroid.usuario.driverrating
 
     You can also add your credentials to an existing key, using this line:
-    51:1E:9D:63:43:EB:DE:1C:CA:6B:53:AA:68:7D:A6:17:81:CB:9D:A1;android.usuario.driverrating
+    99:6B:8E:D9:3A:AD:C5:C5:9F:98:3D:F9:E6:7B:42:92:8D:89:0F:BB;android.usuario.driverrating
 
     Alternatively, follow the directions here:
     https://developers.google.com/maps/documentation/android/start#get-key
@@ -17,5 +17,5 @@
     -->
     <string name="google_maps_key"
         templateMergeStrategy="preserve"
-        translatable="false">AIzaSyAAQuUToMnbymTZEhqR8pnXYDCbH5cBvbM</string>
+        translatable="false">AIzaSyB8tGKp39paII6sDmY4x6ZgMwechL81s74</string>
 </resources>

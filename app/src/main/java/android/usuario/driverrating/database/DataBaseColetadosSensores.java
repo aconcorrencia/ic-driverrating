@@ -83,7 +83,7 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
                 ds.setDistanciaPercorrida(cursor.getFloat(2));
                 ds.setLitrosCombustivel(cursor.getFloat(3));
                 ds.setNotaVelocidade (cursor.getFloat(4));
-                ds.setTipoCombustivel(cursor.getString(5));
+                ds.setTipoCombustivel(cursor.getInt(5));
 
                 arrayList.add(ds);
             }
@@ -107,7 +107,7 @@ public class DataBaseColetadosSensores extends SQLiteOpenHelper {
                 d.setDistanciaPercorrida(cursor.getFloat(2));
                 d.setLitrosCombustivel(cursor.getFloat(3));
                 d.setNotaVelocidade (cursor.getFloat(4));
-                d.setTipoCombustivel(cursor.getString(5));
+                d.setTipoCombustivel(cursor.getInt(5));
 
             }else{
                 db.close();
