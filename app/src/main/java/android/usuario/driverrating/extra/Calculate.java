@@ -16,7 +16,7 @@ import static java.lang.String.valueOf;
 public class Calculate {
 
     // Calcular o fluxo de combustível
-    public static float getFuelflow(OBDInfo obdinfo, float cilindrada, int delta){
+    public static float getFuelflow(OBDInfo obdinfo, float cilindrada, int delta,int densityFuel){
         int rpm = obdinfo.getRpm();
         float iat = obdinfo.getIntakeTemp();
         float map = obdinfo.getIntakePressure();

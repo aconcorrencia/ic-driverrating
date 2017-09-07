@@ -36,126 +36,143 @@ public class ClassificadorFuzzy {
     //Receberá os valores das variáveis de entradas, ou seja, os valore que componhem as funções de pertinências de entradas
     //Para todas as dimenções: CONSUMO DE COMBUSTÍVEL; CO2; NOx; ACELERAÇÃO LONGITUDINAL; ACELERAÇÃO TRANSVERSAL; VELOCIDADE.
 
-    public final static ArrayList<Double> ENTRADAS = new ArrayList<Double>();
-    public final static ArrayList<Double> SAIDAS = new ArrayList<Double>();
+   private  ArrayList<Double> entradas;
+   private  ArrayList<Double> saidas;
+    private String classe;
+    private Double nota;
 
-    public static Double grauPertinBaixo = 0.0;
-    public static Double grauPertinMedio = 0.0;
-    public static Double grauPertinAlto  = 0.0;
+    public ClassificadorFuzzy(ArrayList<Double> entradas) {
+        this.entradas = entradas;
+        this.saidas = ClassificadorEntradasSaidas.saidasParaClassificador();
+    }
 
-    public static Double nota = 0.0;
+    public void classificadorFuzzy(String origem, double dadosSensores) {
 
-    public static String classe = "";
+        Double grauPertinBaixo = 0.0;
+        Double grauPertinMedio = 0.0;
+        Double grauPertinAlto = 0.0;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static final void calcularNotas(String origem, double dadosSensores) {
 
-        classe = null;
-
-        if (ENTRADAS.get(0) < ENTRADAS.get(1) && ENTRADAS.get(1) < ENTRADAS.get(2) && ENTRADAS.get(3) < ENTRADAS.get(4) && ENTRADAS.get(4) < ENTRADAS.get(5) && ENTRADAS.get(6) < ENTRADAS.get(7) && ENTRADAS.get(7) < ENTRADAS.get(8)){
+        if (entradas.get(0) < entradas.get(1) && entradas.get(1) < entradas.get(2) && entradas.get(3) < entradas.get(4) && entradas.get(4) < entradas.get(5) && entradas.get(6) < entradas.get(7) && entradas.get(7) < entradas.get(8)) {
 
             //µbaixo
-            if (dadosSensores < ENTRADAS.get(1)){
+            if (dadosSensores < entradas.get(1)) {
                 grauPertinBaixo = 1.0;
-            } else if (dadosSensores < ENTRADAS.get(0) || ENTRADAS.get(2) <= dadosSensores) {
+            } else if (dadosSensores < entradas.get(0) || entradas.get(2) <= dadosSensores) {
                 grauPertinBaixo = 0.0;
-            } else if (ENTRADAS.get(0) <= dadosSensores && dadosSensores < ENTRADAS.get(1)) {
-                grauPertinBaixo = (dadosSensores - ENTRADAS.get(0)) / (ENTRADAS.get(1) - ENTRADAS.get(0));
-            } else if (ENTRADAS.get(1) <= dadosSensores && dadosSensores < ENTRADAS.get(2)) {
-                grauPertinBaixo = (ENTRADAS.get(2) - dadosSensores) / (ENTRADAS.get(2) - ENTRADAS.get(1));
+            } else if (entradas.get(0) <= dadosSensores && dadosSensores < entradas.get(1)) {
+                grauPertinBaixo = (dadosSensores - entradas.get(0)) / (entradas.get(1) - entradas.get(0));
+            } else if (entradas.get(1) <= dadosSensores && dadosSensores < entradas.get(2)) {
+                grauPertinBaixo = (entradas.get(2) - dadosSensores) / (entradas.get(2) - entradas.get(1));
             }
 
             //µmedio
-            if (dadosSensores < ENTRADAS.get(3) || ENTRADAS.get(5) <= dadosSensores) {
+            if (dadosSensores < entradas.get(3) || entradas.get(5) <= dadosSensores) {
                 grauPertinMedio = 0.0;
-            } else if (ENTRADAS.get(3) <= dadosSensores && dadosSensores < ENTRADAS.get(4)) {
-                grauPertinMedio = (dadosSensores - ENTRADAS.get(3)) / (ENTRADAS.get(4) - ENTRADAS.get(3));
-            } else if (ENTRADAS.get(4) <= dadosSensores && dadosSensores < ENTRADAS.get(5)) {
-                grauPertinMedio = (ENTRADAS.get(5) - dadosSensores) / (ENTRADAS.get(5) - ENTRADAS.get(4));
+            } else if (entradas.get(3) <= dadosSensores && dadosSensores < entradas.get(4)) {
+                grauPertinMedio = (dadosSensores - entradas.get(3)) / (entradas.get(4) - entradas.get(3));
+            } else if (entradas.get(4) <= dadosSensores && dadosSensores < entradas.get(5)) {
+                grauPertinMedio = (entradas.get(5) - dadosSensores) / (entradas.get(5) - entradas.get(4));
             }
 
             //µalto
-            if (ENTRADAS.get(8) == dadosSensores || dadosSensores > ENTRADAS.get(7) ) {
+            if (entradas.get(8) == dadosSensores || dadosSensores > entradas.get(7)) {
                 grauPertinAlto = 1.0;
-            } else if (dadosSensores < ENTRADAS.get(6) || ENTRADAS.get(8) <= dadosSensores) {
+            } else if (dadosSensores < entradas.get(6) || entradas.get(8) <= dadosSensores) {
                 grauPertinAlto = 0.0;
-            } else if (ENTRADAS.get(6) <= dadosSensores && dadosSensores < ENTRADAS.get(7)) {
-                grauPertinAlto = (dadosSensores - ENTRADAS.get(6)) / (ENTRADAS.get(7) - ENTRADAS.get(6));
-            } else if (ENTRADAS.get(7) <= dadosSensores && dadosSensores < ENTRADAS.get(8)) {
-                grauPertinAlto = (ENTRADAS.get(8) - dadosSensores) / (ENTRADAS.get(8) - ENTRADAS.get(7));
+            } else if (entradas.get(6) <= dadosSensores && dadosSensores < entradas.get(7)) {
+                grauPertinAlto = (dadosSensores - entradas.get(6)) / (entradas.get(7) - entradas.get(6));
+            } else if (entradas.get(7) <= dadosSensores && dadosSensores < entradas.get(8)) {
+                grauPertinAlto = (entradas.get(8) - dadosSensores) / (entradas.get(8) - entradas.get(7));
             }
 
-            if (origem.substring(0,3).equals("ger")) {
+            if (origem.substring(0, 3).equals("ger")) {
 
                 if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto) {
 
-                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                    if ((origem.equals("geraisConsumo")) || (origem.equals("geraisVelocidade"))) {
                         classe = "Ruim";
-                    } else if (origem == "geraisCO2") {
+                    } else if (origem.equals("geraisCO2")) {
                         classe = "Vermelho";
-                    } else if (origem == "geraisAcc") {
+                    } else if (origem.equals("geraisAcc")) {
                         classe = "Arriscado";
                     }
 
                 } else if (grauPertinMedio > grauPertinAlto) {
 
-                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                    if ((origem.equals("geraisConsumo")) || (origem.equals("geraisVelocidade"))) {
                         classe = "Médio";
-                    } else if (origem == "geraisCO2") {
+                    } else if (origem.equals("geraisCO2")) {
                         classe = "Amarelo";
-                    } else if (origem == "geraisAcc") {
+                    } else if (origem.equals("geraisAcc")) {
                         classe = "Moderado";
                     }
                 } else {
 
-                    if ((origem == "geraisConsumo") || (origem == "geraisVelocidade")) {
+                    if ((origem.equals("geraisConsumo")) || (origem.equals("geraisVelocidade"))) {
                         classe = "Bom";
-                    } else if (origem == "geraisCO2") {
+                    } else if (origem.equals("geraisCO2")) {
                         classe = "Verde";
-                    } else if (origem == "geraisAcc") {
+                    } else if (origem.equals("geraisAcc")) {
                         classe = "Cauteloso";
                     }
                 }
                 //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
-                nota = ((grauPertinBaixo * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinAlto * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
-            }
-            else {
+                nota = ((grauPertinBaixo * 1 * (saidas.get(0))) + (grauPertinMedio * 1 * (saidas.get(1))) + (grauPertinAlto * 1 * (saidas.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
+            } else {
 
                 if (grauPertinBaixo > grauPertinMedio && grauPertinBaixo > grauPertinAlto) {
 
-                    if ((origem == "consumo") || (origem == "velocidade")) {
+                    if ((origem.equals("consumo")) || (origem.equals("velocidade"))) {
                         classe = "Bom";
-                    } else if (origem == "co2") {
+                    } else if (origem.equals("co2")) {
                         classe = "Verde";
-                    } else if (origem == "aceleracoes") {
+                    } else if (origem.equals("aceleracoes")) {
                         classe = "Cauteloso";
                     }
 
                 } else if (grauPertinMedio > grauPertinAlto) {
 
-                    if ((origem == "consumo") || (origem == "velocidade")) {
+                    if ((origem.equals("consumo")) || (origem.equals("velocidade"))) {
                         classe = "Médio";
-                    } else if (origem == "co2") {
+                    } else if (origem.equals("co2")) {
                         classe = "Amarelo";
-                    } else if (origem == "aceleracoes") {
+                    } else if (origem.equals("aceleracoes")) {
                         classe = "Moderado";
                     }
                 } else {
 
-                    if ((origem == "consumo") || (origem == "velocidade")) {
+                    if ((origem.equals("consumo")) || (origem.equals("velocidade"))) {
                         classe = "Ruim";
-                    } else if (origem == "co2") {
+                    } else if (origem.equals("co2")) {
                         classe = "Vermelho";
-                    } else if (origem == "aceleracoes") {
+                    } else if (origem.equals("aceleracoes")) {
                         classe = "Arriscado";
                     }
                 }
                 //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
-                nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
+                nota = ((grauPertinAlto * 1 * (saidas.get(0))) + (grauPertinMedio * 1 * (saidas.get(1))) + (grauPertinBaixo * 1 * (saidas.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
             }
             //Segundo técnica de DEFUZZIFICAÇÃO Centro dos Máximos (C o M)
             //nota = ((grauPertinAlto * 1 * (SAIDAS.get(0))) + (grauPertinMedio * 1 * (SAIDAS.get(1)) ) + (grauPertinBaixo * 1 * (SAIDAS.get(2)))) / (grauPertinBaixo + grauPertinMedio + grauPertinAlto);
 
         }
+
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
+    public Double getNota() {
+        return nota;
+    }
+
+    public void setNota(Double nota) {
+        this.nota = nota;
     }
 }

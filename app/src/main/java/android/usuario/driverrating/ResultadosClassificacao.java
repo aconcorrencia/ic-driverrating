@@ -11,13 +11,6 @@ import android.usuario.driverrating.extra.ClassificadorEntradasSaidas;
 import android.usuario.driverrating.extra.ClassificadorFuzzy;
 import android.view.View;
 import android.widget.TextView;
-import static android.usuario.driverrating.DriverRatingActivity.notaConsumoCombustivelGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaEmissaoCO2Geral;
-import static android.usuario.driverrating.DriverRatingActivity.notaVelocidadeGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoLongitudinalGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoTransversalGeral;
-
-
 
 public class ResultadosClassificacao extends AppCompatActivity {
 
@@ -119,7 +112,6 @@ public class ResultadosClassificacao extends AppCompatActivity {
     }
 
     public void btnRetornarGerais (View view) {
-
         finish();
     }
 

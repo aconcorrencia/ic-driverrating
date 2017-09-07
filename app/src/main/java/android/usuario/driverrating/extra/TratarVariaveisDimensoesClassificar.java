@@ -7,36 +7,55 @@ import android.support.annotation.RequiresApi;
 import android.usuario.driverrating.domain.DadosColetadosSensores;
 import android.usuario.driverrating.domain.Veiculo;
 
-import static android.usuario.driverrating.DriverRatingActivity.densityFuel;
-import static android.usuario.driverrating.DriverRatingActivity.fatorPenalizacaoCO2;
+import java.util.ArrayList;
 
 
 /**
  * Created by NIELSON on 27/05/2017.
  */
 
-public class TratarVariaveisDimensoesClassificar{
+public class TratarVariaveisDimensoesClassificar {
 
-    private static int somaCarbonoOxigenio = 0;
+    private int somaCarbonoOxigenio = 0;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void ClassificarConsumoDeCombustivel(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo){
 
-        // Envia para o classificador, os dados de Entrada da variável consumo de combustível.
-        ClassificadorEntradasSaidas.EntradasParaConsumoCombustivel();
+    private DadosColetadosSensores dadosColetadosSensores;
+    private Veiculo veiculo;
+
+
+    public static int getDensityFuel(DadosColetadosSensores dadosColetadosSensores) {
+        int densityFuel;
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)) {
+            densityFuel = 750; //Gasolina
+        } else {
+            densityFuel = 820; //Diesel
+        }
+        return densityFuel;
+    }
+
+    public static int getSomaCarbonoOxigenio(DadosColetadosSensores dadosColetadosSensores) {
+        //Tipo de Combustível Gasolina ou Flex
+        int somaCarbonoOxigenio;
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)) {
+            somaCarbonoOxigenio = 2392; //consistem em 87% de carbono (652g)+  1740 gramas de oxigénio.
+        } else {
+            somaCarbonoOxigenio = 2627; //consistem em 86,2% de carbono (707g) + 1920 gramas de oxigénio.
+        }
+        return somaCarbonoOxigenio;
+    }
+
+
+    public static ClassificadorFuzzy classificarConsumoDeCombustivel(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo) {
+
+        // Preenche os dados de Entrada da variável consumo de combustível.
+        ArrayList<Double> entradas = ClassificadorEntradasSaidas.entradasParaConsumoCombustivel();
 
         // Analisa qual o tipo de combustível informado pelo perfil do motorista a ser classificado.
         Double mediaCombustivelFabricante = 0.0;
-        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
+        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)) {
             mediaCombustivelFabricante = veiculo.getGasolinaCidade();
-        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
+        } else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL) {
             mediaCombustivelFabricante = veiculo.getEtanolCidade();
-        }
-
-        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
-            densityFuel = 750; //Gasolina
-        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
-            densityFuel = 820; //Diesel
         }
 
         // Calcular o consumo médio de combustível.
@@ -45,8 +64,11 @@ public class TratarVariaveisDimensoesClassificar{
         // Calcular o CONSUMO NORMALIZADO = consumo médio indicado pelo fabricante do veículo / consumo médio do motorista.
         double NC = mediaCombustivelFabricante / mediaConsCombustMotorista;
         // Envia os dois parâmetros para a classe classificadorFuzzy. Parâmetro1: indica a variável: "CONSUMO DE COMBUSTÍVEL", Paâmetro 2: indica o consumo normalizado.
-        ClassificadorFuzzy.calcularNotas("consumo", NC);
 
+        ClassificadorFuzzy classificadorFuzzy = new ClassificadorFuzzy(entradas);
+        classificadorFuzzy.classificadorFuzzy("consumo", NC);
+
+        return classificadorFuzzy;
        /* tvNotaCons.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassCons.setText("Classificação: "+ClassificadorFuzzy.classe);
 
@@ -57,12 +79,10 @@ public class TratarVariaveisDimensoesClassificar{
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void ClassificarEmissaoCO2(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo){
-
+    public static ClassificadorFuzzy classificarEmissaoCO2(DadosColetadosSensores dadosColetadosSensores, Veiculo veiculo, int percentualAlcool, float fatorPenalizacaoCO2) {
 
         //Envia para o classificador, os dados de Entrada da variável Emissão de Óxido de Carbobo.
-        ClassificadorEntradasSaidas.EntradasParaCO2();
+        ArrayList<Double> entradas = ClassificadorEntradasSaidas.entradasParaCO2();
 
         //Total de litro(s) de combustível gasto(s) a cada janela estabelecida no experimento.
         float litrosCombustivel = dadosColetadosSensores.getLitrosCombustivel() / 1000;
@@ -96,13 +116,7 @@ public class TratarVariaveisDimensoesClassificar{
          ** o atributo "somaCarbonoOxigenio", traz o valor da constante referente ao tipo de combustível se Gasolina = 2392 ou Diesel = 2627.
 
          */
-
-        //Tipo de Combustível Gasolina ou Flex
-        if ((dadosColetadosSensores.getTipoCombustivel() == Utils.GASOLINA) || (dadosColetadosSensores.getTipoCombustivel() == Utils.FLEX)){
-            somaCarbonoOxigenio = 2392; //consistem em 87% de carbono (652g)+  1740 gramas de oxigénio.
-        }else if (dadosColetadosSensores.getTipoCombustivel() == Utils.DIESEL){
-            somaCarbonoOxigenio = 2627; //consistem em 86,2% de carbono (707g) + 1920 gramas de oxigénio.
-        }
+        int somaCarbonoOxigenio =getSomaCarbonoOxigenio(dadosColetadosSensores);
 
         double EmissaoCO2Fabricante = veiculo.getCo2();
 
@@ -117,15 +131,19 @@ public class TratarVariaveisDimensoesClassificar{
             EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
         }*/
 
-        //EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * Float.parseFloat(percentualAlcool));
+        EmissaoCO2Motorista = EmissaoCO2Motorista - (EmissaoCO2Motorista * (percentualAlcool / 100));
 
         //Envia os dois parâmetros para a classe classificadorFuzzy. Parâmetro1: indica a variável: "ÓXIDO DE CARBONO", Parâmetro 2: indica o co2 normalizado.
-        double NCCO2 =  EmissaoCO2Fabricante / EmissaoCO2Motorista;
+        double NCCO2 = EmissaoCO2Fabricante / EmissaoCO2Motorista;
 
         /** Classifica o motorista quanto à variável Emissão de CO2 penalizando-o de acordo com a escolha do veículo.
          *  Quanto maior for a emissão de CO2, maior será a penalização .
          */
-        ClassificadorFuzzy.calcularNotas("co2", NCCO2 * Float.parseFloat(fatorPenalizacaoCO2));
+
+        ClassificadorFuzzy classificadorFuzzy = new ClassificadorFuzzy(entradas);
+        classificadorFuzzy.classificadorFuzzy("co2", NCCO2 * fatorPenalizacaoCO2);
+
+        return classificadorFuzzy;
 
         //tvTituloCO2.setText("ÓXIDO DE CARBONO (CO2) - Nº " + controleClassificacao);
 
@@ -134,18 +152,19 @@ public class TratarVariaveisDimensoesClassificar{
         tvCO2gkm.setText("CO2 em g/km : "+ new DecimalFormat("0.00").format(gramasPorQuilometrosCO2));*/
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void ClassificarAceleracaoLongitudinal(float accLong){
+
+    public static ClassificadorFuzzy classificarAceleracaoLongitudinal(float accLong) {
 
         //Envia para o classificador, os dados de Entrada das variáveis Aceleraçoes Longitudinal e Transversal.
-        ClassificadorEntradasSaidas.EntradasParaAceleracoes();
-
+        ArrayList<Double> entradas = ClassificadorEntradasSaidas.entradasParaAceleracoes();
 
         /** Classifica o motorista quanto às variáveis Aceleração Longitudinal.
          *  Quanto maior for a aceleração, pior será a sua nota.
          */
-        ClassificadorFuzzy.calcularNotas("aceleracoes", accLong);
+        ClassificadorFuzzy classificadorFuzzy = new ClassificadorFuzzy(entradas);
+        classificadorFuzzy.classificadorFuzzy("aceleracoes", accLong);
 
+        return classificadorFuzzy;
         //tvTituloCO2.setText("ÓXIDO DE CARBONO (CO2) - Nº " + controleClassificacao);
 
         /*tvNotaCO2.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
@@ -153,23 +172,40 @@ public class TratarVariaveisDimensoesClassificar{
         tvCO2gkm.setText("CO2 em g/km : "+ new DecimalFormat("0.00").format(gramasPorQuilometrosCO2));*/
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void ClassificarAceleracaoTransversal(float accTrans){
+
+    public static ClassificadorFuzzy ClassificarAceleracaoTransversal(float accTrans) {
 
         //Envia para o classificador, os dados de Entrada das variáveis Aceleraçoes Longitudinal e Transversal.
-        ClassificadorEntradasSaidas.EntradasParaAceleracoes();
 
+        ArrayList<Double> entradas = ClassificadorEntradasSaidas.entradasParaAceleracoes();
 
         /** Classifica o motorista quanto às variáveis Acelerações Longitudinal e/ou Transversal.
          *  Quanto maior for a aceleração, pior será a sua nota.
          */
-        ClassificadorFuzzy.calcularNotas("aceleracoes", accTrans);
+        ClassificadorFuzzy classificadorFuzzy = new ClassificadorFuzzy(entradas);
+        classificadorFuzzy.classificadorFuzzy("aceleracoes", accTrans);
 
+        return classificadorFuzzy;
         //tvTituloCO2.setText("ÓXIDO DE CARBONO (CO2) - Nº " + controleClassificacao);
 
         /*tvNotaCO2.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassCO2.setText("Classificação: "+ClassificadorFuzzy.classe);
         tvCO2gkm.setText("CO2 em g/km : "+ new DecimalFormat("0.00").format(gramasPorQuilometrosCO2));*/
+    }
+
+
+    public static ClassificadorFuzzy classificarVelocidadeParcial(int velocidadeMotorista, int velocidadeMaximaDaVia) {
+
+        //Informa para a classe Entradas, a velocidade máxima da via atual.
+        ArrayList<Double> entradas = ClassificadorEntradasSaidas.entradasParaVelocidade(velocidadeMaximaDaVia);
+        //Classificar o motorista segundo a variável "Velocidade"
+        /* Acumula a nota trazida pelo cálculo fuzzy, este acumulo terá uma média, onde fará uma nova classificação no método
+        *  "ClassificaçãoVelocidade" após a janela de tempo ser fechada.
+        */
+        ClassificadorFuzzy classificadorFuzzy = new ClassificadorFuzzy(entradas);
+        classificadorFuzzy.classificadorFuzzy("velocidade", velocidadeMotorista));
+
+        return classificadorFuzzy;
     }
 
 }

@@ -10,6 +10,7 @@ public class Utils {
     public static final int FLEX = 3;
     public static final int TYPE_FUEL_DEFAUT = GASOLINA;
     public static final int JANELA_DEFAUT = 300;
+    public static final int PERCENTUAL_ALCOOL_DEFAUT = 25;
 
     public static String getTypeFuelString(int type){
         switch (type){

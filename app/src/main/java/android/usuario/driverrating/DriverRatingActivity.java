@@ -58,39 +58,7 @@ public class DriverRatingActivity extends AppCompatActivity
     private SharedPreferences sharedPreferences;
 
 
-    public static final String FATORPENALIZACAO_NAME = "fatorcorrecao_name";
-    public static final String FATORPENALIZACAO_KEY = "fatorcorrecao";
 
-    public static float densityFuel = 0; //Densidade do combstível
-    public static int tipoCombustivel;
-
-    public static String fatorPenalizacaoCO2 = "0";
-
-    //Atributos responsáveis por armazenar os resultados das classificações - Início
-    public static double notaConsumoCombustivel;
-    public static String classificacaoConsumoCombustivel;
-
-    public static double notaConsumoCombustivelGeral;
-
-    public static double notaEmissaoCO2;
-    public static String classificacaoEmissaoCO2;
-
-    public static double notaEmissaoCO2Geral;
-
-    public static double notaVelocidade;
-    public static String classificacaoVelocidade;
-
-    public static double notaVelocidadeGeral;
-
-    public static double notaAceleracaoLongitudinal;
-    public static String classificacaoAceleracaoLongitudinal;
-
-    public static double notaAceleracaoLongitudinalGeral;
-
-    public static double notaAceleracaoTransversal;
-    public static String classificacaoAceleracaoTransversal;
-
-    public static double notaAceleracaoTransversalGeral;
 
     //Atributos responsáveis por armazenar os resultados das classificações - Final
 
