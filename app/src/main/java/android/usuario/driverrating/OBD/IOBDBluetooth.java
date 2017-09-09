@@ -5,7 +5,7 @@ package android.usuario.driverrating.OBD;
  */
 
 public interface IOBDBluetooth {
-    public void obdUpdate(OBDInfo obdinfo);
+    public void obdUpdate(OBDInfo obdinfo,boolean ler);
     void errorConnectBluetooth();//erro na conexão
     void notSupportedBluetooth();//Bluetooth não é suportado pelo dispositivo
     void connectingBluetooth();//Enquanto o bluetooth se conecta ao dispositivo

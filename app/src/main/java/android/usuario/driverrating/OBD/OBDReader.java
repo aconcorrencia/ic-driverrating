@@ -9,20 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.usuario.driverrating.OBD.ConfigEML327.AutoProtocolCommand;
 import android.usuario.driverrating.OBD.ConfigEML327.ObdResetCommand;
-import android.usuario.driverrating.OBD.commands.AbsoluteLoadCommand;
 import android.usuario.driverrating.OBD.commands.AirIntakeTemperatureCommand;
 import android.usuario.driverrating.OBD.commands.AvailablePidsCommand_01_20;
 import android.usuario.driverrating.OBD.commands.IntakeManifoldPressureCommand;
 import android.usuario.driverrating.OBD.commands.RPMCommand;
 import android.usuario.driverrating.OBD.commands.SpeedCommand;
 import android.util.Log;
-
-import com.github.pires.obd.commands.protocol.EchoOffCommand;
-import com.github.pires.obd.commands.protocol.LineFeedOffCommand;
-import com.github.pires.obd.commands.protocol.SelectProtocolCommand;
-import com.github.pires.obd.commands.protocol.TimeoutCommand;
-import com.github.pires.obd.commands.temperature.AmbientAirTemperatureCommand;
-import com.github.pires.obd.enums.ObdProtocols;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +38,7 @@ public class OBDReader {
     private String mac;
     private IOBDBluetooth listener;
 
+
     public OBDReader(Context context, IOBDBluetooth listener, String mac) {
         this.context = context;
         this.mac = mac;
@@ -56,6 +49,7 @@ public class OBDReader {
             return;
         }
     }
+
 
     public void start() {
         if (!mBluetoothAdapter.isEnabled()) {
@@ -81,8 +75,7 @@ public class OBDReader {
         this.mac = mac;
     }
 
-    public void read(int OBDparameters) {
-        Log.w("OBD","READ");
+    public void read(int OBDparameters,boolean ler) {
         Bundle obdbundle = new Bundle();
         try {
             if ((OBDInfo.INTAKE_PRESSURE & OBDparameters) != 0) {
@@ -98,7 +91,6 @@ public class OBDReader {
             if ((OBDInfo.RPM & OBDparameters) != 0) {
                 RPMCommand rpmCommand = new RPMCommand();
                 rpmCommand.run(mmInStream, mmOutStream);
-                Log.w("TESTE","T: "+rpmCommand.getRPM());
                 obdbundle.putInt(OBDInfo.KEY_RPM, rpmCommand.getRPM());
             }
             if ((OBDInfo.SPEED & OBDparameters) != 0) {
@@ -106,18 +98,14 @@ public class OBDReader {
                 speedCommand.run(mmInStream, mmOutStream);
                 obdbundle.putInt(OBDInfo.KEY_SPEED, speedCommand.getMetricSpeed());
             }
-            if ((OBDInfo.ABS_LOAD & OBDparameters) != 0) { //Nielson: 12/05/2017
-                AbsoluteLoadCommand absoluteLoadCommand = new AbsoluteLoadCommand();
-                absoluteLoadCommand.run(mmInStream, mmOutStream);
-                obdbundle.putFloat(OBDInfo.KEY_ABS_LOAD, absoluteLoadCommand.getPercentage());
-            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        listener.obdUpdate(new OBDInfo(obdbundle));
+        listener.obdUpdate(new OBDInfo(obdbundle),ler);
     }
+
 
     /**
      * Estabelece conexão com o dispositivo,
@@ -130,6 +118,7 @@ public class OBDReader {
         mConnectThread = new ConnectThread(device);
         mConnectThread.start();
     }
+
 
     /**
      * GET SOCKET
@@ -147,14 +136,10 @@ public class OBDReader {
         }
 
         public void run() {
-
             try {
                 mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
                 mmSocket.connect();
-                Log.w("OBD","O1");
-
             } catch (Exception e1) {
-                Log.w("OBD","O2");
                 Class<?> clazz = mmSocket.getRemoteDevice().getClass();
                 Class<?>[] paramTypes = new Class<?>[]{Integer.TYPE};
                 try {
@@ -173,23 +158,10 @@ public class OBDReader {
             } catch (IOException e) {
                 listener.errorConnectBluetooth();
             }
-
             try {
-                EchoOffCommand echo =new EchoOffCommand();
-                echo.run(mmInStream, mmOutStream);
-                String e = echo.getFormattedResult();
-                Log.w("OBD","C: "+e);
-                new LineFeedOffCommand().run(mmInStream, mmOutStream);
-                new TimeoutCommand(125).run(mmInStream, mmOutStream);
-                new SelectProtocolCommand(ObdProtocols.AUTO).run(mmInStream, mmOutStream);
+                new ObdResetCommand().run(mmInStream, mmOutStream);
                 new AutoProtocolCommand().run(mmInStream, mmOutStream);
-                new AmbientAirTemperatureCommand().run(mmInStream,mmOutStream);
-                RPMCommand rpmCommand = new RPMCommand();
-                rpmCommand.run(mmInStream, mmOutStream);
-                Log.w("OBD","C: "+rpmCommand.getRPM());
-                //new ObdResetCommand().run(mmInStream, mmOutStream);
-                //new AutoProtocolCommand().run(mmInStream, mmOutStream);
-                //new AvailablePidsCommand_01_20().run(mmInStream, mmOutStream);
+                new AvailablePidsCommand_01_20().run(mmInStream, mmOutStream);
             } catch (IOException e) {
                 connect = false;
                 e.printStackTrace();

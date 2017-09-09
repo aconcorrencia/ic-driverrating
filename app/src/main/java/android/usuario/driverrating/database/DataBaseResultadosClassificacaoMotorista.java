@@ -8,15 +8,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista;
 
-import static android.usuario.driverrating.DriverRatingActivity.notaConsumoCombustivelGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaEmissaoCO2Geral;
-import static android.usuario.driverrating.DriverRatingActivity.notaVelocidadeGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoLongitudinalGeral;
-import static android.usuario.driverrating.DriverRatingActivity.notaAceleracaoTransversalGeral;
-
-
-import java.util.Date;
-
 /**
  * Created by NIELSON on 22/06/2017.
  */
@@ -25,20 +16,20 @@ import java.util.Date;
 public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
     private static final String NOME_BANCO = "resultclassmot";
     private static final int VERSAO_AUX = 1;
-    public static final String TABELA = "tbresultclassmot";
+    private static final String TABELA = "tbresultclassmot";
 
     private static final String ID = "_idjanclasmot";
-    public static final String ID_LOG = "idfklog";
-    public static final String NOTACONSCOMB = "notaconscomb";
-    public static final String CLASCONSCOMB = "clasconscomb";
-    public static final String NOTAEMISCO2 = "notaemisco2";
-    public static final String CLASEMISCO2 = "clasemisco2";
-    public static final String NOTAVELOCID = "notavelocid";
-    public static final String CLASVELOCID = "clasvelocid";
-    public static final String NOTAACELLONG = "notaacellong";
-    public static final String CLASACELLONG = "clasacellong";
-    public static final String NOTAACELTRANS = "notaaceltrans";
-    public static final String CLASACELTRANS = "clasaceltrans";
+    private static final String ID_LOG = "idfklog";
+    private static final String NOTACONSCOMB = "notaconscomb";
+    private static final String CLASCONSCOMB = "clasconscomb";
+    private static final String NOTAEMISCO2 = "notaemisco2";
+    private static final String CLASEMISCO2 = "clasemisco2";
+    private static final String NOTAVELOCID = "notavelocid";
+    private static final String CLASVELOCID = "clasvelocid";
+    private static final String NOTAACELLONG = "notaacellong";
+    private static final String CLASACELLONG = "clasacellong";
+    private static final String NOTAACELTRANS = "notaaceltrans";
+    private static final String CLASACELTRANS = "clasaceltrans";
 
     private Context context;
 
@@ -98,16 +89,10 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
         db.insert(TABELA, null, valores);
     }
 
-    public void selectResultadosClassificacaoByIdLog(long idlog) {
-
+    public DadosResultadosClassificacaoMotorista selectResultadosClassificacaoByIdLog(long idlog) {
+        DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELA + " WHERE " + ID_LOG + " = " + idlog, null);
-
-        notaConsumoCombustivelGeral = 0;
-        notaEmissaoCO2Geral = 0;
-        notaVelocidadeGeral = 0;
-        notaAceleracaoLongitudinalGeral = 0;
-        notaAceleracaoTransversalGeral = 0;
 
         notaConsComb = 0;
         notaEmissaoCO2 = 0;
@@ -123,21 +108,21 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
 
            while (cursor.moveToNext()) {
               quant+=1;
-
               notaConsComb += cursor.getDouble(2);
               notaEmissaoCO2 += cursor.getDouble(4);
               notaVelocidade += cursor.getDouble(6);
               notaAccLong += cursor.getDouble(8);
               notaAccTrans += cursor.getDouble(10);
            }
+            dadosResultadosClassificacaoMotorista.setNota_cons_comb(notaConsComb / quant);
+            dadosResultadosClassificacaoMotorista.setNota_emis_co2(notaEmissaoCO2 / quant);
+            dadosResultadosClassificacaoMotorista.setNota_velocid(notaVelocidade / quant);
+            dadosResultadosClassificacaoMotorista.setNota_acel_long(notaAccLong / quant);
+            dadosResultadosClassificacaoMotorista.setNota_acel_trans(notaAccTrans / quant);
 
-           notaConsumoCombustivelGeral = notaConsComb / quant;
-           notaEmissaoCO2Geral = notaEmissaoCO2 / quant;
-           notaVelocidadeGeral = notaVelocidade / quant;
-           notaAceleracaoLongitudinalGeral = notaAccLong / quant;
-           notaAceleracaoTransversalGeral = notaAccTrans / quant;
         }
         db.close();
+        return dadosResultadosClassificacaoMotorista;
     }
 
     //Recupera a última janela.

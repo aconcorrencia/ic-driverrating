@@ -29,12 +29,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_KEY;
-import static android.usuario.driverrating.DriverRatingActivity.FATORPENALIZACAO_NAME;
-import static android.usuario.driverrating.DriverRatingActivity.menorValorCO2;
-import static java.lang.String.valueOf;
-
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.ArrayList;
@@ -48,16 +42,16 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     private SelectableRoundedImageView imgPerfil;
 
 
-    public static SharedPreferences sharedFatorCorrecao;
-    public static SharedPreferences.Editor sharedFatorCorrecaoEditor;
+    public static SharedPreferences sharedPreferences;
+    public static SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_veiculo);
 
-        sharedFatorCorrecao = getSharedPreferences(FATORPENALIZACAO_NAME, Context.MODE_PRIVATE);
-        sharedFatorCorrecaoEditor = sharedFatorCorrecao.edit();
+        sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, Context.MODE_PRIVATE);
+
 
         edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
         spnMarca = (Spinner) findViewById(R.id.spnMarca);
@@ -226,15 +220,12 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
                         .setMessage("Deseja tornar este perfil como padrão?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                /*editor = sharedPreferences.edit();
+                                editor = sharedPreferences.edit();
+                                editor.putFloat(SharedPreferencesKeys.FATOR_PENALIZACAO, fatPenaliz);
                                 editor.putLong("ID", id);
                                 editor.putFloat("FatorCorrecao", fatPenaliz);  //Nielson: 10/06/2017
-                                editor.apply();*/
-                                if (sharedFatorCorrecaoEditor != null) {
-                                    sharedFatorCorrecaoEditor.putString(FATORPENALIZACAO_KEY, valueOf(fatPenaliz));
-                                    sharedFatorCorrecaoEditor.commit();
-                                }
-                                Toast.makeText(PerfilVeiculoActivity.this, "Perfil selecionado como padrão!", Toast.LENGTH_SHORT).show();
+                                editor.apply();
+                                Toast.makeText(PerfilVeiculoActivity.this, "Perfil selecionado como padrão e fator de Penalização: "+fatPenaliz, Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })
@@ -300,10 +291,8 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
     //Responsável pelo cálculo do fator de penalização do motorista em relação à variável CO2.
     private float CalcularFatorPenalizacao(){
         DataBaseDriverRating dataBaseDriverRating = new DataBaseDriverRating(PerfilVeiculoActivity.this);
-        menorValorCO2 =  dataBaseDriverRating.selectSmallerCO2();
-
+        Double menorValorCO2 =  dataBaseDriverRating.selectSmallerCO2();
         float calcValorPenalizacaoCO2 = (float) (menorValorCO2 / veiculo.getCo2());
-
         return calcValorPenalizacaoCO2;
     }
 

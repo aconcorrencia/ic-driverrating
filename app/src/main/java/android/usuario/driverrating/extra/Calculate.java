@@ -1,13 +1,8 @@
 package android.usuario.driverrating.extra;
 
-import android.usuario.driverrating.GPS.GPSInfo;
-import android.usuario.driverrating.GPS.OverpassInfo;
-import android.usuario.driverrating.GPS.OverpassReader;
-import android.usuario.driverrating.IniciarClassificacao;
 import android.usuario.driverrating.OBD.OBDInfo;
 
-import static android.usuario.driverrating.DriverRatingActivity.densityFuel;
-import static java.lang.String.valueOf;
+
 
 /**
  * Created by Sillas on 24/04/2017.
@@ -17,6 +12,7 @@ public class Calculate {
 
     // Calcular o fluxo de combustível
     public static float getFuelflow(OBDInfo obdinfo, float cilindrada, int delta,int densityFuel){
+        float litrosConsumidos;
         int rpm = obdinfo.getRpm();
         float iat = obdinfo.getIntakeTemp();
         float map = obdinfo.getIntakePressure();
@@ -31,7 +27,7 @@ public class Calculate {
             densityFuel = 820; //Diesel
         }*/
 
-        float litrosConsumidos = (maf * (delta/1000)) / (14.7f * densityFuel) * 10; // multiplica por "10", pois, dm^3 = 10^3 = (10 x 10 x 10) = 1.000
+        litrosConsumidos = (maf * (delta/1000)) / (14.7f * densityFuel) * 10; // multiplica por "10", pois, dm^3 = 10^3 = (10 x 10 x 10) = 1.000
 
         //valormaf2 = maf;
 

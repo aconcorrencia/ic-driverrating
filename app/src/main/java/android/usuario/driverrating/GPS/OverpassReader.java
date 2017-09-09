@@ -52,6 +52,7 @@ public class OverpassReader {
         BackgroundAsyncTask backgroundAsyncTask = new BackgroundAsyncTask();
         backgroundAsyncTask.execute(xmlPath);
     }
+
     private class BackgroundAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String ...params) {

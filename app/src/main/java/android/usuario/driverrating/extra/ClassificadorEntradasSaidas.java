@@ -2,9 +2,6 @@ package android.usuario.driverrating.extra;
 
 import java.util.ArrayList;
 
-import static android.usuario.driverrating.extra.ClassificadorFuzzy.ENTRADAS;
-import static android.usuario.driverrating.extra.ClassificadorFuzzy.SAIDAS;
-
 /**
  * Created by NIELSON on 29/04/2017.
  */
@@ -16,6 +13,7 @@ public class ClassificadorEntradasSaidas {
         saidas.add(1.65);
         saidas.add(2.50);
         saidas.add(4.00);
+        return saidas;
     }
 
     public static ArrayList<Double> entradasParaConsumoCombustivel() {

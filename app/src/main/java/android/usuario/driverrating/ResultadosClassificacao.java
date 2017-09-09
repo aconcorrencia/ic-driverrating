@@ -72,7 +72,7 @@ public class ResultadosClassificacao extends AppCompatActivity {
         int logClass = 1;
         DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
         dataBaseResultadosClassificacaoMotorista.selectResultadosClassificacaoByIdLog(logClass);
-
+/*
         //Envia para o classificador, os dados de saída.
         ClassificadorEntradasSaidas.SaidasParaClassificador();
 
@@ -103,7 +103,7 @@ public class ResultadosClassificacao extends AppCompatActivity {
         ClassificadorFuzzy.calcularNotas("geraisAcc", notaAceleracaoTransversalGeral);
         tvNotaAccTrans.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
         tvClassAccTrans.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaAceleracaoTransversalGeral;
+        notasGerais += notaAceleracaoTransversalGeral;*/
 
         double mediaNotasGerais = notasGerais / 5;
 

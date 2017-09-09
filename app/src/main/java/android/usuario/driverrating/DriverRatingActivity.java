@@ -1,23 +1,14 @@
 package android.usuario.driverrating;
 
-import android.*;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Matrix;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.usuario.driverrating.OBD.IOBDBluetooth;
-import android.usuario.driverrating.OBD.OBDInfo;
-import android.usuario.driverrating.database.DataBaseDriverRating;
 import android.usuario.driverrating.database.DataBasePerfis;
 import android.usuario.driverrating.domain.Veiculo;
 import android.usuario.driverrating.extra.SharedPreferencesKeys;
 import android.usuario.driverrating.extra.Utils;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,53 +18,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.github.anastr.speedviewlib.base.Speedometer;
 import com.joooonho.SelectableRoundedImageView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.text.DecimalFormat;
-
-import static android.R.attr.angle;
-import static android.R.attr.pivotX;
-import static android.R.attr.pivotY;
-import static android.R.attr.sharedUserId;
-import static android.content.Context.MODE_PRIVATE;
-import static android.usuario.driverrating.R.styleable.NavigationView;
-import static android.usuario.driverrating.R.styleable.SelectableRoundedImageView;
-import static android.usuario.driverrating.R.styleable.Toolbar;
 
 
 public class DriverRatingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private RelativeLayout btnIniciarClassificacao;
 
     private SharedPreferences sharedPreferences;
-
-
-
 
     //Atributos responsáveis por armazenar os resultados das classificações - Final
 
     private TextView txtNomePerfil, txtMarca, txtModelo, txtFatorPenaliz;
     private SelectableRoundedImageView imgPerfil;
-    private ImageLoader mImageLoader;
-    private int rotate = -80;
-    private ImageView imageView;
-    float newAngle, oldAngle;
 
-    public static double menorValorCO2;
-    public static int ultimaJanela;
-    public static int ultimoLog;
-
-    private ImageView imgCheckPerfil,imgCheckDispObd;
+    private ImageView imgCheckPerfil, imgCheckDispObd;
     private TextView txtJanela, txtTipoComb;
 
     @Override
@@ -84,8 +48,6 @@ public class DriverRatingActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
-        //Speedometer speedometer = (Speedometer)findViewById(R.id.speedView);
-        //speedometer.speedTo(50, 4000);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -101,12 +63,10 @@ public class DriverRatingActivity extends AppCompatActivity
         txtFatorPenaliz = (TextView) headerView.findViewById(R.id.txtFatorPenaliz);
 
 
-
         txtJanela = (TextView) findViewById(R.id.txtJanela);
         txtTipoComb = (TextView) findViewById(R.id.txtTipoComb);
         imgCheckPerfil = (ImageView) findViewById(R.id.imgCheckPerfil);
         imgCheckDispObd = (ImageView) findViewById(R.id.imgCheckDispObd);
-
 
 
         btnIniciarClassificacao = (RelativeLayout) findViewById(R.id.btnIniciarClassificacao);
@@ -118,7 +78,6 @@ public class DriverRatingActivity extends AppCompatActivity
         });
         navigationView.setNavigationItemSelectedListener(this);
 
-
     }
 
     @Override
@@ -128,20 +87,20 @@ public class DriverRatingActivity extends AppCompatActivity
         String mac = sharedPreferences.getString(SharedPreferencesKeys.ADDRESS_DEVICE, "");
         long idPerfil = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
         int janela = sharedPreferences.getInt(SharedPreferencesKeys.JANELA_TEMPO, Utils.JANELA_DEFAUT);
-        int tipoComb = sharedPreferences.getInt(SharedPreferencesKeys.TIPO_COMBUSTIVEL,Utils.TYPE_FUEL_DEFAUT);
+        int tipoComb = sharedPreferences.getInt(SharedPreferencesKeys.TIPO_COMBUSTIVEL, Utils.TYPE_FUEL_DEFAUT);
 
-        if(mac.equals(""))
+        if (mac.equals(""))
             imgCheckDispObd.setImageResource(R.drawable.ic_x);
         else
             imgCheckDispObd.setImageResource(R.drawable.ic_ok);
 
-        if(idPerfil == -1)
+        if (idPerfil == -1)
             imgCheckPerfil.setImageResource(R.drawable.ic_x);
         else
             imgCheckPerfil.setImageResource(R.drawable.ic_ok);
 
-        txtJanela.setText("Janela de Tempo: "+janela+" s");
-        txtTipoComb.setText("Tipo de Combustível: "+Utils.getTypeFuelString(tipoComb));
+        txtJanela.setText("Janela de Tempo: " + janela + " s");
+        txtTipoComb.setText("Tipo de Combustível: " + Utils.getTypeFuelString(tipoComb));
     }
 
     @Override
@@ -179,14 +138,14 @@ public class DriverRatingActivity extends AppCompatActivity
         } else if (id == R.id.ic_bluetooth) {
             Intent it = new Intent(DriverRatingActivity.this, ProcurarActivity.class);
             startActivity(it);
-        } else if (id == R.id.ic_janelaTempo ) {
+        } else if (id == R.id.ic_janelaTempo) {
             Intent it = new Intent(DriverRatingActivity.this, JanelaTempo.class);
             startActivity(it);
-        } else if (id == R.id.ic_tipoCombustivel ) {
+        } else if (id == R.id.ic_tipoCombustivel) {
             Intent it = new Intent(DriverRatingActivity.this, TipoCombustivel.class);
             startActivity(it);
-        } else if (id == R.id.ic_ClassificacaoGeral ) {
-            Intent it = new Intent(DriverRatingActivity.this,  ResultadosClassificacao.class);
+        } else if (id == R.id.ic_ClassificacaoGeral) {
+            Intent it = new Intent(DriverRatingActivity.this, ResultadosClassificacao.class);
             startActivity(it);
         }
 
@@ -199,7 +158,8 @@ public class DriverRatingActivity extends AppCompatActivity
      * Atualiza o cabeçalho do menu para o perfil padrão
      */
     public void headerReflesh() {
-        long id =  sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
+        long id = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
+        Float fatorPenalizacaoCO2 = sharedPreferences.getFloat(SharedPreferencesKeys.FATOR_PENALIZACAO, -1);
         //float fatorPenalizacaoCO2 = sharedPreferences.getFloat("FatorCorrecao",-1);
 
         //Restaura as preferencias gravadas em fator de penalização.
@@ -214,8 +174,7 @@ public class DriverRatingActivity extends AppCompatActivity
                 txtNomePerfil.setText("Perfil: " + veiculo.getNomeUsuario());
                 txtMarca.setText("Marca: " + veiculo.getMarca().trim());
                 txtModelo.setText("Modelo: " + veiculo.getModelo().trim());
-
-              //  txtFatorPenaliz.setText("Fator de Penalização CO2: " + new DecimalFormat("0.000").format(fatPenaCO2));
+                txtFatorPenaliz.setText("Fator de Penalização CO2: " + fatorPenalizacaoCO2);
 
                 if (veiculo.getFoto() == null)
                     imgPerfil.setImageResource(R.drawable.img_car2);

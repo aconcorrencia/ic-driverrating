@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="152dp">
+        android:layout_marginBottom="152dp"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/tvImage"
@@ -35,342 +36,463 @@
     <LinearLayout
         android:id="@+id/lyMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Leituras:" />
+
+                <TextView
+                    android:id="@+id/txtLeituras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0" />
+            </LinearLayout>
+            <View
+                android:id="@+id/vw_divider"
+                android:layout_width="0.8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/black" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Veloc. Máx Via:" />
+
+                <TextView
+                    android:id="@+id/txtVelocidadeVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="X" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom|left"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Veloc do Veículo"/>
+
+                    <com.github.anastr.speedviewlib.ProgressiveGauge
+                        android:id="@+id/progressiveGauge"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <View
+                    android:id="@+id/vw_divider"
+                    android:layout_width="0.8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="RPM:" />
+
+                    <TextView
+                        android:id="@+id/txtRpm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:background="@color/wallet_holo_blue_light"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:background="@color/wallet_holo_blue_light"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewTituloCons"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="CONSUMO DE COMBUSTÍVEL"
+                        android:textColor="@color/wallet_link_text_light"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textViewTituloCons"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewNotaCons"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="CONSUMO DE COMBUSTÍVEL"
-                    android:textColor="@color/wallet_link_text_light"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Nota: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewNotaCons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="Nota: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewClassCons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Classificação: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_marginTop="7dp"
-                android:background="@color/wallet_holo_blue_light"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/textViewTituloCO2"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewClassCons"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="DIÓXIDO DE CARBONO (CO2)"
-                    android:textColor="@color/wallet_link_text_light"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Classificação: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/wallet_holo_blue_light"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewNotaCO2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="Nota: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textViewTituloCO2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="DIÓXIDO DE CARBONO (CO2)"
+                        android:textColor="@color/wallet_link_text_light"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewClassCO2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Classificação: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_marginTop="7dp"
-                android:background="@color/wallet_holo_blue_light"
-                android:orientation="horizontal">
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textViewTituloVeloc"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewNotaCO2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="VELOCIDADE"
-                    android:textColor="@color/wallet_link_text_light"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Nota: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewNotaVeloc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="Nota: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewClassVeloc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Classificação: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_marginTop="7dp"
-                android:background="@color/wallet_holo_blue_light"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/textViewTituloAcelLong"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewClassCO2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="ACELERAÇÃO LONGITUDINAL"
-                    android:textColor="@color/wallet_link_text_light"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Classificação: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/wallet_holo_blue_light"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewNotaAcelLong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="Nota: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textViewTituloVeloc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="VELOCIDADE"
+                        android:textColor="@color/wallet_link_text_light"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewClassAcelLong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Classificação: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_marginTop="7dp"
-                android:background="@color/wallet_holo_blue_light"
-                android:orientation="horizontal">
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textViewTituloAcelTrans"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewNotaVeloc"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="ACELERAÇÃO TRANSVERSAL"
-                    android:textColor="@color/wallet_link_text_light"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Nota: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewNotaAcelTrans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="Nota: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewClassAcelTrans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Classificação: "
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_marginTop="7dp"
-                android:background="@color/black"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/textViewTituloCons"
-                    android:layout_width="0dp"
+                    android:id="@+id/textViewClassVeloc"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="RESULTADOS GERAIS"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Classificação: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/wallet_holo_blue_light"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewTituloAcelLong"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="ACELERAÇÃO LONGITUDINAL"
+                        android:textColor="@color/wallet_link_text_light"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewNotaAcelLong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Nota: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewClassAcelLong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Classificação: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/wallet_holo_blue_light"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewTituloAcelTrans"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="ACELERAÇÃO TRANSVERSAL"
+                        android:textColor="@color/wallet_link_text_light"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewNotaAcelTrans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Nota: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewClassAcelTrans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Classificação: "
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/black"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewTituloCons"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="RESULTADOS GERAIS"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewTotLitros"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="3dp"
+                    android:text="Total de Litros: "
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/textViewCO2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="3dp"
+                    android:text="CO2 g/km: "
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/textViewNomeVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Nome da Via: "
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/textViewVelocVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Vel. da Via: "
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/textViewVelocVeic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Vel. do Veículo: "
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <Button
+                    android:id="@+id/btnEncerrarColetar"
+                    android:layout_width="match_parent"
+                    android:layout_height="29dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorPrimary"
+                    android:onClick="btnEncerrarColetar"
+                    android:text="Encerrar Coleta de Dados"
+                    android:textColor="@color/white" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewTotLitros"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="3dp"
-                android:text="Total de Litros: "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewCO2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="3dp"
-                android:text="CO2 g/km: "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewNomeVia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Nome da Via: "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewVelocVia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Vel. da Via: "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewVelocVeic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Vel. do Veículo: "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <Button
-                android:id="@+id/btnEncerrarColetar"
-                android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
-                android:onClick="btnEncerrarColetar"
-                android:text="Encerrar Coleta de Dados"
-                android:textColor="@color/white" />
-        </LinearLayout>
         </ScrollView>
     </LinearLayout>
 </RelativeLayout>
