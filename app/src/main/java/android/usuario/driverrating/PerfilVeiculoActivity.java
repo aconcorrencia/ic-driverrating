@@ -222,8 +222,8 @@ public class PerfilVeiculoActivity extends AppCompatActivity implements AdapterV
                             public void onClick(DialogInterface dialog, int which) {
                                 editor = sharedPreferences.edit();
                                 editor.putFloat(SharedPreferencesKeys.FATOR_PENALIZACAO, fatPenaliz);
-                                editor.putLong("ID", id);
-                                editor.putFloat("FatorCorrecao", fatPenaliz);  //Nielson: 10/06/2017
+                                editor.putLong(SharedPreferencesKeys.ID_USER, id);
+                                //editor.putFloat("FatorCorrecao", fatPenaliz);  //Nielson: 10/06/2017
                                 editor.apply();
                                 Toast.makeText(PerfilVeiculoActivity.this, "Perfil selecionado como padrão e fator de Penalização: "+fatPenaliz, Toast.LENGTH_SHORT).show();
                                 finish();

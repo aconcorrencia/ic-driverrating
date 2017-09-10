@@ -25,7 +25,7 @@ public class GPSReader implements LocationListener {
     public void start() {
         if (locManager.isProviderEnabled(locProvider.getName())) {
             try {
-                locManager.requestLocationUpdates(locProvider.getName(), 5000, 1, this);
+                locManager.requestLocationUpdates(locProvider.getName(), 1000, 1, this);
             } catch (SecurityException e) {
                 e.printStackTrace();
             }

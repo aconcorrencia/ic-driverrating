@@ -196,7 +196,7 @@ public class ProcurarActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        this.unregisterReceiver(mReceiver);
+        //this.unregisterReceiver(mReceiver);
     }
 
     @Override

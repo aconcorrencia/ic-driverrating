@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.usuario.driverrating.domain.DadosLogClassificacao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by NIELSON on 22/06/2017.
  */
@@ -15,13 +20,14 @@ import android.usuario.driverrating.domain.DadosLogClassificacao;
 
 public class DataBaseLogClassificacao  extends SQLiteOpenHelper {
     private static final String NOME_BANCO = "logclass";
-    private static final int VERSAO_AUX = 1;
+    private static final int VERSAO_AUX = 2;
     public static final String TABELA = "tblogclass";
 
     private static final String ID = "_id";
-    public static final  String USUARIO = "int";
+    public static final  String ID_PERFIL = "id_perfil";
     public static final String DATA = "data";
     public static final String HORA = "hora";
+
 
     public DataBaseLogClassificacao(Context context) {
         super(context, NOME_BANCO, null, VERSAO_AUX);
@@ -31,9 +37,9 @@ public class DataBaseLogClassificacao  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABELA + " ("
                 + ID + " integer primary key autoincrement, "
-                + USUARIO + " int, "
-                + DATA + " Date, "
-                + HORA + " long "
+                + ID_PERFIL + " int, "
+                + DATA + " text,"
+                + HORA + " text"
                 + ")";
         db.execSQL(sql);
     }
@@ -44,15 +50,14 @@ public class DataBaseLogClassificacao  extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void inserirDadosLogClassificacao(DadosLogClassificacao dadosLogClassificacao) {
+    public long inserirDadosLogClassificacao(DadosLogClassificacao dadosLogClassificacao) {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(USUARIO, dadosLogClassificacao.getUsuario());
-        valores.put(DATA, String.valueOf(dadosLogClassificacao.getData()));
+        valores.put(ID_PERFIL, dadosLogClassificacao.getIdPerfil());
+        valores.put(DATA, dadosLogClassificacao.getData());
         valores.put(HORA, dadosLogClassificacao.getHora());
-
-        db.insert(TABELA, null, valores);
+        return db.insert(TABELA, null, valores);
     }
 
     //Recupera o último ID do Log.
@@ -61,7 +66,7 @@ public class DataBaseLogClassificacao  extends SQLiteOpenHelper {
 
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+USUARIO+"=" + id, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+ID_PERFIL+"=" + id, null);
 
             while (cursor.moveToNext()) {
 
@@ -76,4 +81,28 @@ public class DataBaseLogClassificacao  extends SQLiteOpenHelper {
         }
         return ultimoLog;
     }
+
+    public ArrayList<DadosLogClassificacao>  selectLogByUserId(long idPerfil) {
+        ArrayList<DadosLogClassificacao> mDadosLogClassificacao = new ArrayList<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA + " WHERE "+ID_PERFIL+"=" + idPerfil +" ORDER BY " +ID + " DESC", null);
+
+            while (cursor.moveToNext()) {
+                DadosLogClassificacao dadosLogClassificacao = new DadosLogClassificacao();
+                dadosLogClassificacao.setId(cursor.getInt(0));
+                dadosLogClassificacao.setIdPerfil(cursor.getInt(1));
+                dadosLogClassificacao.setData(cursor.getString(2));
+                dadosLogClassificacao.setHora(cursor.getString(3));
+                mDadosLogClassificacao.add(dadosLogClassificacao);
+            }
+            db.close();
+        } catch (SQLiteException e) {
+            System.out.println(e.getMessage());
+        }
+        return mDadosLogClassificacao;
+    }
+
+
+
 }

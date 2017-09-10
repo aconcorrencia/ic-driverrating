@@ -2,6 +2,7 @@ package android.usuario.driverrating;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -9,6 +10,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.usuario.driverrating.extra.SharedPreferencesKeys;
 import android.usuario.driverrating.extra.Utils;
 import android.util.Log;
@@ -39,6 +41,8 @@ import android.usuario.driverrating.domain.Veiculo;
 import android.usuario.driverrating.extra.Calculate;
 import android.usuario.driverrating.extra.ClassificadorFuzzy;
 import android.usuario.driverrating.extra.TratarVariaveisDimensoesClassificar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,6 +50,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.github.anastr.speedviewlib.ProgressiveGauge;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -56,8 +61,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+import static android.usuario.driverrating.extra.Utils.getDate;
+import static android.usuario.driverrating.extra.Utils.getHour;
 
 
 /**
@@ -105,8 +115,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     private int velocidadeMaximaDaVia = 0;
     private double menorNotaVelocidade = 1000;
     private String classeVelocidade = "";
-    private int contarClassVelocMedio = 0;
-    private int contarClassVelocRuim = 0;
     //**********
 
 
@@ -120,25 +128,44 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     private int tempoAtual = 0;
     private int tempoAnteriorAuxiliar = 0;
     private int janelaTempo;
-    private int acumulaTempo = 0;
-
-    private int numeroLog;
-    private int numeroJanela;
 
     private float distanciaPercorrida = 0;
     private GPSInfo lastGPSInfo = null;
     private boolean start = true;
     //***********
 
-    ArrayList<Double> dadosPercViag = new ArrayList<>();
+    private TextView
+            tvNotaCons,
+            tvClassCons,
 
-    Button btnEncerrarColetar;
+    tvNotaCO2,
+            tvClassCO2,
 
-    TextView txtLeituras, txtVelocidadeVia,txtRpm;
+    tvNotaVeloc,
+            tvClassVeloc,
 
+    tvNotaAcelLong,
+            tvClassAcelLong,
+
+
+    tvNotaAcelTrans,
+            tvClassAcelTrans,
+            tvTotLitros,
+            tvCO2gkm,
+            tvNomeVia,
+            tvVelocVia,
+            tvVelocVeic;
+
+
+    private TextView txtLeituras, txtVelocidadeVia, txtRpm;
     private int tipoCombustivel;
     private int leituras = 0;
     private ProgressiveGauge speedometer;
+    private long idLog;
+    boolean map = true;
+    boolean sound = true;
+    private boolean flag = true;
+    private MenuItem volume, earth_box,encerrar;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -146,7 +173,12 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_classificacao);
 
-        btnEncerrarColetar = (Button) findViewById(R.id.btnEncerrarColetar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setSubtitle("t");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
 
         SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
 
@@ -163,27 +195,11 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
 
         setupViews();
 
-
-
         if (tipoCombustivel == Utils.FLEX) {
             //Caso o tipo de combustível seja FLEX, deduz da quantidade de CO2 emitido pelo motorista o percentual de etanol.
             //Restaura as preferencias gravadas em tipo de combustível para coletar os dados dos dispositivos.
             percentualAlcool = sharedPreferences.getInt(SharedPreferencesKeys.PERCENTUAL_ALCOOL, Utils.PERCENTUAL_ALCOOL_DEFAUT);
         }
-
-        //Persiste na tabela de Logs da classificação. Gravando a Data e a Hora da Classificação.
-        //PersistirLog();
-
-        //Buscar o id do log atual.
-        //DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(this);
-        //ultimoLog = dataBaseLogClassificacao.selectUltimoLog(idPerfil);
-
-
-
-
-        //Restaura as preferencias gravadas em fator de penalização.
-
-
 
         obdReader = new OBDReader(this, this, mac);
         gpsReader = new GPSReader(this, this);
@@ -202,6 +218,29 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotation.setRepeatCount(Animation.INFINITE);
         tvImage.startAnimation(rotation);
+
+        //TextViews Main 2
+        tvNotaCons = (TextView) findViewById(R.id.textViewNotaCons);
+        tvClassCons = (TextView) findViewById(R.id.textViewClassCons);
+
+        tvNotaCO2 = (TextView) findViewById(R.id.textViewNotaCO2);
+        tvClassCO2 = (TextView) findViewById(R.id.textViewClassCO2);
+
+        tvNotaVeloc = (TextView) findViewById(R.id.textViewNotaVeloc);
+        tvClassVeloc = (TextView) findViewById(R.id.textViewClassVeloc);
+
+        tvNotaAcelLong = (TextView) findViewById(R.id.textViewNotaAcelLong);
+        tvClassAcelLong = (TextView) findViewById(R.id.textViewClassAcelLong);
+
+        tvNotaAcelTrans = (TextView) findViewById(R.id.textViewNotaAcelTrans);
+        tvClassAcelTrans = (TextView) findViewById(R.id.textViewClassAcelTrans);
+
+        tvTotLitros = (TextView) findViewById(R.id.textViewTotLitros);
+        tvCO2gkm = (TextView) findViewById(R.id.textViewCO2);
+        tvNomeVia = (TextView) findViewById(R.id.textViewNomeVia);
+        tvVelocVia = (TextView) findViewById(R.id.textViewVelocVia);
+        tvVelocVeic = (TextView) findViewById(R.id.textViewVelocVeic);
+
     }
 
     /***
@@ -221,11 +260,12 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     protected void onStart() {
         super.onStart();
         obdReader.start();
-  /*      gpsReader.start();
+        /*gpsReader.start();
         accReader.start(ACCReader.NORMAL);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        persistirLog();
         findViewById(R.id.lyAnimation).setVisibility(View.GONE);
         findViewById(R.id.lyMain).setVisibility(View.VISIBLE);*/
     }
@@ -247,8 +287,9 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     @Override
     public void obdUpdate(OBDInfo obdinfo, boolean ler) {
 
-        //********** Início - Consumo de Combustível **********:
+
         if (ler) {
+            //********** Início - Consumo de Combustível **********:
             //Calcular litros de combustível
             litrosCombustivelConsumidos = Calculate.getFuelflow(obdinfo, cilindrada, tempoAtual - tempoAnteriorAuxiliar, TratarVariaveisDimensoesClassificar.getDensityFuel(tipoCombustivel));
 
@@ -259,31 +300,27 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             acumulaLitrosCombustivelConsumidos += litrosCombustivelConsumidos;
 
             if (litrosCombustivelConsumidos > 0) {
-
                 //tvLitros.setText("Litros de Combustível: " +litrosCombustivelConsumidos + " ml");
-                //tvTotLitros.setText("Total de Litros: " +acumulaLitrosCombustivelConsumidos + " ml");
+                tvTotLitros.setText("Total de Litros: " + acumulaLitrosCombustivelConsumidos + " ml");
             }
-
-            // float testerpm;
-
-            //teste = obdinfo.getRpm();
 
             if (obdinfo.getSpeed() != 0) {
                 velocidadeMotorista = obdinfo.getSpeed();
             }
-        }else{
-            speedometer.speedTo(obdinfo.getSpeed(), 2000);
-            txtRpm.setText(""+obdinfo.getRpm());
+            //********** Final - Consumo Combustível **********
+        } else {
+            speedometer.speedTo(obdinfo.getSpeed(), 500);
+            txtRpm.setText("" + obdinfo.getRpm());
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    obdReader.read(OBDInfo.RPM|OBDInfo.SPEED, false);
+                    obdReader.read(OBDInfo.RPM | OBDInfo.SPEED, false);
                 }
             }, 2000);
-
+            tvVelocVeic.setText("Vel. do Veículo: " + obdinfo.getSpeed() + " Km/h");
         }
-        //********** Final - Consumo Combustível **********
+
     }
 
     public void ACCUpdate() {
@@ -302,10 +339,17 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         if (!overpassinfo.getMaxspeed().equals("unknown")) {
             velocidadeMaximaDaVia = Integer.parseInt(overpassinfo.getMaxspeed());
             txtVelocidadeVia.setText(velocidadeMaximaDaVia + " Km/h");
+            tvVelocVia.setText("Vel. da Via: " + overpassinfo.getMaxspeed());
         } else {
             velocidadeMaximaDaVia = 0;
             txtVelocidadeVia.setText("X");
+            tvVelocVia.setText("Vel. da Via: Desconhecida");
         }
+
+        if (!overpassinfo.getName().equals("unknown"))
+            tvNomeVia.setText("Nome da Via: " + overpassinfo.getName());
+        else
+            tvNomeVia.setText("Nome da Via: Desconhecida");
     }
 
     @Override
@@ -328,6 +372,10 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     @Override
     public void bluetoothConnected() {
         Toast.makeText(IniciarClassificacao.this, "Conectado!", Toast.LENGTH_SHORT).show();
+        persistirLog();
+        volume.setVisible(true);
+        earth_box.setVisible(true);
+        encerrar.setVisible(true);
         gpsReader.start();
         accReader.start(ACCReader.NORMAL);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -338,7 +386,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         obdReader.read(OBDInfo.RPM, false);
     }
 
-    private boolean flag = true;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -350,7 +398,7 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         marker.setPosition(myLocation);
         if (flag) {
             flag = false;
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15.f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 16.f));
         } else {
             CameraPosition cam = mMap.getCameraPosition();
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, cam.zoom));
@@ -372,8 +420,6 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             Location lastLocation, currentLocation;
             lastLocation = lastGPSInfo.getLocation();
             currentLocation = gpsInfo.getLocation();
-            dadosPercViag.add(gpsInfo.getLongitude());
-            dadosPercViag.add(gpsInfo.getLatitude());
 
             obdReader.read(OBDInfo.RPM | OBDInfo.SPEED | OBDInfo.INTAKE_PRESSURE | OBDInfo.INTAKE_TEMP | OBDInfo.ABS_LOAD, true); //Faz a leitura dos dados do dispositivo OBD. Ativa o método obdUpdate.
 
@@ -381,88 +427,86 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
             lastGPSInfo = gpsInfo;
             overpassReader.read(gpsInfo.getLatitude(), gpsInfo.getLongitude(), 10);
 
+            if (velocidadeMaximaDaVia != 0) {
+                ClassificadorFuzzy classificadorFuzzy = classificarVelocidadeParcial();
+                populaTextView(tvNotaVeloc, tvClassVeloc, classificadorFuzzy);
+            }
+
             ACCUpdate();
 
-            if ((tempoAtual - tempoAnterior) >= (janelaTempo)) {
+            if ((tempoAtual - tempoAnterior) >= (janelaTempo * 1000)) {
                 leituras++;
-                txtLeituras.setText("" + leituras);
-                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, 200);
-                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500); // 500 is duration in ms
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(new LatLng(gpsInfo.getLatitude(), gpsInfo.getLongitude()));
+                markerOptions.title("Leitura: "+leituras);
 
+                mMap.addMarker(markerOptions);
+                txtLeituras.setText("" + leituras);
+                if (sound) {
+                    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, 200);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500); // 500 is duration in ms
+                }
                 DadosColetadosSensores dadosColetadosSensores = populaDadosColetadosSensores();
-                persistirDadosColhidos(dadosColetadosSensores);
+                //persistirDadosColhidos(dadosColetadosSensores); Não irá persistir esses dados
 
                 DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
-
+                dadosResultadosClassificacaoMotorista.setId_log(idLog);
 
                 if (dadosColetadosSensores.getLitrosCombustivel() != 0.0) {
                     ClassificadorFuzzy classificadorFuzzy = TratarVariaveisDimensoesClassificar.classificarConsumoDeCombustivel(dadosColetadosSensores, veiculo);
                     dadosResultadosClassificacaoMotorista.setNota_cons_comb(classificadorFuzzy.getNota());
                     dadosResultadosClassificacaoMotorista.setClas_cons_comb(classificadorFuzzy.getClasse());
+                    populaTextView(tvNotaCons, tvClassCons, classificadorFuzzy);
 
                     //Classificação do motorista através da variável: "EMISSÃO DE ÓXIDO DE CARBONO"
                     classificadorFuzzy = TratarVariaveisDimensoesClassificar.classificarEmissaoCO2(dadosColetadosSensores, veiculo, percentualAlcool, fatorPenalizacaoCO2);
                     dadosResultadosClassificacaoMotorista.setNota_emis_co2(classificadorFuzzy.getNota());
                     dadosResultadosClassificacaoMotorista.setClas_emis_co2(classificadorFuzzy.getClasse());
+                    populaTextView(tvNotaCO2, tvClassCO2, classificadorFuzzy);
                 }
-
                 if (acclongitudinal != 0) {
                     ClassificadorFuzzy classificadorFuzzy = TratarVariaveisDimensoesClassificar.classificarAceleracaoLongitudinal(acclongitudinal);
                     dadosResultadosClassificacaoMotorista.setNota_acel_long(classificadorFuzzy.getNota());
                     dadosResultadosClassificacaoMotorista.setClas_acel_long(classificadorFuzzy.getClasse());
+                    populaTextView(tvNotaAcelLong, tvClassAcelLong, classificadorFuzzy);
                 }
 
                 if (acctransversal != 0) {
                     ClassificadorFuzzy classificadorFuzzy = TratarVariaveisDimensoesClassificar.classificarAceleracaoLongitudinal(acctransversal);
                     dadosResultadosClassificacaoMotorista.setNota_acel_trans(classificadorFuzzy.getNota());
                     dadosResultadosClassificacaoMotorista.setClas_acel_trans(classificadorFuzzy.getClasse());
+                    populaTextView(tvNotaAcelTrans, tvClassAcelTrans, classificadorFuzzy);
                 }
 
-        /*        // Controlador de número de janela.
-                DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
-                //ultimaJanela = dataBaseResultadosClassificacaoMotorista.selectUltimaJanela(ultimoLog);
-                ultimaJanela = dataBaseResultadosClassificacaoMotorista.selectUltimaJanela();
+                long idClassifMot = persistirClassificacoesMotorista(dadosResultadosClassificacaoMotorista);
 
-                if (ultimaJanela == 0) {
-                    numeroJanela = 1;
-                } else {
-                    numeroJanela = ultimaJanela + 1;
-                }
-                dadosResultadosClassificacaoMotorista.setId_janclasmot(numeroJanela);
-                dadosResultadosClassificacaoMotorista.setId_log(ultimoLog);
-                Toast.makeText(this, "CONS: " + dadosResultadosClassificacaoMotorista.getClas_cons_comb(), Toast.LENGTH_SHORT).show();*/
-                //Persiste os resultados das classificações a cada janela, com a identificação de percurso.
-                //persistirClassificacoesMotorista(dadosResultadosClassificacaoMotorista);
-
-                /** Persiste as coordenadas do percurso da janela atual. Deve ser feita após a persistencia
-                 *  da classificação do motorista, pois, é necessário aguardar número atual da janela.
-                 */
-
-                //PersistirPercursosViagem();
-
+                DadosPercursosViagem dadosPercursosViagem = new DadosPercursosViagem();
+                dadosPercursosViagem.setId_janelaclassmot(idClassifMot);
+                dadosPercursosViagem.setLatitude(gpsInfo.getLatitude());
+                dadosPercursosViagem.setLongitude(gpsInfo.getLongitude());
+                persistirPercursosViagem(dadosPercursosViagem);
                 //Zera os atributos acumuladores dentro da janela.
                 distanciaPercorrida = 0;
                 acumulaLitrosCombustivelConsumidos = 0;
                 tempoAnterior = 0;
                 tempoAtual = 0;
                 tempoAnteriorAuxiliar = 0;
-
                 menorNotaVelocidade = 1000;
-
                 classeVelocidade = "";
-                contarClassVelocMedio = 0;
-                contarClassVelocRuim = 0;
-
-                acumulaTempo = 0;
-
                 acclongitudinal = 0;
                 acctransversal = 0;
-
-                dadosPercViag.clear();
-
             }
         }
+    }
 
+    private void populaTextView(TextView nota, TextView classe, ClassificadorFuzzy classificadorFuzzy) {
+        if (classificadorFuzzy != null) {
+            nota.setText("Nota: " + classificadorFuzzy.getNota());
+            classe.setText("Classificação: " + classificadorFuzzy.getClasse());
+        } else {
+            nota.setText("Nota: X");
+            classe.setText("Classificação: X");
+        }
     }
 
     private ClassificadorFuzzy classificarVelocidadeParcial() {
@@ -499,27 +543,18 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         dataBaseColetadosSensores.inserirDadosColetadosSensores(dadosColetadosSensores);
     }
 
-    private void PersistirPercursosViagem() {
-        for (int i = 0; i < dadosPercViag.size(); i++) {
+    private void persistirPercursosViagem(DadosPercursosViagem dadosPercursosViagem) {
+        DataBasePercursosViagem dataBasePercursosViagem = new DataBasePercursosViagem(IniciarClassificacao.this);
+        dataBasePercursosViagem.inserirDadosPercursosViagem(dadosPercursosViagem);
 
-            // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
-            DadosPercursosViagem dadosPercursosViagem = new DadosPercursosViagem();
-
-            dadosPercursosViagem.setId_janelaclassmot(numeroJanela);
-            dadosPercursosViagem.setLongitude(dadosPercViag.get(0));
-            dadosPercursosViagem.setLatitude(dadosPercViag.get(1));
-
-            DataBasePercursosViagem dataBasePercursosViagem = new DataBasePercursosViagem(IniciarClassificacao.this);
-            dataBasePercursosViagem.inserirDadosPercursosViagem(dadosPercursosViagem);
-        }
     }
 
-    private void persistirClassificacoesMotorista(DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista) {
+    private long persistirClassificacoesMotorista(DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista) {
 
         // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
 
         DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(IniciarClassificacao.this);
-        dataBaseResultadosClassificacaoMotorista.inserirDadosResultClassMot(dadosResultadosClassificacaoMotorista);
+        return dataBaseResultadosClassificacaoMotorista.inserirDadosResultClassMot(dadosResultadosClassificacaoMotorista);
     }
 
     public void btnEncerrarColetar(View view) {
@@ -533,22 +568,20 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
     }
 
     // Será utilizado a base de dados para armazenamento dos logs de classificação.
-    private void PersistirLog() {
-
-        DadosLogClassificacao dadosLogClassificacao = new DadosLogClassificacao();
-
-        dadosLogClassificacao.setUsuario((int) idPerfil);
-        Date dataOcorrencia = new Date();
-        dadosLogClassificacao.setData(dataOcorrencia);
-        dadosLogClassificacao.setHora(dataOcorrencia.getTime());
-
+    private void persistirLog() {
         DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(IniciarClassificacao.this);
-        dataBaseLogClassificacao.inserirDadosLogClassificacao(dadosLogClassificacao);
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        DadosLogClassificacao dadosLogClassificacao = new DadosLogClassificacao();
+        dadosLogClassificacao.setIdPerfil(idPerfil);
+        dadosLogClassificacao.setData(getDate(cal));
+        dadosLogClassificacao.setHora(getHour(cal));
+        idLog = dataBaseLogClassificacao.inserirDadosLogClassificacao(dadosLogClassificacao);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "onMapReady", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // desabilita mapas indoor e 3D
@@ -569,4 +602,82 @@ public class IniciarClassificacao extends AppCompatActivity implements IOBDBluet
         marker = mMap.addMarker(markerOptions);
         marker.setVisible(false);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_iniciar_class, menu);
+        volume = menu.findItem(R.id.volume);
+        earth_box= menu.findItem(R.id.earth_box);
+        encerrar= menu.findItem(R.id.encerrar);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.earth_box:
+                if (map) {
+                    item.setIcon(R.drawable.earth_box_off);
+                    findViewById(R.id.lyMain).setVisibility(View.GONE);
+                    findViewById(R.id.lyMain2).setVisibility(View.VISIBLE);
+                    map = false;
+                } else {
+                    item.setIcon(R.drawable.earth_box);
+                    findViewById(R.id.lyMain).setVisibility(View.VISIBLE);
+                    findViewById(R.id.lyMain2).setVisibility(View.GONE);
+                    map = true;
+                }
+                break;
+            case R.id.volume:
+                if (sound) {
+                    item.setIcon(R.drawable.volume_off);
+                    sound = false;
+                } else {
+                    item.setIcon(R.drawable.volume_on);
+                    sound = true;
+                }
+                break;
+            case R.id.encerrar:
+                encerrarClassificacao();
+                break;
+
+            case android.R.id.home:
+                alertEncerrarClassificacao();
+                break;
+
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        alertEncerrarClassificacao();
+    }
+
+    public void alertEncerrarClassificacao() {
+        new android.app.AlertDialog.Builder(this)
+                .setMessage("Deseja encerrar classificação?")
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        encerrarClassificacao();
+                    }
+                })
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
+    public void encerrarClassificacao() {
+        start = false;
+        Toast.makeText(IniciarClassificacao.this, "Classificação Encerrada.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+
 }

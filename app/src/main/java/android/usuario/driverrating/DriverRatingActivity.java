@@ -1,6 +1,7 @@
 package android.usuario.driverrating;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,7 +31,7 @@ import com.joooonho.SelectableRoundedImageView;
 public class DriverRatingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RelativeLayout btnIniciarClassificacao;
+    private RelativeLayout btnIniciarClassificacao,btnResultadosClassificacao;
 
     private SharedPreferences sharedPreferences;
 
@@ -70,10 +73,19 @@ public class DriverRatingActivity extends AppCompatActivity
 
 
         btnIniciarClassificacao = (RelativeLayout) findViewById(R.id.btnIniciarClassificacao);
+        btnResultadosClassificacao = (RelativeLayout) findViewById(R.id.btnResultadosClassificacao);
         btnIniciarClassificacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iniciarClassificacao();
+            }
+        });
+
+        btnResultadosClassificacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(DriverRatingActivity.this, ResultadosClassificacao.class);
+                startActivity(it);
             }
         });
         navigationView.setNavigationItemSelectedListener(this);
@@ -122,7 +134,19 @@ public class DriverRatingActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_creditos);
+            dialog.setCancelable(true);
+            Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+            btnOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -131,10 +155,12 @@ public class DriverRatingActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int id = item.getItemId();
         if (id == R.id.ic_car) {
             Intent it = new Intent(DriverRatingActivity.this, ListarPerfis.class);
             startActivity(it);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.ic_bluetooth) {
             Intent it = new Intent(DriverRatingActivity.this, ProcurarActivity.class);
             startActivity(it);
@@ -144,13 +170,7 @@ public class DriverRatingActivity extends AppCompatActivity
         } else if (id == R.id.ic_tipoCombustivel) {
             Intent it = new Intent(DriverRatingActivity.this, TipoCombustivel.class);
             startActivity(it);
-        } else if (id == R.id.ic_ClassificacaoGeral) {
-            Intent it = new Intent(DriverRatingActivity.this, ResultadosClassificacao.class);
-            startActivity(it);
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

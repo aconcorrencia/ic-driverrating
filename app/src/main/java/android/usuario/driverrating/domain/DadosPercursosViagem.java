@@ -6,7 +6,7 @@ package android.usuario.driverrating.domain;
 
 public class DadosPercursosViagem {
     private int id;
-    private int id_janelaclassmot;
+    private long id_janelaclassmot;
     private double longitude;
     private double latitude;
 
@@ -18,11 +18,11 @@ public class DadosPercursosViagem {
         this.id = id;
     }
 
-    public int getId_janelaclassmot() {
+    public long getId_janelaclassmot() {
         return id_janelaclassmot;
     }
 
-    public void setId_janelaclassmot(int id_janelaclassmot) {
+    public void setId_janelaclassmot(long id_janelaclassmot) {
         this.id_janelaclassmot = id_janelaclassmot;
     }
 

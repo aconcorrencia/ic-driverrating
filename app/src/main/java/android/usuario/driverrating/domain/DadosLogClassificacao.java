@@ -7,10 +7,11 @@ import java.util.Date;
  */
 
 public class DadosLogClassificacao {
+
     private int id;
-    private int usuario;
-    private Date data;
-    private long hora;
+    private long idPerfil;
+    private String data;
+    private String hora;
 
     public int getId() {
         return id;
@@ -20,27 +21,27 @@ public class DadosLogClassificacao {
         this.id = id;
     }
 
-    public int getUsuario() {
-        return usuario;
+    public long getIdPerfil() {
+        return idPerfil;
     }
 
-    public void setUsuario(int usuario) {
-        this.usuario = usuario;
+    public void setIdPerfil(long idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public long getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(long hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -48,9 +49,9 @@ public class DadosLogClassificacao {
     public String toString() {
         return "DadosLogClassificacao{" +
                 "id=" + id +
-                ", usuario=" + usuario +
-                ", data=" + data +
-                ", hora=" + hora +
+                ", idPerfil=" + idPerfil +
+                ", data='" + data + '\'' +
+                ", hora='" + hora + '\'' +
                 '}';
     }
 }

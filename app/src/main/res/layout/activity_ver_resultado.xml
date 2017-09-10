@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="android.usuario.driverrating.VerResultadoActivity">
+
+    <LinearLayout
+        android:id="@+id/abas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnMapa"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:background="@android:color/transparent"
+            android:text="Mapa"
+            android:textColor="#1d80f0" />
+
+        <View
+            android:id="@+id/div_bottom"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_top"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#D3D3D3"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/btnResultado"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:background="@android:color/transparent"
+            android:text="Resultado"
+            android:textColor="#1d80f0"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/abas" />
+
+    <ScrollView
+        android:id="@+id/lyResultados"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/abas"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:background="@color/wallet_holo_blue_light"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewTituloCons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="CONSUMO DE COMBUSTÍVEL"
+                    android:textColor="@color/wallet_link_text_light"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewNotaCons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="Nota: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/wallet_holo_blue_light"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewTituloCO2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="DIÓXIDO DE CARBONO (CO2)"
+                    android:textColor="@color/wallet_link_text_light"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewNotaCO2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="Nota: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/wallet_holo_blue_light"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewTituloVeloc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="VELOCIDADE"
+                    android:textColor="@color/wallet_link_text_light"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewNotaVeloc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="Nota: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/wallet_holo_blue_light"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewTituloAcelLong"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="ACELERAÇÃO LONGITUDINAL"
+                    android:textColor="@color/wallet_link_text_light"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewNotaAcelLong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="Nota: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/wallet_holo_blue_light"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewTituloAcelTrans"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="ACELERAÇÃO TRANSVERSAL"
+                    android:textColor="@color/wallet_link_text_light"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewNotaAcelTrans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="Nota: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

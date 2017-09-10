@@ -1,5 +1,7 @@
 package android.usuario.driverrating.extra;
 
+import java.util.Calendar;
+
 /**
  * Created by Sillas on 04/09/2017.
  */
@@ -22,5 +24,17 @@ public class Utils {
                 return "Flex";
         }
         return "";
+    }
+
+    public static String getHour(Calendar c) {
+        String hour = String.format("%02d", c.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", c.get(Calendar.MINUTE));
+        return hour;
+    }
+
+    public static String getDate(Calendar c) {
+        int month = c.get(Calendar.MONTH);
+        month++;
+        String date = String.format("%02d", c.get(Calendar.DAY_OF_MONTH)) + "/" + String.format("%02d", month) + "/" + c.get(Calendar.YEAR);
+        return date;
     }
 }

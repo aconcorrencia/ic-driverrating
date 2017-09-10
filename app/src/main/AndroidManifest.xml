@@ -14,9 +14,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
 
     <permission
         android:name="android.usuario.driverrating.permission.MAPS_RECEIVE"
@@ -46,7 +44,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".IniciarClassificacao"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"/>
         <activity
             android:name=".ListarPerfis"
             android:screenOrientation="portrait"
@@ -54,7 +53,7 @@
         <activity
             android:name=".ProcurarActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme2" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -64,7 +63,6 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
 
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -72,11 +70,10 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
             android:name=".GPS.MapsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
         <activity android:name=".JanelaTempo" />
         <activity
             android:name=".TipoCombustivel"
@@ -84,7 +81,9 @@
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".ResultadosClassificacao"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"/>
+        <activity android:name=".VerResultadoActivity"></activity>
     </application>
 
 </manifest>

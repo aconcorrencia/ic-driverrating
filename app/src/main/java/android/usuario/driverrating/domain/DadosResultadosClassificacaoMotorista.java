@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class DadosResultadosClassificacaoMotorista {
     private int id_janclasmot;
-    private int id_log;
+    private long id_log;
 
     private double nota_cons_comb;
     private String clas_cons_comb;
@@ -33,11 +33,11 @@ public class DadosResultadosClassificacaoMotorista {
         this.id_janclasmot = id_janclasmot;
     }
 
-    public int getId_log() {
+    public long getId_log() {
         return id_log;
     }
 
-    public void setId_log(int id_log) {
+    public void setId_log(long id_log) {
         this.id_log = id_log;
     }
 

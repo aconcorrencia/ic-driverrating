@@ -1,46 +1,49 @@
 package android.usuario.driverrating;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.usuario.driverrating.adapter.ListViewAdapter;
+import android.usuario.driverrating.adapter.RecyclerViewOnClickListenerHack;
+import android.usuario.driverrating.adapter.ResultadosAdapter;
+import android.usuario.driverrating.database.DataBaseLogClassificacao;
+import android.usuario.driverrating.database.DataBasePerfis;
 import android.usuario.driverrating.database.DataBaseResultadosClassificacaoMotorista;
+import android.usuario.driverrating.domain.DadosColetadosSensores;
+import android.usuario.driverrating.domain.DadosLogClassificacao;
 import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista;
+import android.usuario.driverrating.domain.Veiculo;
 import android.usuario.driverrating.extra.ClassificadorEntradasSaidas;
 import android.usuario.driverrating.extra.ClassificadorFuzzy;
+import android.usuario.driverrating.extra.SharedPreferencesKeys;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ResultadosClassificacao extends AppCompatActivity {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import static android.usuario.driverrating.extra.Utils.getDate;
+import static android.usuario.driverrating.extra.Utils.getHour;
+
+public class ResultadosClassificacao extends AppCompatActivity implements RecyclerViewOnClickListenerHack {
+
+    protected RecyclerView mRecyclerView;
     private DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista;
-
-    TextView tvTituloCons,
-             tvNotaCons,
-             tvClassCons,
-
-    tvTituloCO2,
-            tvNotaCO2,
-            tvClassCO2,
-
-    tvTituloVeloc,
-            tvNotaVeloc,
-            tvClassVeloc,
-
-    tvTituloAccLong,
-            tvNotaAccLong,
-            tvClassAccLong,
-
-    tvTituloAccTrans,
-            tvNotaAccTrans,
-            tvClassAccTrans,
-
-    tvNotaGeral,
-    tvClassGeral;
-
-    float notasGerais = 0;
-
+    private ArrayList<DadosLogClassificacao> mList;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -48,71 +51,85 @@ public class ResultadosClassificacao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_classificacao);
 
-        tvTituloCons = (TextView) findViewById(R.id.tvTituloCons);
-        tvNotaCons = (TextView) findViewById(R.id.tvNotaCons);
-        tvClassCons = (TextView) findViewById(R.id.tvClassCons);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setSubtitle("t");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        tvTituloCO2 = (TextView) findViewById(R.id.tvTituloCO2);
-        tvNotaCO2 = (TextView) findViewById(R.id.tvNotaCO2);
-        tvClassCO2 = (TextView) findViewById(R.id.tvClassCO2);
+        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesKeys.DATABASE, MODE_PRIVATE);
+        long idPerfil = sharedPreferences.getLong(SharedPreferencesKeys.ID_USER, -1);
+        DataBaseLogClassificacao dataBaseLogClassificacao = new DataBaseLogClassificacao(this);
 
-        tvTituloVeloc = (TextView) findViewById(R.id.tvTituloVeloc);
-        tvNotaVeloc = (TextView) findViewById(R.id.tvNotaVeloc);
-        tvClassVeloc = (TextView) findViewById(R.id.tvClassVeloc);
+        mList = dataBaseLogClassificacao.selectLogByUserId(idPerfil);
+        if (mList.size() > 0) {
+            mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecyclerView.setLayoutManager(llm);
+            ResultadosAdapter adapter = new ResultadosAdapter(this, mList);
+            adapter.setRecyclerViewOnClickListenerHack(this);
+            mRecyclerView.setAdapter(adapter);
+        }else{
+            findViewById(R.id.lyNoResults).setVisibility(View.VISIBLE);
+        }
 
-        tvTituloAccLong = (TextView) findViewById(R.id.tvTituloAcelLong);
-        tvNotaAccLong = (TextView) findViewById(R.id.tvNotaAccLong);
-        tvClassAccLong = (TextView) findViewById(R.id.tvClassAccLong);
 
-        tvTituloAccTrans = (TextView) findViewById(R.id.tvTituloAcelTrans);
-        tvNotaAccTrans = (TextView) findViewById(R.id.tvNotaAccTrans);
-        tvClassAccTrans = (TextView) findViewById(R.id.tvClassAccTrans);
+        /*dadosResultadosClassificacaoMotorista= new DadosResultadosClassificacaoMotorista();
+        dadosResultadosClassificacaoMotorista.setId_log(9);
+        dadosResultadosClassificacaoMotorista.setNota_acel_trans(15);
+        dadosResultadosClassificacaoMotorista.setClas_velocid("CLASS");
+        long idClassifMot = persistirClassificacoesMotorista(dadosResultadosClassificacaoMotorista);
+        Log.w("ID","I: "+idClassifMot);*/
 
-        //Armazena o número do log desejado;
-        int logClass = 1;
-        DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
-        dataBaseResultadosClassificacaoMotorista.selectResultadosClassificacaoByIdLog(logClass);
-/*
-        //Envia para o classificador, os dados de saída.
-        ClassificadorEntradasSaidas.SaidasParaClassificador();
-
-        // Envia para o classificador, os dados de Entradas gerais.
-        ClassificadorEntradasSaidas.EntradasParaGerais();
-
-        ClassificadorFuzzy.calcularNotas("geraisConsumo", notaConsumoCombustivelGeral);
-        tvNotaCons.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
-        tvClassCons.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaConsumoCombustivelGeral;
-
-        ClassificadorFuzzy.calcularNotas("geraisCO2", notaEmissaoCO2Geral);
-        tvNotaCO2.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
-        tvClassCO2.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaEmissaoCO2Geral;
-
-        // Envia para o classificador, os dados de Entrada da variável Velocidade.
-        ClassificadorFuzzy.calcularNotas("geraisVelocidade", notaVelocidadeGeral);
-        tvNotaVeloc.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
-        tvClassVeloc.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaVelocidadeGeral;
-
-        ClassificadorFuzzy.calcularNotas("geraisAcc", notaAceleracaoLongitudinalGeral);
-        tvNotaAccLong.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
-        tvClassAccLong.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaAceleracaoLongitudinalGeral;
-
-        ClassificadorFuzzy.calcularNotas("geraisAcc", notaAceleracaoTransversalGeral);
-        tvNotaAccTrans.setText("Nota: "+new DecimalFormat("0.00").format(ClassificadorFuzzy.nota));
-        tvClassAccTrans.setText("Classificação: "+ClassificadorFuzzy.classe);
-        notasGerais += notaAceleracaoTransversalGeral;*/
-
-        double mediaNotasGerais = notasGerais / 5;
-
-        tvNotaGeral.setText("Nota: "+ mediaNotasGerais); //new DecimalFormat("0.00").format(mediaNotasGerais));
 
     }
 
-    public void btnRetornarGerais (View view) {
+    private long persistirClassificacoesMotorista(DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista) {
+
+        // Será utilizado a base de dados para armazenamento das classificações efetuadas a cada valor da janela de tempo estabelecida pelo motorista.
+
+        DataBaseResultadosClassificacaoMotorista dataBaseResultadosClassificacaoMotorista = new DataBaseResultadosClassificacaoMotorista(this);
+        return dataBaseResultadosClassificacaoMotorista.inserirDadosResultClassMot(dadosResultadosClassificacaoMotorista);
+    }
+
+
+    public void btnRetornarGerais(View view) {
         finish();
     }
 
+    @Override
+    public void onClickListener(View view, int position) {
+
+        switch (view.getId()) {
+            case R.id.btnVer:
+                Intent it = new Intent(this, VerResultadoActivity.class);
+                it.putExtra("ID_LOG", mList.get(position).getId());
+                startActivity(it);
+                break;
+
+            case R.id.btnApagar:
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void onLongPressClickListener(View view, int position) {
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

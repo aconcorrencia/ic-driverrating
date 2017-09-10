@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista;
 
+import java.util.ArrayList;
+
 /**
  * Created by NIELSON on 22/06/2017.
  */
@@ -15,7 +17,7 @@ import android.usuario.driverrating.domain.DadosResultadosClassificacaoMotorista
 
 public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
     private static final String NOME_BANCO = "resultclassmot";
-    private static final int VERSAO_AUX = 1;
+    private static final int VERSAO_AUX = 2;
     private static final String TABELA = "tbresultclassmot";
 
     private static final String ID = "_idjanclasmot";
@@ -33,11 +35,7 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
 
     private Context context;
 
-    private float notaConsComb;
-    private float notaEmissaoCO2;
-    private float notaVelocidade;
-    private float notaAccLong;
-    private float notaAccTrans;
+
 
     public DataBaseResultadosClassificacaoMotorista(Context context) {
         super(context, NOME_BANCO, null, VERSAO_AUX);
@@ -47,7 +45,7 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABELA + " ("
-                + ID + " int, "
+                + ID + " integer primary key autoincrement, "
                 + ID_LOG + " int, "
                 + NOTACONSCOMB + " double, "
                 + CLASCONSCOMB + " text, "
@@ -61,6 +59,7 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
                 + CLASACELTRANS + " text "
                 + ")";
         db.execSQL(sql);
+
     }
 
     @Override
@@ -69,11 +68,10 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void inserirDadosResultClassMot(DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista) {
+    public long inserirDadosResultClassMot(DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista) {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ID, dadosResultadosClassificacaoMotorista.getId_janclasmot());
         valores.put(ID_LOG, dadosResultadosClassificacaoMotorista.getId_log());
         valores.put(NOTACONSCOMB, dadosResultadosClassificacaoMotorista.getNota_cons_comb());
         valores.put(CLASCONSCOMB, dadosResultadosClassificacaoMotorista.getClas_cons_comb());
@@ -86,34 +84,100 @@ public class DataBaseResultadosClassificacaoMotorista extends SQLiteOpenHelper {
         valores.put(NOTAACELTRANS, dadosResultadosClassificacaoMotorista.getNota_acel_trans());
         valores.put(CLASACELTRANS, dadosResultadosClassificacaoMotorista.getClas_acel_trans());
 
-        db.insert(TABELA, null, valores);
+        return db.insert(TABELA, null, valores);
     }
 
-    public DadosResultadosClassificacaoMotorista selectResultadosClassificacaoByIdLog(long idlog) {
+    public ArrayList<DadosResultadosClassificacaoMotorista> selectResultadosClassificacaoByIdLog(long idlog) {
+        ArrayList<DadosResultadosClassificacaoMotorista> mDadosResultadosClassificacaoMotorista = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELA + " WHERE " + ID_LOG + " = " + idlog, null);
+        int count=cursor.getCount();
+
+        if (count > 0){
+            while (cursor.moveToNext()) {
+                DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
+                dadosResultadosClassificacaoMotorista.setId_janclasmot(cursor.getInt(0));
+                dadosResultadosClassificacaoMotorista.setId_log(cursor.getLong(1));
+                dadosResultadosClassificacaoMotorista.setNota_cons_comb(cursor.getDouble(2));
+                dadosResultadosClassificacaoMotorista.setClas_cons_comb(cursor.getString(3));
+
+                dadosResultadosClassificacaoMotorista.setNota_emis_co2(cursor.getDouble(4));
+                dadosResultadosClassificacaoMotorista.setClas_emis_co2(cursor.getString(5));
+
+                dadosResultadosClassificacaoMotorista.setNota_velocid(cursor.getDouble(6));
+                dadosResultadosClassificacaoMotorista.setClas_velocid(cursor.getString(7));
+
+                dadosResultadosClassificacaoMotorista.setNota_acel_long(cursor.getDouble(8));
+                dadosResultadosClassificacaoMotorista.setClas_acel_long(cursor.getString(9));
+
+                dadosResultadosClassificacaoMotorista.setNota_acel_trans(cursor.getDouble(10));
+                dadosResultadosClassificacaoMotorista.setClas_acel_trans(cursor.getString(11));
+                mDadosResultadosClassificacaoMotorista.add(dadosResultadosClassificacaoMotorista);
+
+            }
+        }
+        db.close();
+        return mDadosResultadosClassificacaoMotorista;
+    }
+
+    public ArrayList<DadosResultadosClassificacaoMotorista> selectAllResultadosClassificacaoByIdLog(long idlog) {
+        ArrayList<DadosResultadosClassificacaoMotorista> mDadosResultadosClassificacaoMotorista = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELA, null);
+        int count=cursor.getCount();
+
+        if (count > 0){
+            while (cursor.moveToNext()) {
+                DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
+                dadosResultadosClassificacaoMotorista.setId_janclasmot(cursor.getInt(0));
+                dadosResultadosClassificacaoMotorista.setId_log(cursor.getLong(1));
+                dadosResultadosClassificacaoMotorista.setNota_cons_comb(cursor.getDouble(2));
+                dadosResultadosClassificacaoMotorista.setClas_cons_comb(cursor.getString(3));
+
+                dadosResultadosClassificacaoMotorista.setNota_emis_co2(cursor.getDouble(4));
+                dadosResultadosClassificacaoMotorista.setClas_emis_co2(cursor.getString(5));
+
+                dadosResultadosClassificacaoMotorista.setNota_velocid(cursor.getDouble(6));
+                dadosResultadosClassificacaoMotorista.setClas_velocid(cursor.getString(7));
+
+                dadosResultadosClassificacaoMotorista.setNota_acel_long(cursor.getDouble(8));
+                dadosResultadosClassificacaoMotorista.setClas_acel_long(cursor.getString(9));
+
+                dadosResultadosClassificacaoMotorista.setNota_acel_trans(cursor.getDouble(10));
+                dadosResultadosClassificacaoMotorista.setClas_acel_trans(cursor.getString(11));
+                mDadosResultadosClassificacaoMotorista.add(dadosResultadosClassificacaoMotorista);
+
+            }
+        }
+        db.close();
+        return mDadosResultadosClassificacaoMotorista;
+    }
+
+    public DadosResultadosClassificacaoMotorista selectMediaResultadosClassificacaoByIdLog(long idlog) {
         DadosResultadosClassificacaoMotorista dadosResultadosClassificacaoMotorista = new DadosResultadosClassificacaoMotorista();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELA + " WHERE " + ID_LOG + " = " + idlog, null);
+        float notaConsComb =0;
+        float notaEmissaoCO2 =0;
+        float notaVelocidade =0;
+        float notaAccLong =0;
+        float notaAccTrans =0;
 
-        notaConsComb = 0;
-        notaEmissaoCO2 = 0;
-        notaVelocidade = 0;
-        notaAccLong = 0;
-        notaAccTrans = 0;
 
         int count=cursor.getCount();
 
         if (count > 0){
 
-           int quant = 0;
+            int quant = 0;
 
-           while (cursor.moveToNext()) {
-              quant+=1;
-              notaConsComb += cursor.getDouble(2);
-              notaEmissaoCO2 += cursor.getDouble(4);
-              notaVelocidade += cursor.getDouble(6);
-              notaAccLong += cursor.getDouble(8);
-              notaAccTrans += cursor.getDouble(10);
-           }
+            while (cursor.moveToNext()) {
+                quant+=1;
+                notaConsComb += cursor.getDouble(2);
+                notaEmissaoCO2 += cursor.getDouble(4);
+                notaVelocidade += cursor.getDouble(6);
+                notaAccLong += cursor.getDouble(8);
+                notaAccTrans += cursor.getDouble(10);
+            }
             dadosResultadosClassificacaoMotorista.setNota_cons_comb(notaConsComb / quant);
             dadosResultadosClassificacaoMotorista.setNota_emis_co2(notaEmissaoCO2 / quant);
             dadosResultadosClassificacaoMotorista.setNota_velocid(notaVelocidade / quant);
